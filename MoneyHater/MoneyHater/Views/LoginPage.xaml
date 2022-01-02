@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.LoginPage"
+             Shell.FlyoutBehavior="Disabled"
+			 Shell.NavBarIsVisible="False"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:LoginViewModel />
+   </ContentPage.BindingContext>
+
+
+   <ContentPage.Content>
+	  <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand">
+		 <ffSvg:SvgCachedImage Source="{Binding Link}">
+		 </ffSvg:SvgCachedImage>
+
+		 <Label Text="Email:"/>
+		 <Entry Placeholder="Email" Text="{Binding Email}"/>
+		 <Label Text="Password:"/>
+		 <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
+		 <Button Text="Login" Command="{Binding LoginCommand}"/>
+		 <Label Text="Register" HorizontalOptions="Center">
+			<Label.GestureRecognizers>
+			   <TapGestureRecognizer Command="{Binding ToRegisterCommand}"/>
+			</Label.GestureRecognizers>
+		 </Label>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

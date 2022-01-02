@@ -1,0 +1,112 @@
+﻿using MoneyHater.Helpers;
+using MoneyHater.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace MoneyHater.Services
+{
+   public class WalletService
+   {
+      public static IRepository<WalletModel> walletRepo { get; set; }
+      public static IRepository<AnotherUserModel> memberRepo { get; set; }
+      public static IRepository<BudgetModel> budgetRepo { get; set; }
+      public static IRepository<CategoryModel> customCategoryRepo { get; set; }
+      public static IRepository<DebtModel> debtRepo { get; set; }
+      public static IRepository<EventModel> eventRepo { get; set; }
+      public static IRepository<ReadyExecutedTransactionModel> readyExecutedTransactionRepo { get; set; }
+      public static IRepository<RecurringTransactionModel> recurringTransactionRepo { get; set; }
+      public static IRepository<TransactionModel> transactionRepo { get; set; }
+
+      public WalletService()
+      {
+         walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
+         memberRepo = DependencyService.Resolve<IRepository<AnotherUserModel>>();
+         budgetRepo = DependencyService.Resolve<IRepository<BudgetModel>>();
+         customCategoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
+         debtRepo = DependencyService.Resolve<IRepository<DebtModel>>();
+         eventRepo = DependencyService.Resolve<IRepository<EventModel>>();
+         readyExecutedTransactionRepo = DependencyService.Resolve<IRepository<ReadyExecutedTransactionModel>>();
+         recurringTransactionRepo = DependencyService.Resolve<IRepository<RecurringTransactionModel>>();
+         transactionRepo = DependencyService.Resolve<IRepository<TransactionModel>>();
+      }
+
+      //public async Task<List<WalletModel>> GetAllWallet()
+      //{
+      //   var wallets = (await walletRepo.GetAll()) as List<WalletModel>;
+      //   List<Task> tasks = new List<Task>() { };
+      //   for (int i = 0; i < wallets.Count; ++i)
+      //   {
+      //      Task t;
+      //      var index = i;
+      //      t = Task.Factory.StartNew(async () =>
+      //      {
+      //         WalletModel item = new WalletModel { };
+      //         item = wallets[index];
+      //         wallets[index] = await GetWalletDetails(item);
+      //      });
+      //      tasks.Add(t);
+      //   }
+
+      //   Task taskReturned = Task.WhenAll(tasks);
+      //   try
+      //   {
+      //      wallets = await taskReturned;
+      //   }
+      //   catch
+      //   {
+      //      await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
+      //   }
+      //   return wallets;
+      //}
+      public async Task<WalletModel> GetWalletDetails(WalletModel wallet)
+      {
+         string id = wallet.Id;
+
+         string previousPath = walletRepo.DocumentPath + $"/{id}";
+         memberRepo.previousPath = previousPath;
+         budgetRepo.previousPath = previousPath;
+         customCategoryRepo.previousPath = previousPath;
+         debtRepo.previousPath = previousPath;
+         eventRepo.previousPath = previousPath;
+         readyExecutedTransactionRepo.previousPath = previousPath;
+         recurringTransactionRepo.previousPath = previousPath;
+         transactionRepo.previousPath = previousPath;
+
+         List<Task> tasks = new List<Task> { };
+         var loadMembers = memberRepo.GetAll();
+         var loadBudgets = budgetRepo.GetAll();
+         var loadCustomCategories = customCategoryRepo.GetAll();
+         var loadDebts = debtRepo.GetAll();
+         var loadEvents = eventRepo.GetAll();
+         var loadReadyExecutedTransactions = readyExecutedTransactionRepo.GetAll();
+         var loadRecurringTransactions = recurringTransactionRepo.GetAll();
+         var loadTransactions = transactionRepo.GetAll();
+
+         wallet.CurrencyModel = FbApp.currencies.Find(x => x.Id == wallet.CurrencyId);
+
+         Task taskReturned = Task.WhenAll(new Task[] { loadMembers, loadBudgets, loadCustomCategories, loadDebts,
+            loadEvents, loadReadyExecutedTransactions, loadRecurringTransactions, loadTransactions});
+         try
+         {
+            await taskReturned;
+            wallet.Members = (await loadMembers) as List<AnotherUserModel>;
+            wallet.Budgets = (await loadBudgets) as List<BudgetModel>;
+            wallet.CustomCategories = (await loadCustomCategories) as List<CategoryModel>;
+            wallet.Debts = (await loadDebts) as List<DebtModel>;
+            wallet.Events = (await loadEvents) as List<EventModel>;
+            wallet.ReadyExecutedTransactions = (await loadReadyExecutedTransactions) as List<ReadyExecutedTransactionModel>;
+            wallet.RecurringTransactions = (await loadRecurringTransactions) as List<RecurringTransactionModel>;
+            wallet.Transactions = (await loadTransactions) as List<TransactionModel>;
+         }
+         catch
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
+         }
+         return wallet;
+
+      }
+   }
+}

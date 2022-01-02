@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+   </PropertyGroup>
+
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DebugType>portable</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+   </PropertyGroup>
+
+   <ItemGroup>
+      <None Remove="Resources\Fonts\CustomFont.ttf" />
+      <None Remove="Resources\Fonts\fa-brands-400.ttf" />
+      <None Remove="Resources\Fonts\fa-regular-400.ttf" />
+      <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+      <None Remove="Resources\Fonts\Lexend-ExtraBold.ttf" />
+      <None Remove="Resources\Fonts\Lexend-Regular.ttf" />
+      <None Remove="Resources\Fonts\Lexend-SemiBold.ttf" />
+      <None Remove="Resources\Icons\bellsolid.svg" />
+      <None Remove="Resources\Icons\bookmark-solid.svg" />
+      <None Remove="Resources\Icons\calculator-solid.svg" />
+      <None Remove="Resources\Icons\chart-bar-solid.svg" />
+      <None Remove="Resources\Icons\file-alt-solid.svg" />
+      <None Remove="Resources\Icons\google-brands.svg" />
+      <None Remove="Resources\Icons\hand-holding-usd-solid.svg" />
+      <None Remove="Resources\Icons\home-solid.svg" />
+      <None Remove="Resources\Icons\money-bill-wave-solid.svg" />
+      <None Remove="Resources\Icons\plus-square-regular.svg" />
+      <None Remove="Resources\Icons\unlock-alt-solid.svg" />
+      <None Remove="Resources\Icons\user-circle-solid.svg" />
+      <None Remove="Resources\Icons\wallet-solid.svg" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <EmbeddedResource Include="Resources\Fonts\CustomFont.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\fa-brands-400.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\Lexend-ExtraBold.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\Lexend-Regular.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\Lexend-SemiBold.ttf" />
+      <EmbeddedResource Include="Resources\Icons\bellsolid.svg" />
+      <EmbeddedResource Include="Resources\Icons\bookmark-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\calculator-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\chart-bar-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\file-alt-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\google-brands.svg" />
+      <EmbeddedResource Include="Resources\Icons\hand-holding-usd-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\home-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\money-bill-wave-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\plus-square-regular.svg" />
+      <EmbeddedResource Include="Resources\Icons\unlock-alt-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\user-circle-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\wallet-solid.svg" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <PackageReference Include="Acr.UserDialogs" Version="7.2.0.562" />
+      <PackageReference Include="MonkeyCache.FileStore" Version="1.5.2" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+      <PackageReference Include="SkiaSharp" Version="2.80.3" />
+      <PackageReference Include="Xamarin.Build.Download" Version="0.11.0" />
+      <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.1" />
+      <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+      <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
+      <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <Compile Update="Views\HomePage.xaml.cs">
+         <DependentUpon>HomePage.xaml</DependentUpon>
+      </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+      <EmbeddedResource Update="AppShell.xaml">
+         <Generator>MSBuild:Compile</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\SplashPage.xaml">
+         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+   </ItemGroup>
+</Project>

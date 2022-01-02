@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1039307517943",
+    "firebase_url": "https://moneyhater-e3629-default-rtdb.firebaseio.com",
+    "project_id": "moneyhater-e3629",
+    "storage_bucket": "moneyhater-e3629.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039307517943:android:899cd1944a0464fc3088f2",
+        "android_client_info": {
+          "package_name": "com.nothingness.moneyhater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039307517943-b7jlbrf5ohjce6dss4dd3lr32qnh0c33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ-6LYD8MJWeEeXYMzGKHcLa-dWCTUKBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039307517943-b7jlbrf5ohjce6dss4dd3lr32qnh0c33.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1039307517943-rk64jhiou8gjs36raqg2spsdjvso4s3b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyname.MoneyHater"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             x:DataType="viewmodels:Test"
+             x:Class="MoneyHater.Views.TestPage"
+             BackgroundColor="White"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             >
+
+   <ContentPage.BindingContext>
+	  <viewmodels:ImageCacheViewModel />
+   </ContentPage.BindingContext>
+
+   <ContentPage.ToolbarItems>
+	  <ToolbarItem Text="Refresh" Command="{Binding RefreshCommand}"/>
+   </ContentPage.ToolbarItems>
+
+   <StackLayout Padding="20,0">
+	  <Label Text="Xamarin Forms!" TextColor="DeepPink" FontSize="40"/>
+	  <Label Text="GIF" TextColor="DodgerBlue" FontSize="40" />
+
+
+	  <Label Text="SVG" TextColor="DodgerBlue" FontSize="40"/>
+
+	  <Label Text="Blurred" TextColor="DodgerBlue" FontSize="40"/>
+	  <ffSvg:SvgCachedImage
+			Margin="0"
+			HeightRequest="50"
+			RetryCount="3"                                
+			Source="https://drive.google.com/file/d/1N87mK4CZvjmJc4HkKSiBTFhSpKRtUan4/view"
+			WidthRequest="50" />
+
+	  <ffSvg:SvgCachedImage
+			x:Name="abcSvg"
+			Margin="0"
+			HeightRequest="50"
+			RetryCount="3"                                
+			Source="https://drive.google.com/file/d/1N87mK4CZvjmJc4HkKSiBTFhSpKRtUan4/view"
+			WidthRequest="50" />
+
+
+	  <ffSvg:SvgCachedImage WidthRequest="50" HeightRequest="50" 
+									 Source="resource://MoneyHater.Resources.Icons.bellsolid.svg"/>
+
+   </StackLayout>
+
+</ContentPage>

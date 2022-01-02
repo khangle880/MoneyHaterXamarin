@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.RegistrationPage"
+             Shell.FlyoutBehavior="Disabled"
+			 Shell.NavBarIsVisible="False"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             x:DataType="viewmodels:RegistrationViewModel"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+
+   <ContentPage.BindingContext>
+	  <viewmodels:RegistrationViewModel />
+   </ContentPage.BindingContext>
+   <ContentPage.Content>
+
+	  <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand">
+		 <Label Text="Email:"/>
+		 <Entry Placeholder="Email" Text="{Binding Email}"/>
+		 <Label Text="Password:"/>
+		 <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
+		 <Button Text="Register" Command="{Binding RegisterCommand}"/>
+		 <Label Text="Login" HorizontalOptions="Center">
+			<Label.GestureRecognizers>
+			   <TapGestureRecognizer Command="{Binding ToLoginCommand}"/>
+			</Label.GestureRecognizers>
+		 </Label>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
