@@ -31,7 +31,7 @@ namespace MoneyHater.Droid.ServiceListeners
                   user.Name = doc.GetString("Name");
                   user.Email = doc.GetString("Email");
                   user.PremiumStatus = doc.GetBoolean("PremiumStatus").BooleanValue();
-                  user.PremiumTo = Newtonsoft.Json.JsonConvert.DeserializeObject<DateTime>(doc.GetString("PremiumTo"));
+                  user.PremiumTo = DateTime.Parse(doc.GetString("PremiumTo"));
                }
                else
                {

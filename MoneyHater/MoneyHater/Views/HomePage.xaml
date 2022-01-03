@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.HomePage"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
-             x:DataType="viewmodels:TransactionViewModel"
+             x:DataType="viewmodels:HomeViewModel"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
    <ContentPage.BindingContext>
-	  <viewmodels:TransactionViewModel />
+	  <viewmodels:HomeViewModel />
    </ContentPage.BindingContext>
 
    <ContentPage.ToolbarItems>

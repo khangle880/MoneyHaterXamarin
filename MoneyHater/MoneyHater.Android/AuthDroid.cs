@@ -14,6 +14,8 @@ namespace MoneyHater.Droid
 {
    class AuthDroid : IAuth
    {
+      public string Uid { get; set; }
+
       public bool isSigned()
       {
          var user = FirebaseAuth.Instance.CurrentUser;
@@ -25,6 +27,7 @@ namespace MoneyHater.Droid
          try
          {
             var newUser = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
+            Uid = newUser.User.Uid;
             var token = await newUser.User.GetIdToken(false).AsAsync<GetTokenResult>();
             return token.Token;
          }
@@ -57,6 +60,7 @@ namespace MoneyHater.Droid
          try
          {
             var newUser = await Firebase.Auth.FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+            Uid = newUser.User.Uid;
             var token = await newUser.User.GetIdToken(false).AsAsync<GetTokenResult>(); ;
             return token.Token;
          }

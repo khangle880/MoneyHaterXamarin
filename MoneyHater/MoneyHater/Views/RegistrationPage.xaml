@@ -19,6 +19,8 @@
                      HorizontalOptions="FillAndExpand">
 		 <Label Text="Email:"/>
 		 <Entry Placeholder="Email" Text="{Binding Email}"/>
+		 <Label Text="Name:"/>
+		 <Entry Placeholder="Name" Text="{Binding Name}"/>
 		 <Label Text="Password:"/>
 		 <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
 		 <Button Text="Register" Command="{Binding RegisterCommand}"/>

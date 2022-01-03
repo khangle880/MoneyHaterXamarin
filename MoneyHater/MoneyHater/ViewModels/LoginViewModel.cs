@@ -26,6 +26,7 @@ namespace MoneyHater.ViewModels
          LoginCommand = new AsyncCommand(Login);
          ToRegisterCommand = new AsyncCommand(ToRegister);
       }
+
       async Task Login()
       {
          IsBusy = true;
@@ -43,24 +44,23 @@ namespace MoneyHater.ViewModels
          //   State = true,
          //}
          //    );
-         //try
-         //{
-         //   var user = await FbApp.auth.LoginWithEAndP(email, password);
-         //   if (user != null)
-         //   {
-         await FbApp.LoadDataLoggeduser();
-         link = FbApp.icons[0];
-         //         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-         //      }
-         //      else
-         //      {
-         //         await App.Current.MainPage.DisplayAlert("Alert", "User Not Found", "Ok");
-         //      }
-         //   }
-         //   catch (Exception e)
-         //   {
-         //      await App.Current.MainPage.DisplayAlert("Alert", e.Message, "Ok");
-         //   }
+         try
+         {
+            var user = await FbApp.auth.LoginWithEAndP(email, password);
+            if (user != null)
+            {
+               await FbApp.LoadDataLoggeduser();
+               await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            }
+            else
+            {
+               await App.Current.MainPage.DisplayAlert("Alert", "User Not Found", "Ok");
+            }
+         }
+         catch (Exception e)
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", e.Message, "Ok");
+         }
 
          UserDialogs.Instance.HideLoading();
          IsBusy = false;

@@ -65,5 +65,19 @@ namespace MoneyHater.Droid.Services
          return tcs.Task;
       }
 
+      public Task<string> Save(T item, string id)
+      {
+         var tcs = new TaskCompletionSource<string>();
+
+         FirebaseFirestore.Instance
+             .Collection(DocumentPath)
+             .Document(id)
+             .Set(item.Convert())
+             .AddOnCompleteListener(new OnCreateCompleteListener(tcs));
+
+         return tcs.Task;
+      }
+
+
    }
 }

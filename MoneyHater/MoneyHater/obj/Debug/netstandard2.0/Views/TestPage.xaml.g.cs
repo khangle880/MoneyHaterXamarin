@@ -17,12 +17,8 @@ namespace MoneyHater.Views {
     public partial class TestPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::FFImageLoading.Svg.Forms.SvgCachedImage abcSvg;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(TestPage));
-            abcSvg = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Svg.Forms.SvgCachedImage>(this, "abcSvg");
         }
     }
 }

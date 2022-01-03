@@ -13,7 +13,8 @@ namespace MoneyHater.ViewModels
    {
       public AsyncCommand RegisterCommand { get; }
       public AsyncCommand ToLoginCommand { get; }
-      string email, password;
+      string email, password, name;
+      public string Name { get => name; set => SetProperty(ref name, value); }
       public string Email { get => email; set => SetProperty(ref email, value); }
       public string Password { get => password; set => SetProperty(ref password, value); }
 
@@ -29,6 +30,13 @@ namespace MoneyHater.ViewModels
             var user = await FbApp.auth.SignUpWithEAndP(email, password);
             if (user != null)
             {
+               await FbApp.userRepo.Save(new Models.UserModel()
+               {
+                  Email = email,
+                  Name = name,
+                  PremiumStatus = false,
+               }, FbApp.auth.Uid);
+               await FbApp.LoadDataLoggeduser();
                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
             else

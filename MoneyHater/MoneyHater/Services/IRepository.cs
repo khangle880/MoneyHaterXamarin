@@ -18,6 +18,7 @@ namespace MoneyHater.Services
       Task<T> Get(string id);
       Task<IList<T>> GetAll();
       Task<string> Save(T item);
+      Task<string> Save(T item, string id);
       Task<bool> Delete(T item);
    }
 }

@@ -1,5 +1,6 @@
 ﻿using MoneyHater.Helpers;
 using MoneyHater.Views;
+using MoneyHater.Views.PickupPage;
 using Xamarin.Forms;
 
 namespace MoneyHater
@@ -12,6 +13,9 @@ namespace MoneyHater
 
          Routing.RegisterRoute(nameof(RegistrationPage),
              typeof(RegistrationPage));
+         Routing.RegisterRoute(nameof(PickupUserPage),
+             typeof(PickupUserPage));
+
          Shell.SetTabBarIsVisible(this, false);
          //Routing.RegisterRoute(nameof(TransactionPage),
          //            typeof(TransactionPage));

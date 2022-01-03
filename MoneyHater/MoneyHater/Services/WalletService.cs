@@ -10,15 +10,17 @@ namespace MoneyHater.Services
 {
    public class WalletService
    {
-      public static IRepository<WalletModel> walletRepo { get; set; }
-      public static IRepository<AnotherUserModel> memberRepo { get; set; }
-      public static IRepository<BudgetModel> budgetRepo { get; set; }
-      public static IRepository<CategoryModel> customCategoryRepo { get; set; }
-      public static IRepository<DebtModel> debtRepo { get; set; }
-      public static IRepository<EventModel> eventRepo { get; set; }
-      public static IRepository<ReadyExecutedTransactionModel> readyExecutedTransactionRepo { get; set; }
-      public static IRepository<RecurringTransactionModel> recurringTransactionRepo { get; set; }
-      public static IRepository<TransactionModel> transactionRepo { get; set; }
+      public IRepository<WalletModel> walletRepo { get; set; }
+      public IRepository<AnotherUserModel> memberRepo { get; set; }
+      public IRepository<BudgetModel> budgetRepo { get; set; }
+      public IRepository<CategoryModel> customCategoryRepo { get; set; }
+      public IRepository<DebtModel> debtRepo { get; set; }
+      public IRepository<EventModel> eventRepo { get; set; }
+      public IRepository<ReadyExecutedTransactionModel> readyExecutedTransactionRepo { get; set; }
+      public IRepository<RecurringTransactionModel> recurringTransactionRepo { get; set; }
+      public IRepository<TransactionModel> transactionRepo { get; set; }
+      public WalletModel currentWallet { get; set; }
+      public List<WalletModel> wallets { get; set; }
 
       public WalletService()
       {
@@ -33,6 +35,21 @@ namespace MoneyHater.Services
          transactionRepo = DependencyService.Resolve<IRepository<TransactionModel>>();
       }
 
+      public async Task AddWallet(WalletModel wallet)
+      {
+         var newId = await walletRepo.Save(wallet);
+         wallet.Id = newId;
+         wallets.Add(wallet);
+      }
+
+      public async Task LoadWallets()
+      {
+         wallets = (await walletRepo.GetAll()) as List<WalletModel>;
+         if (wallets.Count > 0)
+         {
+            currentWallet = wallets[0];
+         }
+      }
       //public async Task<List<WalletModel>> GetAllWallet()
       //{
       //   var wallets = (await walletRepo.GetAll()) as List<WalletModel>;

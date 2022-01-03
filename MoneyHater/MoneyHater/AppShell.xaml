@@ -94,8 +94,10 @@
     -->
 
    <ShellItem FlyoutItemIsVisible="False" >
-	  <ShellContent Route="TestPage" ContentTemplate="{DataTemplate local:TestPage}"/>
+	  <ShellContent Route="SplashPage" ContentTemplate="{DataTemplate local:SplashPage}"/>
+	  <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}"/>
 	  <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
+	  <ShellContent Route="AddWalletPage" ContentTemplate="{DataTemplate local:AddWalletPage}"/>
    </ShellItem>
 
    <!-- <FlyoutItem Title="Equipment - CV">

@@ -3,6 +3,7 @@ using MoneyHater.Services;
 using MoneyHater.Services.Account;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -24,13 +25,18 @@ namespace MoneyHater.Helpers
       public static List<CategoryModel> categories;
       public static List<CurrencyModel> currencies;
       public static List<string> icons;
-      public static List<UserModel> usersPublicInfo;
+      public static List<AnotherUserModel> usersPublicInfo;
       public static List<WalletModel> wallets;
       public static UserModel userInfo;
       public static void Init()
       {
          auth = DependencyService.Resolve<IAuth>();
          walletService = new WalletService();
+         currencyRepo = DependencyService.Resolve<IRepository<CurrencyModel>>();
+         categoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
+         userRepo = DependencyService.Resolve<IRepository<UserModel>>();
+         iconRepo = DependencyService.Resolve<IRepository<IconModel>>();
+         walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
       }
 
       public static void clear()
@@ -45,30 +51,25 @@ namespace MoneyHater.Helpers
 
       public static async Task LoadDataLoggeduser()
       {
-         //currencyRepo = DependencyService.Resolve<IRepository<CurrencyModel>>();
-         //categoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
-         //userRepo = DependencyService.Resolve<IRepository<UserModel>>();
-         iconRepo = DependencyService.Resolve<IRepository<IconModel>>();
-         //walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
 
          //var loadCurrencies = currencyRepo.GetAll();
          //var loadCategories = categoryRepo.GetAll();
-         //var loadUsersPublicInfo = userRepo.GetAll();
-         var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
-         //var loadUserLoggedInfo = auth.GetUserAsync();
+         var loadUsersPublicInfo = userRepo.GetAll();
+         //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
+         var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { loadIcons });
+         Task taskReturned = Task.WhenAll(new Task[] { loadUsersPublicInfo });
          try
          {
             await taskReturned;
-            icons = (await loadIcons).Icons;
+            //icons = (await loadIcons).Icons;
             //currencies = (await loadCurrencies) as List<CurrencyModel>;
             //categories = (await loadCategories) as List<CategoryModel>;
-            //usersPublicInfo = (await loadUsersPublicInfo) as List<UserModel>;
+            usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
             //userInfo = await loadUserLoggedInfo;
-            //wallets = (await walletRepo.GetAll()) as List<WalletModel>;
+            await walletService.LoadWallets();
          }
          catch
          {
@@ -79,6 +80,7 @@ namespace MoneyHater.Helpers
 
    public interface IAuth
    {
+      string Uid { get; set; }
       Task<string> LoginWithEAndP(string email, string password);
       Task<string> SignUpWithEAndP(string email, string password);
       Task<UserModel> GetUserAsync();

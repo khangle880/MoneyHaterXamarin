@@ -16,6 +16,7 @@ namespace MoneyHater.iOS
 {
    class AuthIOS : IAuth
    {
+      public string Uid { get; set; }
       public bool isSigned()
       {
          var user = Auth.DefaultInstance.CurrentUser;
@@ -27,6 +28,7 @@ namespace MoneyHater.iOS
          try
          {
             var newUser = await Auth.DefaultInstance.SignInWithPasswordAsync(email, password);
+            Uid = newUser.User.Uid;
             return await newUser.User.GetIdTokenAsync();
          }
          catch (Exception ex)
@@ -53,6 +55,7 @@ namespace MoneyHater.iOS
          try
          {
             var newUser = await Auth.DefaultInstance.CreateUserAsync(email, password);
+            Uid = newUser.User.Uid;
             return await newUser.User.GetIdTokenAsync();
          }
          catch (Exception ex)

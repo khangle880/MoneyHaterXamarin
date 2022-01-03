@@ -10,7 +10,7 @@
              >
 
    <ContentPage.BindingContext>
-	  <viewmodels:ImageCacheViewModel />
+	  <viewmodels:Test />
    </ContentPage.BindingContext>
 
    <ContentPage.ToolbarItems>
@@ -33,16 +33,15 @@
 			WidthRequest="50" />
 
 	  <ffSvg:SvgCachedImage
-			x:Name="abcSvg"
 			Margin="0"
 			HeightRequest="50"
 			RetryCount="3"                                
-			Source="https://drive.google.com/file/d/1N87mK4CZvjmJc4HkKSiBTFhSpKRtUan4/view"
+			Source="{Binding url}"
 			WidthRequest="50" />
 
 
 	  <ffSvg:SvgCachedImage WidthRequest="50" HeightRequest="50" 
-									 Source="resource://MoneyHater.Resources.Icons.bellsolid.svg"/>
+									 Source="{Binding ImageSource}"/>
 
    </StackLayout>
 

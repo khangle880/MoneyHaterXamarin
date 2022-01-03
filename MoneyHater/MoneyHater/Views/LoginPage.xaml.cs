@@ -20,17 +20,9 @@ namespace MoneyHater.Views
 
       protected override void OnAppearing()
       {
-         CheckWhetherTheUserIsSignedIn();
          base.OnAppearing();
       }
 
-      private async void CheckWhetherTheUserIsSignedIn()
-      {
-         if (FbApp.auth.isSigned())
-         {
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-         }
-      }
 
       private async void Button_Clicked(object sender, EventArgs e)
       {

@@ -11,6 +11,7 @@ namespace MoneyHater.Droid.Services
    {
       public override string DocumentPath =>
          "users/"
+         //+ FirebaseAuth.Instance.CurrentUser.Uid
          + "6JgDy10KgXU71Y1zvBP3DDPMDbi2"
          + "/wallets";
 

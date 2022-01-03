@@ -16,7 +16,6 @@ namespace MoneyHater.Views
       public TestPage()
       {
          InitializeComponent();
-         abcSvg.Source = SvgImageSource.FromUri(new Uri("https://drive.google.com/file/d/1N87mK4CZvjmJc4HkKSiBTFhSpKRtUan4/view"));
       }
 
       private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

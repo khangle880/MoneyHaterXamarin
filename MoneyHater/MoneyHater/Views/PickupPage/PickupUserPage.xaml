@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.PickupPage.PickupUserPage"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+             x:DataType="viewmodels:PickupUserViewModel"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:PickupUserViewModel />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <ListView ItemsSource="{Binding SelectableUsers}">
+			<ListView.ItemTemplate>
+			   <DataTemplate x:DataType="viewmodels:SelectableUser">
+				  <ViewCell>
+					 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+						<CheckBox IsChecked="{Binding IsSelected}" HorizontalOptions="EndAndExpand" Color="Black"/>
+						<Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+					 </StackLayout>
+				  </ViewCell>
+			   </DataTemplate>
+			</ListView.ItemTemplate>
+		 </ListView>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

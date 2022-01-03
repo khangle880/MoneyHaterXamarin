@@ -18,9 +18,6 @@
    <ContentPage.Content>
 	  <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
-		 <ffSvg:SvgCachedImage Source="{Binding Link}">
-		 </ffSvg:SvgCachedImage>
-
 		 <Label Text="Email:"/>
 		 <Entry Placeholder="Email" Text="{Binding Email}"/>
 		 <Label Text="Password:"/>

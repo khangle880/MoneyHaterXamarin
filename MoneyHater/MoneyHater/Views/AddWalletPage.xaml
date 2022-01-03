@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.AddWalletPage"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             x:DataType="viewmodels:AddWalletViewModel"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:AddWalletViewModel />
+   </ContentPage.BindingContext>
+
+
+   <ContentPage.Content>
+	  <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand">
+		 <Label Text="Wallet Name:"/>
+		 <Entry Placeholder="Name" Text="{Binding Name}"/>
+		 <Label Text="Balance:"/>
+		 <Entry Placeholder="Balance" Text="{Binding Balance}"/>
+		 <Label Text="Currency:"/>
+		 <Label Text="{Binding CurrencyModel.Name}"/>
+		 <Label Text="Members:"/>
+		 <Label Text="{Binding MembersName}"/>
+		 <Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
+		 <RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
+		 <RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
+		 <Button Text="Create Wallet" Command="{Binding RegisterCommand}"/>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

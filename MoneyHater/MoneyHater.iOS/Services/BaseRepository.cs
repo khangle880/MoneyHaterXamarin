@@ -95,5 +95,14 @@ namespace MoneyHater.iOS.Services
 
          return null;
       }
+
+      public virtual Task<string> Save(T item, string id)
+      {
+         Firebase.CloudFirestore.Firestore.SharedInstance
+             .GetCollection(DocumentPath).GetDocument(id)
+             .SetData(item.Convert());
+         return Task.FromResult(id);
+      }
+
    }
 }

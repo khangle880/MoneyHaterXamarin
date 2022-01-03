@@ -9,7 +9,7 @@ namespace MoneyHater.Droid.Services
 {
    public class MemberRepository : BaseRepository<AnotherUserModel>
    {
-      public override string DocumentPath =>
+      public override string DocumentPath => Path ??
           previousPath
          + "/members";
    }

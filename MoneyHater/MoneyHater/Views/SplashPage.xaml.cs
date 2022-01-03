@@ -20,30 +20,16 @@ namespace MoneyHater.Views
          CheckWhetherTheUserIsSignedIn();
       }
 
-      protected override void OnAppearing()
-      {
-         if (!isFirstAppeared)
-         {
-            CheckWhetherTheUserIsSignedIn();
-         }
-         else
-         {
-            Shell.Current.GoToAsync("..");
-         }
-         isFirstAppeared = true;
-         base.OnAppearing();
-      }
-
       private async void CheckWhetherTheUserIsSignedIn()
       {
-         await Task.Delay(2000);
          if (FbApp.auth.isSigned())
          {
-            await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+            await FbApp.LoadDataLoggeduser();
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
          }
          else
          {
-            await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
          }
       }
 
