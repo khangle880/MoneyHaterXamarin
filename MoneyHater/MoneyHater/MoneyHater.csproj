@@ -86,6 +86,12 @@
       <EmbeddedResource Update="Views\AddWalletPage.xaml">
          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\PickupPage\PickupCategoryPage.xaml">
+         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\PickupPage\PickupCurrencyPage.xaml">
+         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Views\PickupPage\PickupUserPage.xaml">
          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>

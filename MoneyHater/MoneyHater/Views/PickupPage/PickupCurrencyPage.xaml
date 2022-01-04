@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.PickupPage.PickupCurrencyPage"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+             x:DataType="viewmodels:PickupCurrencyVM"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+
+   <ContentPage.BindingContext>
+	  <viewmodels:PickupCurrencyVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <ListView ItemsSource="{Binding Currencies}" SelectedItem="{Binding CurrencySelected}">
+			<ListView.ItemTemplate>
+			   <DataTemplate x:DataType="models:CurrencyModel">
+				  <ViewCell>
+					 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+						<Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+						<Label Text="{Binding Iso}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+					 </StackLayout>
+				  </ViewCell>
+			   </DataTemplate>
+			</ListView.ItemTemplate>
+		 </ListView>
+		 <Button Text="Done" Command="{Binding CompleteCommand}"></Button>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

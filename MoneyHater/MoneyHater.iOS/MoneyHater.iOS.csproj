@@ -71,6 +71,8 @@
     <Compile Include="Extensions\IIdentifiableExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\StandardEntryRenderer.cs" />
+    <Compile Include="Renderers\StandardPickerRenderer.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\BaseRepository.cs" />
     <Compile Include="Services\WorkItemRepository.cs" />
@@ -182,4 +184,5 @@
       <Name>MoneyHater</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -5,6 +5,7 @@
              Shell.FlyoutBehavior="Disabled"
 			 Shell.NavBarIsVisible="False"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:LoginViewModel"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
@@ -19,7 +20,13 @@
 	  <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
 		 <Label Text="Email:"/>
-		 <Entry Placeholder="Email" Text="{Binding Email}"/>
+		 <controls:StandardEntry
+                    BackgroundColor="White"
+                    BorderColor="Black"
+                    BorderThickness="1"
+                    CornerRadius="8"
+					Text="{Binding Email}"
+                    Placeholder="Email" />
 		 <Label Text="Password:"/>
 		 <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
 		 <Button Text="Login" Command="{Binding LoginCommand}"/>

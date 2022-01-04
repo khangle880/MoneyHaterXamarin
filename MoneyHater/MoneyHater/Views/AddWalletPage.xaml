@@ -11,22 +11,27 @@
 	  <viewmodels:AddWalletViewModel />
    </ContentPage.BindingContext>
 
-
    <ContentPage.Content>
-	  <StackLayout Padding="40" VerticalOptions="Center"
+	  <ScrollView>
+		 <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
-		 <Label Text="Wallet Name:"/>
-		 <Entry Placeholder="Name" Text="{Binding Name}"/>
-		 <Label Text="Balance:"/>
-		 <Entry Placeholder="Balance" Text="{Binding Balance}"/>
-		 <Label Text="Currency:"/>
-		 <Label Text="{Binding CurrencyModel.Name}"/>
-		 <Label Text="Members:"/>
-		 <Label Text="{Binding MembersName}"/>
-		 <Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
-		 <RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
-		 <RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
-		 <Button Text="Create Wallet" Command="{Binding RegisterCommand}"/>
-	  </StackLayout>
+			<Label Text="Wallet Name:"/>
+			<Entry Placeholder="Name" Text="{Binding Name}"/>
+			<Label Text="Balance:"/>
+			<Entry Placeholder="Balance" Text="{Binding Balance}"/>
+			<Label Text="Currency:"/>
+			<Label Text="{Binding CurrencyModel.Name}"/>
+			<Button Text="Pick Currency" Command="{Binding PickupCurrencyCommand}"/>
+			<Label Text="Members:"/>
+			<Label Text="{Binding MembersName}" TextColor="Black"/>
+			<Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
+			<Label Text="Members:"/>
+			<Label Text="{Binding MembersName}" TextColor="Black"/>
+			<Button Text="Pick Category" Command="{Binding PickupCategoryCommand}"/>
+			<RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
+			<RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
+			<Button Text="Create Wallet" Command="{Binding RegisterCommand}"/>
+		 </StackLayout>
+	  </ScrollView>
    </ContentPage.Content>
 </ContentPage>

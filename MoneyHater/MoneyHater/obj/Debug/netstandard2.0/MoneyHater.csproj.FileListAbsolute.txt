@@ -2,6 +2,7 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstandard2.0\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstandard2.0\ref\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstandard2.0\MoneyHater.pdb
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.csproj.AssemblyReference.cache
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.GeneratedMSBuildEditorConfig.editorconfig
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\App.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\AppShell.xaml.g.cs
@@ -10,6 +11,9 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\HomePage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\ImageCachePage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\LoginPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupCategoryPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupCurrencyPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupUserPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\RegistrationPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\SettingsPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\SplashPage.xaml.g.cs
@@ -21,5 +25,3 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\ref\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.pdb
-D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.csproj.AssemblyReference.cache
-D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupUserPage.xaml.g.cs

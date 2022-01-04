@@ -24,21 +24,36 @@ namespace MoneyHater.ViewModels
       public bool EnableNotification { get => enableNotification; set => SetProperty(ref enableNotification, value); }
       public bool ExcludedFromTotal { get => excludedFromTotal; set => SetProperty(ref excludedFromTotal, value); }
       public List<AnotherUserModel> Members { get => members; set => SetProperty(ref members, value); }
-      public string MembersName
-      {
-         get
-         {
-            var membersName = members.ConvertAll<string>((e) => e.Name);
-            return string.Join(", ", membersName);
-         }
-      }
+
+      public string membersName;
+      public string MembersName { get => membersName; set => SetProperty(ref membersName, value); }
       public AsyncCommand RegisterCommand { get; }
       public AsyncCommand PickupMemberCommand { get; }
+      public AsyncCommand PickupCurrencyCommand { get; }
+      public AsyncCommand PickupCategoryCommand { get; }
 
       public AddWalletViewModel()
       {
          RegisterCommand = new AsyncCommand(RegisterWallet);
          PickupMemberCommand = new AsyncCommand(PickupMember);
+         PickupCurrencyCommand = new AsyncCommand(PickupCurrency);
+         PickupCategoryCommand = new AsyncCommand(PickupCategory);
+
+         MessagingCenter.Subscribe<object, List<AnotherUserModel>>(this, "Load members", (obj, s) =>
+         {
+            members = s;
+            var term = members.ConvertAll<string>((e) => e.Name);
+            MembersName = string.Join(", ", term);
+         });
+         MessagingCenter.Subscribe<object, CurrencyModel>(this, "Load currency", (obj, s) =>
+          {
+             CurrencyModel = s;
+          });
+         MessagingCenter.Subscribe<object, CurrencyModel>(this, "Load category", (obj, s) =>
+           {
+              CurrencyModel = s;
+           });
+
       }
 
       async Task RegisterWallet()
@@ -68,6 +83,15 @@ namespace MoneyHater.ViewModels
       {
          await Shell.Current.GoToAsync($"{nameof(PickupUserPage)}");
       }
+      async Task PickupCurrency()
+      {
+         await Shell.Current.GoToAsync($"{nameof(PickupCurrencyPage)}");
+      }
+      async Task PickupCategory()
+      {
+         await Shell.Current.GoToAsync($"{nameof(PickupCategoryPage)}");
+      }
+
 
 
    }

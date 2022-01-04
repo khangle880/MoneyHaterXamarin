@@ -20,6 +20,7 @@ namespace MoneyHater.Helpers
       public static IRepository<CategoryModel> categoryRepo { get; set; }
       public static IRepository<IconModel> iconRepo { get; set; }
       public static WalletService walletService { get; set; }
+      public static CategoryService categoryService { get; set; }
       public static IRepository<WalletModel> walletRepo { get; set; }
 
       public static List<CategoryModel> categories;
@@ -32,6 +33,7 @@ namespace MoneyHater.Helpers
       {
          auth = DependencyService.Resolve<IAuth>();
          walletService = new WalletService();
+         categoryService = new CategoryService();
          currencyRepo = DependencyService.Resolve<IRepository<CurrencyModel>>();
          categoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
          userRepo = DependencyService.Resolve<IRepository<UserModel>>();
@@ -53,21 +55,21 @@ namespace MoneyHater.Helpers
       {
 
          //var loadCurrencies = currencyRepo.GetAll();
-         //var loadCategories = categoryRepo.GetAll();
-         var loadUsersPublicInfo = userRepo.GetAll();
+         var loadCategories = categoryService.LoadCategories();
+         //var loadUsersPublicInfo = userRepo.GetAll();
          //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
          var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { loadUsersPublicInfo });
+         Task taskReturned = Task.WhenAll(new Task[] { loadCategories });
          try
          {
             await taskReturned;
             //icons = (await loadIcons).Icons;
             //currencies = (await loadCurrencies) as List<CurrencyModel>;
-            //categories = (await loadCategories) as List<CategoryModel>;
-            usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
+            categories = await loadCategories;
+            //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
             //userInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
          }

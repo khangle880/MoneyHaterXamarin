@@ -102,6 +102,8 @@
     <Compile Include="Extensions\IIdentifiableExtensions.cs" />
     <Compile Include="Extensions\JavaLangExtensions.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\StandardEntryRenderer.cs" />
+    <Compile Include="Renderers\StandardPickerRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceListeners\OnCollectionCompleteListener.cs" />
@@ -114,7 +116,6 @@
     <Compile Include="Services\BudgetRepository.cs" />
     <Compile Include="Services\CategoryRepository.cs" />
     <Compile Include="Services\CurrencyRepository.cs" />
-    <Compile Include="Services\CustomCategoryRepository.cs" />
     <Compile Include="Services\DebtRepository.cs" />
     <Compile Include="Services\EventRepository.cs" />
     <Compile Include="Services\IconRepo.cs" />

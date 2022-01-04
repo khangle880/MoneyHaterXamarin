@@ -83,9 +83,9 @@ namespace MoneyHater.Services
          string id = wallet.Id;
 
          string previousPath = walletRepo.DocumentPath + $"/{id}";
-         memberRepo.previousPath = previousPath;
+         memberRepo.Path = previousPath + "/members";
          budgetRepo.previousPath = previousPath;
-         customCategoryRepo.previousPath = previousPath;
+         customCategoryRepo.Path = previousPath + "/custom_categories";
          debtRepo.previousPath = previousPath;
          eventRepo.previousPath = previousPath;
          readyExecutedTransactionRepo.previousPath = previousPath;

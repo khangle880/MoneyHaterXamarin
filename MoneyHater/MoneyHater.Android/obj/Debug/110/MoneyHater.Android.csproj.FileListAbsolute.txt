@@ -690,6 +690,8 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64b76f6e8b2d8c8db1\LoginAppCompatDialogFragment.java
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64b76f6e8b2d8c8db1\PromptAppCompatDialogFragment.java
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64b76f6e8b2d8c8db1\TimeAppCompatDialogFragment.java
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64dde1eac11371364a\StandardEntryRenderer.java
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64dde1eac11371364a\StandardPickerRenderer.java
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64ee486da937c010f4\ButtonRenderer.java
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64ee486da937c010f4\FrameRenderer.java
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\android\src\crc64ee486da937c010f4\ImageRenderer.java

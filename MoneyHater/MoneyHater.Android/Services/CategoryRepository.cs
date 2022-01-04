@@ -8,7 +8,7 @@ namespace MoneyHater.Droid.Services
 {
    public class CategoryRepository : BaseRepository<CategoryModel>
    {
-      public override string DocumentPath =>
-         "groups";
+      public override string DocumentPath => Path ??
+         "categories";
    }
 }

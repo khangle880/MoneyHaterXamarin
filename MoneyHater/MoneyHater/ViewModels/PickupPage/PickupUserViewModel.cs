@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MoneyHater.ViewModels.PickupPage
 {
@@ -30,11 +31,10 @@ namespace MoneyHater.ViewModels.PickupPage
 
       async Task Complete()
       {
-
-
+         var users = selectableUsers.Where(x => x.IsSelected == true).Cast<AnotherUserModel>().ToList();
+         MessagingCenter.Send<object, List<AnotherUserModel>>(this, "Load members", users);
+         await Shell.Current.GoToAsync("..");
       }
-
-
    }
 
    class SelectableUser : AnotherUserModel

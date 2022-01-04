@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.PickupPage.PickupCategoryPage"
+			 x:Name="PickCategoryPage"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+             x:DataType="viewmodels:PickupCategoryVM"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+
+   <ContentPage.BindingContext>
+	  <viewmodels:PickupCategoryVM />
+   </ContentPage.BindingContext>
+
+
+   <CollectionView
+            BackgroundColor="Transparent"
+            IsGrouped="True"
+            ItemSizingStrategy="MeasureAllItems"
+            ItemsLayout="VerticalList"
+            ItemsSource="{Binding CategoriesGrouped}"
+            SelectedItem="{Binding CategorySelected, Mode=TwoWay}"
+            SelectionMode="Single">
+	  <CollectionView.EmptyView>
+		 <StackLayout Padding="12">
+			<Label HorizontalOptions="Center" Text="No Category" />
+		 </StackLayout>
+	  </CollectionView.EmptyView>
+	  <CollectionView.GroupHeaderTemplate>
+		 <DataTemplate x:DataType="{x:Null}">
+			<StackLayout Padding="12">
+			   <Label Style="{StaticResource LabelMedium}" Text="{Binding Key}" />
+			</StackLayout>
+		 </DataTemplate>
+	  </CollectionView.GroupHeaderTemplate>
+	  <CollectionView.ItemTemplate>
+		 <DataTemplate x:DataType="viewmodels:CategoryShowable">
+			<Grid Padding="10">
+			   <Grid.RowDefinitions>
+				  <RowDefinition Height="Auto"/>
+				  <RowDefinition Height="Auto"/>
+			   </Grid.RowDefinitions>
+			   <Grid.ColumnDefinitions>
+				  <ColumnDefinition Width="*"/>
+				  <ColumnDefinition Width="5*"/>
+			   </Grid.ColumnDefinitions>
+			   <ffSvg:SvgCachedImage
+				  Margin="0"
+				  HeightRequest="50"
+				  RetryCount="3"       	
+				  Grid.Row="0"
+				  Grid.Column="0"
+				  Source="{Binding ImageSource}"
+				  WidthRequest="50" />
+			   <Label
+					   Style="{StaticResource LabelLarge}"
+					   Text="{Binding Name}"
+					   Grid.Row="0"
+					   Grid.Column="1"
+					   VerticalOptions="Center" />
+			   <CollectionView
+					   Grid.Row="1"
+					   Grid.Column="1"
+					   ItemsSource="{Binding childrenShowable}"
+					   SelectedItem="{Binding Source={x:Reference PickCategoryPage}, Path=BindingContext.CategorySelected}"
+					   SelectionMode="Single">
+				  <CollectionView.ItemTemplate>
+					 <DataTemplate x:DataType="viewmodels:CategoryShowable">
+						<ViewCell>
+						   <Grid Padding="10">
+							  <Grid.RowDefinitions>
+								 <RowDefinition Height="Auto"/>
+							  </Grid.RowDefinitions>
+							  <Grid.ColumnDefinitions>
+								 <ColumnDefinition Width="*"/>
+								 <ColumnDefinition Width="5*"/>
+							  </Grid.ColumnDefinitions>
+							  <ffSvg:SvgCachedImage
+								 Margin="0"
+								 HeightRequest="50"
+								 RetryCount="3"       	
+								 Grid.Row="0"
+								 Grid.Column="0"
+								 Source="{Binding ImageSource}"
+								 WidthRequest="50" />
+							  <Label
+								   Style="{StaticResource LabelLarge}"
+								   Text="{Binding Name}"
+								   Grid.Row="0"
+								   Grid.Column="1"
+								   VerticalOptions="Center" />
+						   </Grid>
+						</ViewCell>
+					 </DataTemplate>
+				  </CollectionView.ItemTemplate>
+			   </CollectionView>
+			</Grid>
+		 </DataTemplate>
+	  </CollectionView.ItemTemplate>
+	  <CollectionView.Header>
+		 <StackLayout Orientation="Horizontal">
+			<Label
+                        HorizontalOptions="Center"
+                        Style="{StaticResource LabelMedium}"
+                        Text="Category of transaction" />
+		 </StackLayout>
+	  </CollectionView.Header>
+	  <CollectionView.Footer>
+	  </CollectionView.Footer>
+   </CollectionView>
+</ContentPage>

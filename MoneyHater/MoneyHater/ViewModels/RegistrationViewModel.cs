@@ -1,4 +1,5 @@
-﻿using MoneyHater.Helpers;
+﻿using Acr.UserDialogs;
+using MoneyHater.Helpers;
 using MoneyHater.Views;
 using MvvmHelpers.Commands;
 using System;
@@ -25,6 +26,9 @@ namespace MoneyHater.ViewModels
       }
       async Task Register()
       {
+         IsBusy = true;
+         UserDialogs.Instance.ShowLoading();
+
          try
          {
             var user = await FbApp.auth.SignUpWithEAndP(email, password);
@@ -48,6 +52,9 @@ namespace MoneyHater.ViewModels
          {
             await App.Current.MainPage.DisplayAlert("Alert", e.Message, "Ok");
          }
+
+         UserDialogs.Instance.HideLoading();
+         IsBusy = false;
 
       }
 

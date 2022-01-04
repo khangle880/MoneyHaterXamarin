@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.PickupPage.PickupUserPage"
-			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
              x:DataType="viewmodels:PickupUserViewModel"
              BackgroundColor="{AppThemeBinding 
@@ -26,6 +25,7 @@
 			   </DataTemplate>
 			</ListView.ItemTemplate>
 		 </ListView>
+		 <Button Text="Done" Command="{Binding CompleteCommand}"></Button>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>
