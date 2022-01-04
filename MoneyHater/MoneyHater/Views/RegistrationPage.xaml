@@ -5,6 +5,7 @@
              Shell.FlyoutBehavior="Disabled"
 			 Shell.NavBarIsVisible="False"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:RegistrationViewModel"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -14,8 +15,69 @@
 	  <viewmodels:RegistrationViewModel />
    </ContentPage.BindingContext>
    <ContentPage.Content>
+	   <Grid Padding="0">
+        <StackLayout Padding="0" Margin="0">
+            <Frame BackgroundColor="DarkBlue" HeightRequest="110" HorizontalOptions="FillAndExpand">
+                
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="15,110,15,0">
+            <Frame BackgroundColor="White" HeightRequest="470" HorizontalOptions="FillAndExpand" CornerRadius="5">
+                <StackLayout>
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <Label Text="SIGN UP" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+                    </StackLayout>
+                     
+                    <StackLayout Margin="0,25,0,0">
+                        <Frame Padding="0,10,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                            <controls:StandardEntry
+                                    Padding="10,12,12,10"
+                                    BackgroundColor="White"
+                                    BorderColor="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+					                Text="{Binding Email}"
+                                    Placeholder="Email" />
+                        </Frame>
+                        <Frame Padding="0,15,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                            <controls:StandardEntry
+                                    Padding="10,12,12,10"
+                                    BackgroundColor="White"
+                                    BorderColor="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+					                Text="{Binding Name}"
+                                    Placeholder="Name" />
+                        </Frame><Frame Padding="0,15,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                            <controls:StandardEntry
+                                    Padding="10,12,12,10"
+                                    BackgroundColor="White"
+                                    BorderColor="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+					                Text="{Binding Password}"
+                                    Placeholder="Password" />
+                        </Frame>
+                         
+                    </StackLayout>
 
-	  <StackLayout Padding="40" VerticalOptions="Center"
+                    <Button Text="SIGN UP" BackgroundColor="DarkBlue" TextColor="White" Margin="15" FontAttributes="Bold" CornerRadius="20"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Already had an Account?" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+                        <Label Text="Login" HorizontalTextAlignment="Center" TextColor="DarkBlue" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+			                   <TapGestureRecognizer Command="{Binding ToLoginCommand}"/>
+			                </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+                
+            </Frame>
+        </StackLayout>
+   </Grid>
+	  <!--<StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
 		 <Label Text="Email:"/>
 		 <Entry Placeholder="Email" Text="{Binding Email}"/>
@@ -29,6 +91,6 @@
 			   <TapGestureRecognizer Command="{Binding ToLoginCommand}"/>
 			</Label.GestureRecognizers>
 		 </Label>
-	  </StackLayout>
+	  </StackLayout>-->
    </ContentPage.Content>
 </ContentPage>
