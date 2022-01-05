@@ -16,25 +16,65 @@
    </ContentPage.BindingContext>
 
 
-   <ContentPage.Content>
-	  <StackLayout Padding="40" VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand">
-		 <Label Text="Email:"/>
-		 <controls:StandardEntry
-                    BackgroundColor="White"
-                    BorderColor="Black"
-                    BorderThickness="1"
-                    CornerRadius="8"
-					Text="{Binding Email}"
-                    Placeholder="Email" />
-		 <Label Text="Password:"/>
-		 <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
-		 <Button Text="Login" Command="{Binding LoginCommand}"/>
-		 <Label Text="Register" HorizontalOptions="Center">
-			<Label.GestureRecognizers>
-			   <TapGestureRecognizer Command="{Binding ToRegisterCommand}"/>
-			</Label.GestureRecognizers>
-		 </Label>
-	  </StackLayout>
-   </ContentPage.Content>
+   <Grid Padding="0">
+        <StackLayout Padding="0" Margin="0">
+            <Frame BackgroundColor="DarkBlue" HeightRequest="110" HorizontalOptions="FillAndExpand">
+                
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="15,110,15,0">
+            <Frame BackgroundColor="White" HeightRequest="450" HorizontalOptions="FillAndExpand" CornerRadius="5">
+                <StackLayout>
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+                    </StackLayout>
+                     
+                    <StackLayout Margin="0,25,0,0">
+                        <Frame Padding="0,10,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                            <controls:StandardEntry
+                                    Padding="10,12,12,10"
+                                    BackgroundColor="White"
+                                    BorderColor="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+					                Text="{Binding Email}"
+                                    Placeholder="Email" />
+                        </Frame>
+                        <Frame Padding="0,15,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                            <controls:StandardEntry
+                                    IsPassword="True"
+                                    Padding="10,12,12,10"
+                                    BackgroundColor="White"
+                                    BorderColor="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+					                Text="{Binding Password}"
+                                    Placeholder="Password" />
+                        </Frame>
+                         
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <CheckBox IsChecked="False" Color="DarkBlue"></CheckBox>
+                        <Label Text="Remember me" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+                        <Label Text="Forgot password" HorizontalTextAlignment="End" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                    </StackLayout>
+
+                    <Button Text="SIGN IN" BackgroundColor="DarkBlue" TextColor="White" Margin="15" FontAttributes="Bold" CornerRadius="20" Command="{Binding LoginCommand}"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Don't have an Account?" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+                        <Label Text="Sign up" HorizontalTextAlignment="Center" TextColor="DarkBlue" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+			                    <TapGestureRecognizer Command="{Binding ToRegisterCommand}"/>
+			                </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+                
+            </Frame>
+        </StackLayout>
+   </Grid>
 </ContentPage>
