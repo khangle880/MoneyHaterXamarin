@@ -1,4 +1,5 @@
 ﻿using MoneyHater.Helpers;
+using MoneyHater.Views;
 using MonkeyCache.FileStore;
 using System;
 using Xamarin.Essentials;
@@ -20,7 +21,7 @@ namespace MoneyHater
          FbApp.Init();
          Barrel.ApplicationId = AppInfo.PackageName;
 
-         MainPage = new AppShell();
+         MainPage = new NavigationPage(new SplashPage());
       }
 
       void InitializeFirebase()

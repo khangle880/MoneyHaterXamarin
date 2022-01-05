@@ -41,6 +41,7 @@ namespace MoneyHater.ViewModels.PickupPage
                 Children = y.Children,
                 ImageSource = SvgImageSource.FromUri(new Uri(y.Icon)),
              }).ToList(),
+            childrenSize = x.Children.Count * 50,
             ImageSource = SvgImageSource.FromUri(new Uri(x.Icon)),
          }).ToList();
 
@@ -63,5 +64,6 @@ namespace MoneyHater.ViewModels.PickupPage
    {
       public ImageSource ImageSource { get; set; }
       public List<CategoryShowable> childrenShowable { get; set; }
+      public int childrenSize { get; set; }
    }
 }

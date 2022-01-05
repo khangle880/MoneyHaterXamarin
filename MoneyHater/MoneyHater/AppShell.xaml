@@ -93,11 +93,8 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-   <ShellItem FlyoutItemIsVisible="False" >
-	  <ShellContent Route="SplashPage" ContentTemplate="{DataTemplate local:SplashPage}"/>
-	  <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}"/>
+   <ShellItem >
 	  <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
-	  <ShellContent Route="AddWalletPage" ContentTemplate="{DataTemplate local:AddWalletPage}"/>
    </ShellItem>
 
    <!-- <FlyoutItem Title="Equipment - CV">
@@ -133,6 +130,20 @@
 	  </FlyoutItem.Icon>
 	 <ShellContent ContentTemplate="{DataTemplate local:InternetCoffeePage}" Route="InternetCoffeePage" /> 
    </FlyoutItem> -->
+
+
+
+   <FlyoutItem Title="Add New Wallet">
+	  <FlyoutItem.Icon>
+		 <FontImageSource FontFamily="FAS"
+                             Color="{AppThemeBinding 
+                                    Dark=White, 
+                                    Light={StaticResource SystemGray5Dark}}"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+	  </FlyoutItem.Icon>
+	  <ShellContent Route="AddWalletPage" ContentTemplate="{DataTemplate local:AddWalletPage}"/>
+   </FlyoutItem>
+
 
    <FlyoutItem Title="Image Cache">
 	  <FlyoutItem.Icon>

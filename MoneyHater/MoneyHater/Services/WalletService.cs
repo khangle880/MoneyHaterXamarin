@@ -39,7 +39,17 @@ namespace MoneyHater.Services
       {
          var newId = await walletRepo.Save(wallet);
          wallet.Id = newId;
+         string id = wallet.Id;
+
+         string previousPath = walletRepo.DocumentPath + $"/{id}";
+         memberRepo.Path = previousPath + "/members";
+
+         foreach (var item in wallet.Members)
+         {
+            await memberRepo.Save(item);
+         }
          wallets.Add(wallet);
+         currentWallet = wallets[wallets.Count - 1];
       }
 
       public async Task LoadWallets()
@@ -49,6 +59,7 @@ namespace MoneyHater.Services
          {
             currentWallet = wallets[0];
          }
+         else { currentWallet = null; }
       }
       //public async Task<List<WalletModel>> GetAllWallet()
       //{

@@ -40,7 +40,8 @@ namespace MoneyHater.ViewModels
          {
             if (FbApp.auth.SignOut())
             {
-               await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+               FbApp.clear();
+               Application.Current.MainPage = new SplashPage();
             }
             else
             {

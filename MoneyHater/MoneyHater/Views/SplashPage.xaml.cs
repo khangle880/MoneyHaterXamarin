@@ -17,19 +17,24 @@ namespace MoneyHater.Views
       public SplashPage()
       {
          InitializeComponent();
-         CheckWhetherTheUserIsSignedIn();
       }
+      protected override void OnAppearing()
+      {
+         CheckWhetherTheUserIsSignedIn();
+         base.OnAppearing();
+      }
+
 
       private async void CheckWhetherTheUserIsSignedIn()
       {
          if (FbApp.auth.isSigned())
          {
             await FbApp.LoadDataLoggeduser();
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            Application.Current.MainPage = new AppShell();
          }
          else
          {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            Application.Current.MainPage = new NavigationPage(new LoginPage());
          }
       }
 

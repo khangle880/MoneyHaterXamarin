@@ -41,7 +41,7 @@ namespace MoneyHater.ViewModels
                   PremiumStatus = false,
                }, FbApp.auth.Uid);
                await FbApp.LoadDataLoggeduser();
-               await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+               Application.Current.MainPage = new SplashPage();
             }
             else
             {
@@ -60,7 +60,7 @@ namespace MoneyHater.ViewModels
 
       async Task ToLogin()
       {
-         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+         Application.Current.MainPage = new LoginPage();
       }
 
 

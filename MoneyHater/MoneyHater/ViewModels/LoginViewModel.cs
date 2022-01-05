@@ -4,10 +4,8 @@ using MoneyHater.Models;
 using MoneyHater.Views;
 using MvvmHelpers.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace MoneyHater.ViewModels
 {
@@ -50,7 +48,7 @@ namespace MoneyHater.ViewModels
             if (user != null)
             {
                await FbApp.LoadDataLoggeduser();
-               await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+               Application.Current.MainPage = new SplashPage();
             }
             else
             {
@@ -68,8 +66,7 @@ namespace MoneyHater.ViewModels
 
       async Task ToRegister()
       {
-         await Shell.Current.GoToAsync($"{nameof(RegistrationPage)}");
+         Application.Current.MainPage = new RegistrationPage();
       }
-
    }
 }

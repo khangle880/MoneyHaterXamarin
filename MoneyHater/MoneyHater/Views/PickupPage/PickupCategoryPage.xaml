@@ -14,40 +14,33 @@
    <ContentPage.BindingContext>
 	  <viewmodels:PickupCategoryVM />
    </ContentPage.BindingContext>
+   <ContentPage.ToolbarItems>
+	  <ToolbarItem
+            Text="Done"
+            Command="{Binding CompleteCommand}">
+	  </ToolbarItem>
+   </ContentPage.ToolbarItems>
 
-
-   <CollectionView
+   <ListView
             BackgroundColor="Transparent"
-            IsGrouped="True"
-            ItemSizingStrategy="MeasureAllItems"
-            ItemsLayout="VerticalList"
+            IsGroupingEnabled="True"
+			GroupDisplayBinding="{Binding Key}"
+			HasUnevenRows="True"
             ItemsSource="{Binding CategoriesGrouped}"
-            SelectedItem="{Binding CategorySelected, Mode=TwoWay}"
-            SelectionMode="Single">
-	  <CollectionView.EmptyView>
-		 <StackLayout Padding="12">
-			<Label HorizontalOptions="Center" Text="No Category" />
-		 </StackLayout>
-	  </CollectionView.EmptyView>
-	  <CollectionView.GroupHeaderTemplate>
-		 <DataTemplate x:DataType="{x:Null}">
-			<StackLayout Padding="12">
-			   <Label Style="{StaticResource LabelMedium}" Text="{Binding Key}" />
-			</StackLayout>
-		 </DataTemplate>
-	  </CollectionView.GroupHeaderTemplate>
-	  <CollectionView.ItemTemplate>
+            SelectedItem="{Binding CategorySelected, Mode=TwoWay}">
+	  <ListView.ItemTemplate>
 		 <DataTemplate x:DataType="viewmodels:CategoryShowable">
-			<Grid Padding="10">
-			   <Grid.RowDefinitions>
-				  <RowDefinition Height="Auto"/>
-				  <RowDefinition Height="Auto"/>
-			   </Grid.RowDefinitions>
-			   <Grid.ColumnDefinitions>
-				  <ColumnDefinition Width="*"/>
-				  <ColumnDefinition Width="5*"/>
-			   </Grid.ColumnDefinitions>
-			   <ffSvg:SvgCachedImage
+			<ViewCell>
+			   <Grid Padding="10">
+				  <Grid.RowDefinitions>
+					 <RowDefinition Height="Auto"/>
+					 <RowDefinition Height="Auto"/>
+				  </Grid.RowDefinitions>
+				  <Grid.ColumnDefinitions>
+					 <ColumnDefinition Width="*"/>
+					 <ColumnDefinition Width="5*"/>
+				  </Grid.ColumnDefinitions>
+				  <ffSvg:SvgCachedImage
 				  Margin="0"
 				  HeightRequest="50"
 				  RetryCount="3"       	
@@ -55,60 +48,54 @@
 				  Grid.Column="0"
 				  Source="{Binding ImageSource}"
 				  WidthRequest="50" />
-			   <Label
+				  <Label
 					   Style="{StaticResource LabelLarge}"
 					   Text="{Binding Name}"
 					   Grid.Row="0"
 					   Grid.Column="1"
 					   VerticalOptions="Center" />
-			   <CollectionView
+				  <ListView
+					   HasUnevenRows="True"
+					   HeightRequest="{Binding childrenSize}"
 					   Grid.Row="1"
 					   Grid.Column="1"
 					   ItemsSource="{Binding childrenShowable}"
 					   SelectedItem="{Binding Source={x:Reference PickCategoryPage}, Path=BindingContext.CategorySelected}"
 					   SelectionMode="Single">
-				  <CollectionView.ItemTemplate>
-					 <DataTemplate x:DataType="viewmodels:CategoryShowable">
-						<ViewCell>
-						   <Grid Padding="10">
-							  <Grid.RowDefinitions>
-								 <RowDefinition Height="Auto"/>
-							  </Grid.RowDefinitions>
-							  <Grid.ColumnDefinitions>
-								 <ColumnDefinition Width="*"/>
-								 <ColumnDefinition Width="5*"/>
-							  </Grid.ColumnDefinitions>
-							  <ffSvg:SvgCachedImage
-								 Margin="0"
-								 HeightRequest="50"
-								 RetryCount="3"       	
-								 Grid.Row="0"
-								 Grid.Column="0"
-								 Source="{Binding ImageSource}"
-								 WidthRequest="50" />
-							  <Label
+					 <ListView.ItemTemplate>
+						<DataTemplate x:DataType="viewmodels:CategoryShowable">
+						   <ViewCell>
+							  <StackLayout Orientation="Horizontal">
+								 <ffSvg:SvgCachedImage
+									Margin="0"
+									HeightRequest="40"
+									RetryCount="3"       	
+									Grid.Row="0"
+									Grid.Column="0"
+									Source="{Binding ImageSource}"
+									WidthRequest="40" />
+								 <Label
 								   Style="{StaticResource LabelLarge}"
 								   Text="{Binding Name}"
 								   Grid.Row="0"
 								   Grid.Column="1"
 								   VerticalOptions="Center" />
-						   </Grid>
-						</ViewCell>
-					 </DataTemplate>
-				  </CollectionView.ItemTemplate>
-			   </CollectionView>
-			</Grid>
+							  </StackLayout>
+						   </ViewCell>
+						</DataTemplate>
+					 </ListView.ItemTemplate>
+				  </ListView>
+			   </Grid>
+			</ViewCell>
 		 </DataTemplate>
-	  </CollectionView.ItemTemplate>
-	  <CollectionView.Header>
+	  </ListView.ItemTemplate>
+	  <ListView.Header>
 		 <StackLayout Orientation="Horizontal">
 			<Label
                         HorizontalOptions="Center"
                         Style="{StaticResource LabelMedium}"
                         Text="Category of transaction" />
 		 </StackLayout>
-	  </CollectionView.Header>
-	  <CollectionView.Footer>
-	  </CollectionView.Footer>
-   </CollectionView>
+	  </ListView.Header>
+   </ListView>
 </ContentPage>

@@ -1,5 +1,7 @@
-﻿using MoneyHater.Helpers;
+﻿using Acr.UserDialogs;
+using MoneyHater.Helpers;
 using MoneyHater.Models;
+using MoneyHater.Views;
 using MoneyHater.Views.PickupPage;
 using MvvmHelpers.Commands;
 using System;
@@ -18,6 +20,8 @@ namespace MoneyHater.ViewModels
       bool excludedFromTotal;
       List<AnotherUserModel> members;
       string name;
+      public List<CurrencyModel> currencies;
+      public List<CurrencyModel> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
       public string Name { get => name; set => SetProperty(ref name, value); }
       public double Balance { get => balance; set => SetProperty(ref balance, value); }
       public CurrencyModel CurrencyModel { get => currencyModel; set => SetProperty(ref currencyModel, value); }
@@ -29,15 +33,14 @@ namespace MoneyHater.ViewModels
       public string MembersName { get => membersName; set => SetProperty(ref membersName, value); }
       public AsyncCommand RegisterCommand { get; }
       public AsyncCommand PickupMemberCommand { get; }
-      public AsyncCommand PickupCurrencyCommand { get; }
       public AsyncCommand PickupCategoryCommand { get; }
 
       public AddWalletViewModel()
       {
          RegisterCommand = new AsyncCommand(RegisterWallet);
          PickupMemberCommand = new AsyncCommand(PickupMember);
-         PickupCurrencyCommand = new AsyncCommand(PickupCurrency);
          PickupCategoryCommand = new AsyncCommand(PickupCategory);
+         currencies = FbApp.currencies;
 
          MessagingCenter.Subscribe<object, List<AnotherUserModel>>(this, "Load members", (obj, s) =>
          {
@@ -45,10 +48,6 @@ namespace MoneyHater.ViewModels
             var term = members.ConvertAll<string>((e) => e.Name);
             MembersName = string.Join(", ", term);
          });
-         MessagingCenter.Subscribe<object, CurrencyModel>(this, "Load currency", (obj, s) =>
-          {
-             CurrencyModel = s;
-          });
          MessagingCenter.Subscribe<object, CurrencyModel>(this, "Load category", (obj, s) =>
            {
               CurrencyModel = s;
@@ -58,6 +57,9 @@ namespace MoneyHater.ViewModels
 
       async Task RegisterWallet()
       {
+         IsBusy = true;
+         UserDialogs.Instance.ShowLoading();
+
          try
          {
             await FbApp.walletService.AddWallet(new WalletModel()
@@ -71,11 +73,14 @@ namespace MoneyHater.ViewModels
                Name = name,
                State = true,
             });
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
          }
          catch (Exception e)
          {
             await App.Current.MainPage.DisplayAlert("Alert", "Register New Wallet Failed", "Ok");
          }
+         UserDialogs.Instance.HideLoading();
+         IsBusy = false;
 
       }
 
@@ -83,16 +88,10 @@ namespace MoneyHater.ViewModels
       {
          await Shell.Current.GoToAsync($"{nameof(PickupUserPage)}");
       }
-      async Task PickupCurrency()
-      {
-         await Shell.Current.GoToAsync($"{nameof(PickupCurrencyPage)}");
-      }
       async Task PickupCategory()
       {
          await Shell.Current.GoToAsync($"{nameof(PickupCategoryPage)}");
       }
-
-
 
    }
 }

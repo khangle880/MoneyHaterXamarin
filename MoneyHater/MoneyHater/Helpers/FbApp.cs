@@ -43,33 +43,33 @@ namespace MoneyHater.Helpers
 
       public static void clear()
       {
-         categories.Clear();
-         currencies.Clear();
-         icons.Clear();
-         usersPublicInfo.Clear();
-         wallets.Clear();
+         if (categories != null) { categories.Clear(); }
+         if (icons != null) { icons.Clear(); }
+         if (currencies != null) { currencies.Clear(); }
+         if (usersPublicInfo != null) { usersPublicInfo.Clear(); }
+         if (wallets != null) { wallets.Clear(); }
          userInfo = null;
       }
 
       public static async Task LoadDataLoggeduser()
       {
 
-         //var loadCurrencies = currencyRepo.GetAll();
-         var loadCategories = categoryService.LoadCategories();
-         //var loadUsersPublicInfo = userRepo.GetAll();
+         var loadCurrencies = currencyRepo.GetAll();
+         //var loadCategories = categoryService.LoadCategories();
+         var loadUsersPublicInfo = userRepo.GetAll();
          //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
          var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { loadCategories });
+         Task taskReturned = Task.WhenAll(new Task[] { loadCurrencies, loadUsersPublicInfo });
          try
          {
             await taskReturned;
             //icons = (await loadIcons).Icons;
-            //currencies = (await loadCurrencies) as List<CurrencyModel>;
-            categories = await loadCategories;
-            //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
+            currencies = (await loadCurrencies) as List<CurrencyModel>;
+            //categories = await loadCategories;
+            usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
             //userInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
          }

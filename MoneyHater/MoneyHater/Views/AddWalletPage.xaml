@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.AddWalletPage"
+			 Shell.FlyoutBehavior="Disabled"
+			 Shell.NavBarIsVisible="False"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:AddWalletViewModel"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -18,16 +21,23 @@
 			<Label Text="Wallet Name:"/>
 			<Entry Placeholder="Name" Text="{Binding Name}"/>
 			<Label Text="Balance:"/>
-			<Entry Placeholder="Balance" Text="{Binding Balance}"/>
+			<Entry Placeholder="Balance" Text="{Binding Balance}" Keyboard="Numeric" />
 			<Label Text="Currency:"/>
-			<Label Text="{Binding CurrencyModel.Name}"/>
-			<Button Text="Pick Currency" Command="{Binding PickupCurrencyCommand}"/>
+			<controls:StandardPicker
+			  Grid.Row="5"
+			  ItemsSource="{Binding Currencies}"
+			  SelectedItem="{Binding CurrencyModel}"
+			  ItemDisplayBinding="{Binding Name}"
+			  BackgroundColor="White"
+			  BorderColor="Black"
+			  BorderThickness="2"
+			  CornerRadius="8"
+			  Padding="6, 10, 6, 10"
+			  VerticalOptions="CenterAndExpand"
+			  Title="Choose Your Currency" />
 			<Label Text="Members:"/>
 			<Label Text="{Binding MembersName}" TextColor="Black"/>
 			<Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
-			<Label Text="Members:"/>
-			<Label Text="{Binding MembersName}" TextColor="Black"/>
-			<Button Text="Pick Category" Command="{Binding PickupCategoryCommand}"/>
 			<RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
 			<RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
 			<Button Text="Create Wallet" Command="{Binding RegisterCommand}"/>

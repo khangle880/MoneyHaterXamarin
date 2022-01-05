@@ -17,6 +17,5 @@ namespace MoneyHater.Views
       {
          InitializeComponent();
       }
-
    }
 }
