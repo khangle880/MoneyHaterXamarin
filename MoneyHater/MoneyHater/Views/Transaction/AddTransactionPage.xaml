@@ -5,6 +5,7 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Transaction"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:AddTransactionVM"
+			 xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -14,42 +15,52 @@
 
    <ContentPage.Content>
 	  <ScrollView>
-		 <StackLayout Padding="40" VerticalOptions="Center"
+		 <StackLayout Padding="25" VerticalOptions="StartAndExpand"
                      HorizontalOptions="FillAndExpand">
-
-			<StackLayout VerticalOptions="Center">
-			   <Entry Placeholder="Balance" Text="{Binding Amount}" Keyboard="Numeric" />
-			   <Picker
+			<StackLayout Padding="0,0,0,30" HorizontalOptions="CenterAndExpand">
+				<Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal" VerticalOptions="Center">
+				<ffSvg:SvgCachedImage
+				   HeightRequest="30"
+				   Grid.Row="0"
+				   Grid.Column="1"
+				   Source="resource://MoneyHater.Resources.Icons.money.svg"
+				   WidthRequest="30" />
+			   <Entry HorizontalOptions="FillAndExpand" Placeholder="Balance" Text="{Binding Amount}" Keyboard="Numeric" />
+			   <controls:StandardPicker
 				 ItemsSource="{Binding Currencies}"
 				 SelectedItem="{Binding CurrencyModel}"
 				 ItemDisplayBinding="{Binding Iso}"
-				 BackgroundColor="White"
+				 BackgroundColor="Transparent"
 				 VerticalOptions="CenterAndExpand"
 				 Title="{Binding WalletModel.CurrencyModel.Iso}" />
 			</StackLayout>
-			<StackLayout VerticalOptions="Center">
-			   <Label Text="{Binding CategoryModel.Name}" TextColor="Black" />
-			   <Button Command="{Binding PickupCategoryCommand}"/>
+			<StackLayout Orientation="Horizontal" VerticalOptions="Center">
+			   <Entry PlaceholderColor="DarkGray" Placeholder="Catalory" HorizontalOptions="FillAndExpand" Text="{Binding CategoryModel.Name}" TextColor="Black" />
+			   <Button Text="Pick" BackgroundColor="SlateGray" FontSize="14" TextColor="White" Margin="0,20,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupCategoryCommand}"/>
 			</StackLayout>
-			<Entry Text="{Binding Note}" TextColor="Black" />
+			<Entry Margin="0,20,0,0" PlaceholderColor="DarkGray" Placeholder="Note" Text="{Binding Note}" TextColor="Black" />
 			<!-- Remind -->
 			<!-- Wallet -->
 			<Picker
+				Margin="0,20,0,0"
 				 ItemsSource="{Binding AnotherUsers}"
 				 SelectedItem="{Binding With}"
 				 ItemDisplayBinding="{Binding Name}"
-				 BackgroundColor="White"
+				 BackgroundColor="Transparent"
 				 VerticalOptions="CenterAndExpand"
 				 Title="Choose Partner" />
 			<Picker
+				Margin="0,20,0,0"
 				 ItemsSource="{Binding Events}"
 				 SelectedItem="{Binding EventModel}"
 				 ItemDisplayBinding="{Binding Name}"
-				 BackgroundColor="White"
+				 BackgroundColor="Transparent"
 				 VerticalOptions="CenterAndExpand"
 				 Title="Choose Event" />
-			<RadioButton Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
-			<Button Text="Create Transaction" Command="{Binding CreateCommand}"/>
+			<RadioButton Margin="0,20,0,0" Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
+			<Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Margin="0,20,0,0" Text="Create Transaction" Command="{Binding CreateCommand}"/>
 		 </StackLayout>
 	  </ScrollView>
    </ContentPage.Content>
