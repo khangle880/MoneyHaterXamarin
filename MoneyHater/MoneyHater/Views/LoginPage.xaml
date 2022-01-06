@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.LoginPage"
-             Shell.FlyoutBehavior="Disabled"
-			 Shell.NavBarIsVisible="False"
+			 NavigationPage.HasNavigationBar="False"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:LoginViewModel"
@@ -17,21 +16,21 @@
 
 
    <Grid Padding="0">
-        <StackLayout Padding="0" Margin="0">
-            <Frame BackgroundColor="DarkBlue" HeightRequest="110" HorizontalOptions="FillAndExpand">
-                
-            </Frame>
-        </StackLayout>
-        <StackLayout Margin="15,110,15,0">
-            <Frame BackgroundColor="White" HeightRequest="450" HorizontalOptions="FillAndExpand" CornerRadius="5">
-                <StackLayout>
-                    <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
-                    </StackLayout>
-                     
-                    <StackLayout Margin="0,25,0,0">
-                        <Frame Padding="0,10,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
-                            <controls:StandardEntry
+	  <StackLayout Padding="0" Margin="0">
+		 <Frame BackgroundColor="DarkBlue" HeightRequest="110" HorizontalOptions="FillAndExpand">
+
+		 </Frame>
+	  </StackLayout>
+	  <StackLayout Margin="15,110,15,0">
+		 <Frame BackgroundColor="White" HeightRequest="450" HorizontalOptions="FillAndExpand" CornerRadius="5">
+			<StackLayout>
+			   <StackLayout HorizontalOptions="CenterAndExpand">
+				  <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+			   </StackLayout>
+
+			   <StackLayout Margin="0,25,0,0">
+				  <Frame Padding="0,10,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+					 <controls:StandardEntry
                                     Padding="10,12,12,10"
                                     BackgroundColor="White"
                                     BorderColor="Black"
@@ -39,9 +38,9 @@
                                     CornerRadius="8"
 					                Text="{Binding Email}"
                                     Placeholder="Email" />
-                        </Frame>
-                        <Frame Padding="0,15,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
-                            <controls:StandardEntry
+				  </Frame>
+				  <Frame Padding="0,15,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+					 <controls:StandardEntry
                                     IsPassword="True"
                                     Padding="10,12,12,10"
                                     BackgroundColor="White"
@@ -50,31 +49,31 @@
                                     CornerRadius="8"
 					                Text="{Binding Password}"
                                     Placeholder="Password" />
-                        </Frame>
-                         
-                    </StackLayout>
+				  </Frame>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                        <CheckBox IsChecked="False" Color="DarkBlue"></CheckBox>
-                        <Label Text="Remember me" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+			   </StackLayout>
 
-                        <Label Text="Forgot password" HorizontalTextAlignment="End" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontAttributes="Bold"/>
-                    </StackLayout>
+			   <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+				  <CheckBox IsChecked="False" Color="DarkBlue"></CheckBox>
+				  <Label Text="Remember me" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
 
-                    <Button Text="SIGN IN" BackgroundColor="DarkBlue" TextColor="White" Margin="15" FontAttributes="Bold" CornerRadius="20" Command="{Binding LoginCommand}"/>
+				  <Label Text="Forgot password" HorizontalTextAlignment="End" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+			   </StackLayout>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Don't have an Account?" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+			   <Button Text="SIGN IN" BackgroundColor="DarkBlue" TextColor="White" Margin="15" FontAttributes="Bold" CornerRadius="20" Command="{Binding LoginCommand}"/>
 
-                        <Label Text="Sign up" HorizontalTextAlignment="Center" TextColor="DarkBlue" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold">
-                            <Label.GestureRecognizers>
-			                    <TapGestureRecognizer Command="{Binding ToRegisterCommand}"/>
-			                </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-                </StackLayout>
-                
-            </Frame>
-        </StackLayout>
+			   <StackLayout Orientation="Horizontal">
+				  <Label Text="Don't have an Account?" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+				  <Label Text="Sign up" HorizontalTextAlignment="Center" TextColor="DarkBlue" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold">
+					 <Label.GestureRecognizers>
+						<TapGestureRecognizer Command="{Binding ToRegisterCommand}"/>
+					 </Label.GestureRecognizers>
+				  </Label>
+			   </StackLayout>
+			</StackLayout>
+
+		 </Frame>
+	  </StackLayout>
    </Grid>
 </ContentPage>

@@ -20,7 +20,7 @@ namespace MoneyHater.ViewModels.PickupPage
 
       public PickupCurrencyVM()
       {
-         currencies = FbApp.currencies;
+         currencies = FirebaseService.currencies;
          CompleteCommand = new AsyncCommand(Complete);
       }
 

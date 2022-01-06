@@ -44,10 +44,10 @@ namespace MoneyHater.ViewModels
          //    );
          try
          {
-            var user = await FbApp.auth.LoginWithEAndP(email, password);
+            var user = await FirebaseService.auth.LoginWithEAndP(email, password);
             if (user != null)
             {
-               await FbApp.LoadDataLoggeduser();
+               await FirebaseService.LoadDataLoggeduser();
                Application.Current.MainPage = new SplashPage();
             }
             else

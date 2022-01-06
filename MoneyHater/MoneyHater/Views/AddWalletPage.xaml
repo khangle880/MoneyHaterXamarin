@@ -2,8 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.AddWalletPage"
-			 Shell.FlyoutBehavior="Disabled"
-			 Shell.NavBarIsVisible="False"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:AddWalletViewModel"
@@ -24,7 +22,6 @@
 			<Entry Placeholder="Balance" Text="{Binding Balance}" Keyboard="Numeric" />
 			<Label Text="Currency:"/>
 			<controls:StandardPicker
-			  Grid.Row="5"
 			  ItemsSource="{Binding Currencies}"
 			  SelectedItem="{Binding CurrencyModel}"
 			  ItemDisplayBinding="{Binding Name}"

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.ViewModels.Transaction.AddTransactionPage"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Transaction"
+			 xmlns:controls="clr-namespace:MoneyHater.Controls"
+             x:DataType="viewmodels:AddTransactionVM"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:AddTransactionVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <ScrollView>
+		 <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand">
+
+			<StackLayout VerticalOptions="Center">
+			   <Entry Placeholder="Balance" Text="{Binding Amount}" Keyboard="Numeric" />
+			   <Picker
+				 ItemsSource="{Binding Currencies}"
+				 SelectedItem="{Binding CurrencyModel}"
+				 ItemDisplayBinding="{Binding Iso}"
+				 BackgroundColor="White"
+				 VerticalOptions="CenterAndExpand"
+				 Title="{Binding WalletModel.CurrencyModel.Iso}" />
+			</StackLayout>
+			<StackLayout VerticalOptions="Center">
+			   <Label Text="{Binding CategoryModel.Name}" TextColor="Black" />
+			   <Button Command="{Binding PickupCategoryCommand}"/>
+			</StackLayout>
+			<Entry Text="{Binding Note}" TextColor="Black" />
+			<!-- Remind -->
+			<!-- Wallet -->
+			<Picker
+				 ItemsSource="{Binding AnotherUsers}"
+				 SelectedItem="{Binding With}"
+				 ItemDisplayBinding="{Binding Name}"
+				 BackgroundColor="White"
+				 VerticalOptions="CenterAndExpand"
+				 Title="Choose Partner" />
+			<Picker
+				 ItemsSource="{Binding Events}"
+				 SelectedItem="{Binding EventModel}"
+				 ItemDisplayBinding="{Binding Name}"
+				 BackgroundColor="White"
+				 VerticalOptions="CenterAndExpand"
+				 Title="Choose Event" />
+			<RadioButton Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
+			<Button Text="Create Transaction" Command="{Binding CreateCommand}"/>
+		 </StackLayout>
+	  </ScrollView>
+   </ContentPage.Content>
+</ContentPage>

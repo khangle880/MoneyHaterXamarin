@@ -14,12 +14,12 @@ namespace MoneyHater.ViewModels
 {
    class AddWalletViewModel : ViewModelBase
    {
-      double balance;
-      CurrencyModel currencyModel;
-      bool enableNotification;
-      bool excludedFromTotal;
-      List<AnotherUserModel> members;
-      string name;
+      public double balance;
+      public CurrencyModel currencyModel;
+      public bool enableNotification;
+      public bool excludedFromTotal;
+      public List<AnotherUserModel> members;
+      public string name;
       public List<CurrencyModel> currencies;
       public List<CurrencyModel> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
       public string Name { get => name; set => SetProperty(ref name, value); }
@@ -40,7 +40,7 @@ namespace MoneyHater.ViewModels
          RegisterCommand = new AsyncCommand(RegisterWallet);
          PickupMemberCommand = new AsyncCommand(PickupMember);
          PickupCategoryCommand = new AsyncCommand(PickupCategory);
-         currencies = FbApp.currencies;
+         currencies = FirebaseService.currencies;
 
          MessagingCenter.Subscribe<object, List<AnotherUserModel>>(this, "Load members", (obj, s) =>
          {
@@ -48,10 +48,6 @@ namespace MoneyHater.ViewModels
             var term = members.ConvertAll<string>((e) => e.Name);
             MembersName = string.Join(", ", term);
          });
-         MessagingCenter.Subscribe<object, CurrencyModel>(this, "Load category", (obj, s) =>
-           {
-              CurrencyModel = s;
-           });
 
       }
 
@@ -62,17 +58,17 @@ namespace MoneyHater.ViewModels
 
          try
          {
-            await FbApp.walletService.AddWallet(new WalletModel()
+            await FirebaseService.walletService.AddWallet(new WalletModel()
             {
                Balance = balance,
                CurrencyId = currencyModel.Id,
-               CurrencyModel = currencyModel,
                EnableNotification = enableNotification,
                ExcludedFromTotal = excludedFromTotal,
                Members = members,
                Name = name,
                State = true,
             });
+            MessagingCenter.Send<object, WalletModel>(this, "Add wallet", null);
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
          }
          catch (Exception e)

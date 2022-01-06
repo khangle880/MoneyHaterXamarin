@@ -18,7 +18,7 @@ namespace MoneyHater
 
          TheTheme.SetTheme();
 
-         FbApp.Init();
+         FirebaseService.Init();
          Barrel.ApplicationId = AppInfo.PackageName;
 
          MainPage = new NavigationPage(new SplashPage());

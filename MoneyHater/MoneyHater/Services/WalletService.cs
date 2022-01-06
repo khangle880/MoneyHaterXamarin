@@ -48,9 +48,37 @@ namespace MoneyHater.Services
          {
             await memberRepo.Save(item);
          }
-         wallets.Add(wallet);
+         wallets.Insert(0, wallet);
          currentWallet = wallets[wallets.Count - 1];
       }
+      public async Task<TransactionModel> AddTransaction(TransactionModel transaction)
+      {
+         if (currentWallet == null) return null;
+         string walletId = currentWallet.Id;
+         string previousPath = walletRepo.DocumentPath + $"/{walletId}";
+         transactionRepo.previousPath = previousPath;
+
+         var newId = await transactionRepo.Save(transaction);
+         transaction.Id = newId;
+         currentWallet.Transactions.Insert(0, transaction);
+
+         var category = transaction.CategoryModel;
+         var amountChanged = category.Type == "Expense" ||
+                 category.Name == "Loan" ||
+                 category.Name == "Repayment"
+                   ? -transaction.AmountByWallet
+                   : category.Type == "Income" ||
+                     category.Name == "Debt" ||
+                     category.Name == "Debt Collection"
+                   ? transaction.AmountByWallet
+                   : 0;
+         currentWallet.Balance += amountChanged;
+
+         await walletRepo.Save(currentWallet, currentWallet.Id);
+
+         return transaction;
+      }
+
 
       public async Task LoadWallets()
       {
@@ -60,35 +88,32 @@ namespace MoneyHater.Services
             currentWallet = wallets[0];
          }
          else { currentWallet = null; }
-      }
-      //public async Task<List<WalletModel>> GetAllWallet()
-      //{
-      //   var wallets = (await walletRepo.GetAll()) as List<WalletModel>;
-      //   List<Task> tasks = new List<Task>() { };
-      //   for (int i = 0; i < wallets.Count; ++i)
-      //   {
-      //      Task t;
-      //      var index = i;
-      //      t = Task.Factory.StartNew(async () =>
-      //      {
-      //         WalletModel item = new WalletModel { };
-      //         item = wallets[index];
-      //         wallets[index] = await GetWalletDetails(item);
-      //      });
-      //      tasks.Add(t);
-      //   }
+         List<Task<WalletModel>> tasks = new List<Task<WalletModel>>() { };
+         for (int i = 0; i < wallets.Count; ++i)
+         {
+            var index = i;
+            WalletModel item = new WalletModel { };
+            item = wallets[index];
+            tasks.Add(GetWalletDetails(item));
+         }
 
-      //   Task taskReturned = Task.WhenAll(tasks);
-      //   try
-      //   {
-      //      wallets = await taskReturned;
-      //   }
-      //   catch
-      //   {
-      //      await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
-      //   }
-      //   return wallets;
-      //}
+         Task taskReturned = Task.WhenAll(tasks);
+         try
+         {
+            await taskReturned;
+            for (int i = 0; i < tasks.Count; i++)
+            {
+               var index = i;
+               wallets[index] = await tasks[index];
+            }
+         }
+         catch
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
+         }
+
+      }
+
       public async Task<WalletModel> GetWalletDetails(WalletModel wallet)
       {
          string id = wallet.Id;
@@ -103,6 +128,7 @@ namespace MoneyHater.Services
          recurringTransactionRepo.previousPath = previousPath;
          transactionRepo.previousPath = previousPath;
 
+         // load event before
          List<Task> tasks = new List<Task> { };
          var loadMembers = memberRepo.GetAll();
          var loadBudgets = budgetRepo.GetAll();
@@ -113,10 +139,9 @@ namespace MoneyHater.Services
          var loadRecurringTransactions = recurringTransactionRepo.GetAll();
          var loadTransactions = transactionRepo.GetAll();
 
-         wallet.CurrencyModel = FbApp.currencies.Find(x => x.Id == wallet.CurrencyId);
-
+         wallet.Events = (await loadEvents) as List<EventModel>;
          Task taskReturned = Task.WhenAll(new Task[] { loadMembers, loadBudgets, loadCustomCategories, loadDebts,
-            loadEvents, loadReadyExecutedTransactions, loadRecurringTransactions, loadTransactions});
+             loadReadyExecutedTransactions, loadRecurringTransactions, loadTransactions});
          try
          {
             await taskReturned;
@@ -124,7 +149,6 @@ namespace MoneyHater.Services
             wallet.Budgets = (await loadBudgets) as List<BudgetModel>;
             wallet.CustomCategories = (await loadCustomCategories) as List<CategoryModel>;
             wallet.Debts = (await loadDebts) as List<DebtModel>;
-            wallet.Events = (await loadEvents) as List<EventModel>;
             wallet.ReadyExecutedTransactions = (await loadReadyExecutedTransactions) as List<ReadyExecutedTransactionModel>;
             wallet.RecurringTransactions = (await loadRecurringTransactions) as List<RecurringTransactionModel>;
             wallet.Transactions = (await loadTransactions) as List<TransactionModel>;

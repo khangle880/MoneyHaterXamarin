@@ -14,43 +14,24 @@ namespace MoneyHater.ViewModels.PickupPage
 {
    class PickupCategoryVM : ViewModelBase
    {
-      public List<CategoryShowable> categories;
-      public List<CategoryShowable> Categories { get => categories; set => SetProperty(ref categories, value); }
-      public CategoryShowable categorySelected;
-      public CategoryShowable CategorySelected { get => categorySelected; set => SetProperty(ref categorySelected, value); }
-      public ObservableRangeCollection<Grouping<string, CategoryShowable>> CategoriesGrouped { get; }
+      public List<CategoryModel> categories;
+      public List<CategoryModel> Categories { get => categories; set => SetProperty(ref categories, value); }
+      public CategoryModel categorySelected;
+      public CategoryModel CategorySelected { get => categorySelected; set => SetProperty(ref categorySelected, value); }
+      public ObservableRangeCollection<Grouping<string, CategoryModel>> CategoriesGrouped { get; }
 
       public AsyncCommand CompleteCommand { get; }
 
       public PickupCategoryVM()
       {
-         categories = FbApp.categories.Select(x => new CategoryShowable()
-         {
-            Type = x.Type,
-            Name = x.Name,
-            Id = x.Id,
-            Icon = x.Icon,
-            Children = x.Children,
-            childrenShowable = x.Children.Select(
-             y => new CategoryShowable()
-             {
-                Type = y.Type,
-                Name = y.Name,
-                Id = y.Id,
-                Icon = y.Icon,
-                Children = y.Children,
-                ImageSource = SvgImageSource.FromUri(new Uri(y.Icon)),
-             }).ToList(),
-            childrenSize = x.Children.Count * 50,
-            ImageSource = SvgImageSource.FromUri(new Uri(x.Icon)),
-         }).ToList();
+         categories = FirebaseService.categories;
 
          CompleteCommand = new AsyncCommand(Complete);
-         CategoriesGrouped = new ObservableRangeCollection<Grouping<string, CategoryShowable>>();
+         CategoriesGrouped = new ObservableRangeCollection<Grouping<string, CategoryModel>>();
          CategoriesGrouped.Clear();
-         CategoriesGrouped.Add(new Grouping<string, CategoryShowable>("Expense", categories.Where(c => c.Type == "Expense")));
-         CategoriesGrouped.Add(new Grouping<string, CategoryShowable>("Income", categories.Where(c => c.Type == "Income")));
-         CategoriesGrouped.Add(new Grouping<string, CategoryShowable>("Debt & Loan", categories.Where(c => c.Type == "Debt & Loan")));
+         CategoriesGrouped.Add(new Grouping<string, CategoryModel>("Expense", categories.Where(c => c.Type == "Expense")));
+         CategoriesGrouped.Add(new Grouping<string, CategoryModel>("Income", categories.Where(c => c.Type == "Income")));
+         CategoriesGrouped.Add(new Grouping<string, CategoryModel>("Debt & Loan", categories.Where(c => c.Type == "Debt & Loan")));
       }
 
       async Task Complete()
@@ -59,11 +40,5 @@ namespace MoneyHater.ViewModels.PickupPage
          await Shell.Current.GoToAsync("..");
 
       }
-   }
-   class CategoryShowable : CategoryModel
-   {
-      public ImageSource ImageSource { get; set; }
-      public List<CategoryShowable> childrenShowable { get; set; }
-      public int childrenSize { get; set; }
    }
 }

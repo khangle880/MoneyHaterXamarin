@@ -29,7 +29,7 @@
             ItemsSource="{Binding CategoriesGrouped}"
             SelectedItem="{Binding CategorySelected, Mode=TwoWay}">
 	  <ListView.ItemTemplate>
-		 <DataTemplate x:DataType="viewmodels:CategoryShowable">
+		 <DataTemplate x:DataType="models:CategoryModel">
 			<ViewCell>
 			   <Grid Padding="10">
 				  <Grid.RowDefinitions>
@@ -41,13 +41,10 @@
 					 <ColumnDefinition Width="5*"/>
 				  </Grid.ColumnDefinitions>
 				  <ffSvg:SvgCachedImage
-				  Margin="0"
-				  HeightRequest="50"
-				  RetryCount="3"       	
-				  Grid.Row="0"
-				  Grid.Column="0"
-				  Source="{Binding ImageSource}"
-				  WidthRequest="50" />
+					 Margin="0"
+					 HeightRequest="50"
+					 Source="{Binding ImageSource}"
+					 WidthRequest="50" />
 				  <Label
 					   Style="{StaticResource LabelLarge}"
 					   Text="{Binding Name}"
@@ -56,22 +53,19 @@
 					   VerticalOptions="Center" />
 				  <ListView
 					   HasUnevenRows="True"
-					   HeightRequest="{Binding childrenSize}"
+					   HeightRequest="{Binding ChildrenSize}"
 					   Grid.Row="1"
 					   Grid.Column="1"
-					   ItemsSource="{Binding childrenShowable}"
+					   ItemsSource="{Binding Children}"
 					   SelectedItem="{Binding Source={x:Reference PickCategoryPage}, Path=BindingContext.CategorySelected}"
 					   SelectionMode="Single">
 					 <ListView.ItemTemplate>
-						<DataTemplate x:DataType="viewmodels:CategoryShowable">
+						<DataTemplate x:DataType="models:CategoryModel">
 						   <ViewCell>
 							  <StackLayout Orientation="Horizontal">
 								 <ffSvg:SvgCachedImage
 									Margin="0"
 									HeightRequest="40"
-									RetryCount="3"       	
-									Grid.Row="0"
-									Grid.Column="0"
 									Source="{Binding ImageSource}"
 									WidthRequest="40" />
 								 <Label

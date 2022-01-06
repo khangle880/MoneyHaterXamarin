@@ -13,6 +13,7 @@ namespace MoneyHater.Models
       public string Icon { get; set; }
       public string Symbol { get; set; }
       public string Iso { get; set; }
+      public double RateUS { get; set; }
       public int TimesUsed { get; set; }
    }
 }

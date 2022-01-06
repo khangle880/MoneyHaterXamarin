@@ -19,7 +19,7 @@ namespace MoneyHater.ViewModels.PickupPage
 
       public PickupUserViewModel()
       {
-         selectableUsers = FbApp.usersPublicInfo.Select(x => new SelectableUser()
+         selectableUsers = FirebaseService.usersPublicInfo.Select(x => new SelectableUser()
          {
             Email = x.Email,
             Id = x.Id,

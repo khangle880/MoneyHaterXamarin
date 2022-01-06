@@ -1,4 +1,5 @@
 ﻿using MoneyHater.Helpers;
+using MoneyHater.ViewModels.Transaction;
 using MoneyHater.Views;
 using MoneyHater.Views.PickupPage;
 using Xamarin.Forms;
@@ -11,8 +12,8 @@ namespace MoneyHater
       {
          InitializeComponent();
 
-         Routing.RegisterRoute(nameof(RegistrationPage),
-             typeof(RegistrationPage));
+         Routing.RegisterRoute(nameof(AddTransactionPage),
+             typeof(AddTransactionPage));
          Routing.RegisterRoute(nameof(PickupUserPage),
              typeof(PickupUserPage));
          Routing.RegisterRoute(nameof(PickupCurrencyPage),

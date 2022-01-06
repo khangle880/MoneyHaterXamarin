@@ -1,4 +1,5 @@
-﻿using MoneyHater.Services;
+﻿using MoneyHater.Helpers;
+using MoneyHater.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,6 @@ namespace MoneyHater.Models
       public string Id { get; set; }
       public double Balance { get; set; }
       public string CurrencyId { get; set; }
-      public CurrencyModel CurrencyModel { get; set; }
       public bool EnableNotification { get; set; }
       public bool ExcludedFromTotal { get; set; }
       public string Name { get; set; }
@@ -23,5 +23,8 @@ namespace MoneyHater.Models
       public List<ReadyExecutedTransactionModel> ReadyExecutedTransactions { get; set; }
       public List<RecurringTransactionModel> RecurringTransactions { get; set; }
       public List<TransactionModel> Transactions { get; set; }
+
+      public CurrencyModel CurrencyModel => FirebaseService.currencies.Find(x => x.Id == CurrencyId);
+      public string BalanceText => $"{Balance} {CurrencyModel.Iso}";
    }
 }

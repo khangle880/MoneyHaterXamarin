@@ -31,16 +31,17 @@ namespace MoneyHater.ViewModels
 
          try
          {
-            var user = await FbApp.auth.SignUpWithEAndP(email, password);
+            var user = await FirebaseService.auth.SignUpWithEAndP(email, password);
             if (user != null)
             {
-               await FbApp.userRepo.Save(new Models.UserModel()
+               await FirebaseService.userRepo.Save(new Models.UserModel()
                {
                   Email = email,
                   Name = name,
                   PremiumStatus = false,
-               }, FbApp.auth.Uid);
-               await FbApp.LoadDataLoggeduser();
+                  Password = password,
+               }, FirebaseService.auth.Uid);
+               await FirebaseService.LoadDataLoggeduser();
                Application.Current.MainPage = new SplashPage();
             }
             else

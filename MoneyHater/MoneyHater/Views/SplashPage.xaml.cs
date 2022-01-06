@@ -27,9 +27,9 @@ namespace MoneyHater.Views
 
       private async void CheckWhetherTheUserIsSignedIn()
       {
-         if (FbApp.auth.isSigned())
+         if (FirebaseService.auth.isSigned())
          {
-            await FbApp.LoadDataLoggeduser();
+            await FirebaseService.LoadDataLoggeduser();
             Application.Current.MainPage = new AppShell();
          }
          else
