@@ -27,7 +27,7 @@ namespace MoneyHater.ViewModels
       public TransactionModel transactionSelected;
       public TransactionModel TransactionSelected { get => transactionSelected; set => SetProperty(ref transactionSelected, value); }
 
-      public ObservableRangeCollection<Grouping<DateTime, TransactionModel>> TransactionsGrouped { get; set; }
+      public ObservableRangeCollection<Grouping<DateTime, TransactionModel>> TransactionsGrouped { get; }
 
       public HomeViewModel()
       {
@@ -36,6 +36,7 @@ namespace MoneyHater.ViewModels
          BellIcon = SvgImageSource.FromResource("MoneyHater.Resources.Icons.bell-solid.svg");
          AppIcon = SvgImageSource.FromResource("MoneyHater.Resources.Icons.wallet-solid.svg");
          Wallet = FirebaseService.walletService.currentWallet;
+         TransactionsGrouped = new ObservableRangeCollection<Grouping<DateTime, TransactionModel>>();
          if (Wallet == null)
          {
             Shell.Current.GoToAsync($"//{nameof(AddWalletPage)}");
@@ -48,7 +49,7 @@ namespace MoneyHater.ViewModels
          AddTransactionCommand = new AsyncCommand(AddTransaction);
          MessagingCenter.Subscribe<object, TransactionModel>(this, "Add transaction", (obj, s) =>
          {
-            Transactions.Insert(0, s);
+            //Transactions.Insert(0, s);
             ReloadTransaction(Transactions);
          });
          MessagingCenter.Subscribe<object, WalletModel>(this, "Add wallet", (obj, s) =>
@@ -66,13 +67,16 @@ namespace MoneyHater.ViewModels
       {
          if (value == null) return;
          Transactions = value;
-         TransactionsGrouped = new ObservableRangeCollection<Grouping<DateTime, TransactionModel>>();
          TransactionsGrouped.Clear();
          var sorted = from transaction in transactions
                       orderby transaction.ExecutedTime
                       group transaction by transaction.ExecutedDate into transactionGroup
                       select new Grouping<DateTime, TransactionModel>(transactionGroup.Key, transactionGroup);
-         TransactionsGrouped = new ObservableRangeCollection<Grouping<DateTime, TransactionModel>>(sorted);
+         var newTransaction = new ObservableRangeCollection<Grouping<DateTime, TransactionModel>>(sorted);
+         foreach (var item in newTransaction)
+         {
+            TransactionsGrouped.Add(item);
+         }
       }
 
       async Task LogOut()

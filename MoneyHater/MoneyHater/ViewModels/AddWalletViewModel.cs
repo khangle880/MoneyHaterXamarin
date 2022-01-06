@@ -6,7 +6,6 @@ using MoneyHater.Views.PickupPage;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -55,26 +54,41 @@ namespace MoneyHater.ViewModels
       {
          IsBusy = true;
          UserDialogs.Instance.ShowLoading();
+         if (Name == null)
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", "Name Can Not Empty", "Ok");
+         }
+         else if (CurrencyModel == null)
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", "Currency Unit Can Not Empty", "Ok");
+         }
 
-         try
+         else
          {
-            await FirebaseService.walletService.AddWallet(new WalletModel()
+            try
             {
-               Balance = balance,
-               CurrencyId = currencyModel.Id,
-               EnableNotification = enableNotification,
-               ExcludedFromTotal = excludedFromTotal,
-               Members = members,
-               Name = name,
-               State = true,
-            });
-            MessagingCenter.Send<object, WalletModel>(this, "Add wallet", null);
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+               List<AnotherUserModel> memberList = new List<AnotherUserModel>();
+               memberList = members;
+               memberList.Add(FirebaseService.userLoggedInfo as AnotherUserModel);
+               await FirebaseService.walletService.AddWallet(new WalletModel()
+               {
+                  Balance = Balance,
+                  CurrencyId = CurrencyModel?.Id,
+                  EnableNotification = EnableNotification,
+                  ExcludedFromTotal = ExcludedFromTotal,
+                  Members = memberList,
+                  Name = Name,
+                  State = true,
+               });
+               MessagingCenter.Send<object, WalletModel>(this, "Add wallet", null);
+               await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            }
+            catch (Exception e)
+            {
+               await App.Current.MainPage.DisplayAlert("Alert", "Register New Wallet Failed", "Ok");
+            }
          }
-         catch (Exception e)
-         {
-            await App.Current.MainPage.DisplayAlert("Alert", "Register New Wallet Failed", "Ok");
-         }
+
          UserDialogs.Instance.HideLoading();
          IsBusy = false;
 

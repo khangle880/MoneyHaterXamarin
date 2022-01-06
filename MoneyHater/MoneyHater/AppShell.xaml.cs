@@ -21,7 +21,6 @@ namespace MoneyHater
          Routing.RegisterRoute(nameof(PickupCategoryPage),
              typeof(PickupCategoryPage));
 
-         Shell.SetTabBarIsVisible(this, false);
          //Routing.RegisterRoute(nameof(TransactionPage),
          //            typeof(TransactionPage));
          //Routing.RegisterRoute(nameof(LoginPage),

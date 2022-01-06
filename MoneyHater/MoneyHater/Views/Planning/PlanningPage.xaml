@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.Planning.PlanningPage"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
+             x:DataType="viewmodels:PlanningVM"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:PlanningVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

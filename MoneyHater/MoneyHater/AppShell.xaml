@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MoneyHater.Views"
+    xmlns:planning="clr-namespace:MoneyHater.Views.Planning"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     Title="MyCoffeeApp"
     FlyoutBackgroundColor="{AppThemeBinding 
@@ -95,6 +96,9 @@
 
    <ShellItem >
 	  <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
+	  <ShellContent Route="ReportPage" ContentTemplate="{DataTemplate local:ReportPage}"/>
+	  <ShellContent Route="PlanningPage" ContentTemplate="{DataTemplate planning:PlanningPage}"/>
+	  <ShellContent Route="MyPage" ContentTemplate="{DataTemplate local:MyPage}"/>
    </ShellItem>
 
    <!-- <FlyoutItem Title="Equipment - CV">
@@ -131,8 +135,6 @@
 	 <ShellContent ContentTemplate="{DataTemplate local:InternetCoffeePage}" Route="InternetCoffeePage" /> 
    </FlyoutItem> -->
 
-
-
    <FlyoutItem Title="Add New Wallet">
 	  <FlyoutItem.Icon>
 		 <FontImageSource FontFamily="FAS"
@@ -143,6 +145,51 @@
 	  </FlyoutItem.Icon>
 	  <ShellContent Route="AddWalletPage" ContentTemplate="{DataTemplate local:AddWalletPage}"/>
    </FlyoutItem>
+
+   <FlyoutItem Title="Transactions">
+	  <FlyoutItem.Icon>
+		 <FontImageSource FontFamily="FAS"
+                             Color="{AppThemeBinding 
+                                    Dark=White, 
+                                    Light={StaticResource SystemGray5Dark}}"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+	  </FlyoutItem.Icon>
+	  <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
+   </FlyoutItem>
+
+   <FlyoutItem Title="Report">
+	  <FlyoutItem.Icon>
+		 <FontImageSource FontFamily="FAS"
+                             Color="{AppThemeBinding 
+                                    Dark=White, 
+                                    Light={StaticResource SystemGray5Dark}}"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+	  </FlyoutItem.Icon>
+	  <ShellContent Route="ReportPage" ContentTemplate="{DataTemplate local:ReportPage}"/>
+   </FlyoutItem>
+
+   <FlyoutItem Title="Planning">
+	  <FlyoutItem.Icon>
+		 <FontImageSource FontFamily="FAS"
+                             Color="{AppThemeBinding 
+                                    Dark=White, 
+                                    Light={StaticResource SystemGray5Dark}}"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+	  </FlyoutItem.Icon>
+	  <ShellContent Route="PlanningPage" ContentTemplate="{DataTemplate planning:PlanningPage}"/>
+   </FlyoutItem>
+
+   <FlyoutItem Title="My Page">
+	  <FlyoutItem.Icon>
+		 <FontImageSource FontFamily="FAS"
+                             Color="{AppThemeBinding 
+                                    Dark=White, 
+                                    Light={StaticResource SystemGray5Dark}}"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+	  </FlyoutItem.Icon>
+	  <ShellContent Route="MyPage" ContentTemplate="{DataTemplate local:MyPage}"/>
+   </FlyoutItem>
+
 
 
    <FlyoutItem Title="Image Cache">

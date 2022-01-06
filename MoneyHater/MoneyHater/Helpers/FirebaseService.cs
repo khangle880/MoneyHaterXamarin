@@ -28,7 +28,7 @@ namespace MoneyHater.Helpers
       public static List<string> icons;
       public static List<AnotherUserModel> usersPublicInfo;
       public static List<WalletModel> wallets;
-      public static UserModel userInfo;
+      public static UserModel userLoggedInfo;
       public static void Init()
       {
          auth = DependencyService.Resolve<IAuth>();
@@ -48,17 +48,20 @@ namespace MoneyHater.Helpers
          if (currencies != null) { currencies.Clear(); }
          if (usersPublicInfo != null) { usersPublicInfo.Clear(); }
          if (wallets != null) { wallets.Clear(); }
-         userInfo = null;
+         userLoggedInfo = null;
       }
 
       public static async Task LoadDataLoggeduser()
       {
 
+         currencies = new List<CurrencyModel>() { };
+         categories = new List<CategoryModel>() { };
+         usersPublicInfo = new List<AnotherUserModel>() { };
          //var loadCurrencies = currencyRepo.GetAll();
          //var loadCategories = categoryService.LoadCategories();
          //var loadUsersPublicInfo = userRepo.GetAll();
          //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
-         var loadUserLoggedInfo = auth.GetUserAsync();
+         //var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
@@ -70,7 +73,7 @@ namespace MoneyHater.Helpers
             //currencies = (await loadCurrencies) as List<CurrencyModel>;
             //categories = await loadCategories;
             //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
-            //userInfo = await loadUserLoggedInfo;
+            //userLoggedInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
          }
          catch

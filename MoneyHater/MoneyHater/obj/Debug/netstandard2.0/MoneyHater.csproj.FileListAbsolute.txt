@@ -26,3 +26,6 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstandard2.0\ref\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\bin\Debug\netstandard2.0\MoneyHater.pdb
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\XamlC.stamp
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\PlanningPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\MyPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\ReportPage.xaml.g.cs

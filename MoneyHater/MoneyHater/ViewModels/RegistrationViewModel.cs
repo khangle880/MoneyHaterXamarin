@@ -28,30 +28,36 @@ namespace MoneyHater.ViewModels
       {
          IsBusy = true;
          UserDialogs.Instance.ShowLoading();
-
-         try
+         if (Name == null)
          {
-            var user = await FirebaseService.auth.SignUpWithEAndP(email, password);
-            if (user != null)
-            {
-               await FirebaseService.userRepo.Save(new Models.UserModel()
-               {
-                  Email = email,
-                  Name = name,
-                  PremiumStatus = false,
-                  Password = password,
-               }, FirebaseService.auth.Uid);
-               await FirebaseService.LoadDataLoggeduser();
-               Application.Current.MainPage = new SplashPage();
-            }
-            else
-            {
-               await App.Current.MainPage.DisplayAlert("Alert", "Register Failed", "Ok");
-            }
+            await App.Current.MainPage.DisplayAlert("Alert", "Name Can Not Empty", "Ok");
          }
-         catch (Exception e)
+         else
          {
-            await App.Current.MainPage.DisplayAlert("Alert", e.Message, "Ok");
+            try
+            {
+               var user = await FirebaseService.auth.SignUpWithEAndP(email, password);
+               if (user != null)
+               {
+                  await FirebaseService.userRepo.Save(new Models.UserModel()
+                  {
+                     Email = email,
+                     Name = name,
+                     PremiumStatus = false,
+                     Password = password,
+                  }, FirebaseService.auth.Uid);
+                  await FirebaseService.LoadDataLoggeduser();
+                  Application.Current.MainPage = new SplashPage();
+               }
+               else
+               {
+                  await App.Current.MainPage.DisplayAlert("Alert", "Register Failed", "Ok");
+               }
+            }
+            catch (Exception e)
+            {
+               await App.Current.MainPage.DisplayAlert("Alert", e.Message, "Ok");
+            }
          }
 
          UserDialogs.Instance.HideLoading();

@@ -21,7 +21,15 @@ namespace MoneyHater.Models
       public string WithUserId { get; set; }
 
       public EventModel EventModel { get; set; }
-      public CategoryModel CategoryModel => FirebaseService.categories.Find(x => x.Id == CategoryId);
+      public CategoryModel CategoryModel
+      {
+         get
+         {
+            CategoryModel category = new CategoryModel();
+            category = FindCategory();
+            return category;
+         }
+      }
       public CurrencyModel CurrencyModel => FirebaseService.currencies.Find(x => x.Id == CurrencyId);
       public AnotherUserModel With => FirebaseService.usersPublicInfo.Find(x => x.Id == WithUserId);
 
@@ -32,6 +40,29 @@ namespace MoneyHater.Models
             DateTime onlyDate = new DateTime(ExecutedTime.Year, ExecutedTime.Month, ExecutedTime.Day);
             return onlyDate;
          }
+      }
+
+      CategoryModel FindCategory()
+      {
+         foreach (var item in FirebaseService.categories)
+         {
+            if (item.Id == CategoryId)
+            {
+               return item;
+            }
+            else
+            {
+               foreach (var child in item.Children)
+               {
+                  if (child.Id == CategoryId)
+                  {
+                     return child;
+                  }
+               }
+            }
+         }
+         return null;
+
       }
    }
 }

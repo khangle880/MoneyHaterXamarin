@@ -16,6 +16,6 @@ namespace MoneyHater.Models
       public List<CategoryModel> Children { get; set; }
 
       public ImageSource ImageSource => SvgImageSource.FromUri(new Uri(Icon));
-      public int ChildrenSize => Children.Count * 50;
+      public int ChildrenSize => Children == null ? 0 : Children.Count * 50;
    }
 }
