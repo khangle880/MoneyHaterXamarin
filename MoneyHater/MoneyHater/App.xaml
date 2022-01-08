@@ -52,6 +52,10 @@
 		 <Color x:Key="SystemGray5Dark">#2C2C2E</Color>
 		 <Color x:Key="SystemGray6Dark">#1C1C1E</Color>
 
+		 <Color x:Key="ColorAccent">#57b6f9</Color>
+		 <Color x:Key="TextHolderColor">#edfeff</Color>
+		 
+
 		 <Style x:Key="CoffeeListView" TargetType="ListView">
 			<Setter Property="HasUnevenRows" Value="True"/>
 			<Setter Property="BackgroundColor" Value="Transparent"/>
