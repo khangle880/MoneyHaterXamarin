@@ -35,94 +35,67 @@ namespace MoneyHater.Services
          transactionRepo = DependencyService.Resolve<IRepository<TransactionModel>>();
       }
 
-      public async Task AddWallet(WalletModel wallet)
+      public async Task AddWallet(WalletModel wallet, bool isEdit, WalletModel oldWallet)
       {
-         var newId = await walletRepo.Save(wallet);
-         wallet.Id = newId;
-         string id = wallet.Id;
-
-         string previousPath = walletRepo.DocumentPath + $"/{id}";
-         memberRepo.Path = previousPath + "/members";
-
-         foreach (var item in wallet.Members)
-         {
-            await memberRepo.Save(item);
-         }
-         wallets.Insert(0, wallet);
-         currentWallet = wallets[wallets.Count - 1];
-      }
-      public async Task<TransactionModel> AddTransaction(TransactionModel transaction, bool isEdit, TransactionModel oldTransaction)
-      {
-         if (currentWallet == null) return null;
-         string walletId = currentWallet.Id;
-         string previousPath = walletRepo.DocumentPath + $"/{walletId}";
-         transactionRepo.previousPath = previousPath;
-
          if (isEdit)
          {
-            transaction.Id = oldTransaction.Id;
-            await transactionRepo.Save(transaction, transaction.Id);
-            int index = currentWallet.Transactions.FindIndex(x => x.Id == transaction.Id);
-            currentWallet.Transactions[index] = transaction;
+            wallet.Id = oldWallet.Id;
+            await walletRepo.Save(wallet, wallet.Id);
+            int index = wallets.FindIndex(x => x.Id == oldWallet.Id);
+            wallets[index] = wallet;
+
+            string previousPath = walletRepo.DocumentPath + $"/{wallet.Id}";
+            memberRepo.Path = previousPath + "/members";
+
+            List<AnotherUserModel> popMembers = new List<AnotherUserModel>();
+            foreach (var item in oldWallet.Members)
+            {
+               if (wallet.Members.Find(x => x.Id == item.Id) == null)
+               {
+                  popMembers.Add(item);
+               }
+            }
+            List<AnotherUserModel> pushMembers = new List<AnotherUserModel>();
+            foreach (var item in wallet.Members)
+            {
+               if (oldWallet.Members.Find(x => x.Id == item.Id) == null)
+               {
+                  pushMembers.Add(item);
+               }
+            }
+            foreach (var item in popMembers)
+            {
+               await memberRepo.Delete(item);
+            }
+            foreach (var item in popMembers)
+            {
+               await memberRepo.Save(item, item.Id);
+            }
          }
          else
          {
-            var newId = await transactionRepo.Save(transaction);
-            transaction.Id = newId;
-            currentWallet.Transactions.Insert(0, transaction);
+            var newId = await walletRepo.Save(wallet);
+            wallet.Id = newId;
+            string id = wallet.Id;
+
+            string previousPath = walletRepo.DocumentPath + $"/{id}";
+            memberRepo.Path = previousPath + "/members";
+
+            foreach (var item in wallet.Members)
+            {
+               await memberRepo.Save(item, item.Id);
+            }
+            wallets.Insert(0, wallet);
+            currentWallet = wallets[wallets.Count - 1];
          }
-
-         var category = transaction.CategoryModel;
-         var amountChanged = category.Type == "Expense" ||
-                 category.Name == "Loan" ||
-                 category.Name == "Repayment"
-                   ? -transaction.AmountByWallet
-                   : category.Type == "Income" ||
-                     category.Name == "Debt" ||
-                     category.Name == "Debt Collection"
-                   ? transaction.AmountByWallet
-                   : 0;
-
-
-
-         currentWallet.Balance += amountChanged;
-         if (isEdit)
-         {
-            var oldCategory = oldTransaction.CategoryModel;
-            var oldAmountChanged = oldCategory.Type == "Expense" ||
-                    oldCategory.Name == "Loan" ||
-                    oldCategory.Name == "Repayment"
-                      ? -oldTransaction.AmountByWallet
-                      : oldCategory.Type == "Income" ||
-                        oldCategory.Name == "Debt" ||
-                        oldCategory.Name == "Debt Collection"
-                      ? oldTransaction.AmountByWallet
-                      : 0;
-
-            currentWallet.Balance -= oldAmountChanged;
-         }
-
-         await walletRepo.Save(currentWallet, currentWallet.Id);
-
-         return transaction;
       }
-      public async Task DeleteTransaction(TransactionModel transaction)
+
+      public async Task DeleteWallet(WalletModel wallet)
       {
-         if (currentWallet == null) return;
-         string walletId = currentWallet.Id;
-         string previousPath = walletRepo.DocumentPath + $"/{walletId}";
-         transactionRepo.previousPath = previousPath;
-
-         int index = currentWallet.Transactions.FindIndex(x => x.Id == transaction.Id);
-         currentWallet.Transactions.RemoveAt(index);
-         await transactionRepo.Delete(transaction);
-
-         currentWallet.Balance -= transaction.AmountByWallet;
-
-         await walletRepo.Save(currentWallet, currentWallet.Id);
+         int index = wallets.FindIndex(x => x.Id == wallet.Id);
+         wallets.RemoveAt(index);
+         await walletRepo.Delete(wallet);
       }
-
-
 
 
       public async Task LoadWallets()

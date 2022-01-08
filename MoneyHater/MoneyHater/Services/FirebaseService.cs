@@ -24,13 +24,11 @@ namespace MoneyHater.Helpers
       public static IRepository<IconModel> iconRepo { get; set; }
       public static WalletService walletService { get; set; }
       public static CategoryService categoryService { get; set; }
-      public static IRepository<WalletModel> walletRepo { get; set; }
 
       public static List<CategoryModel> categories;
       public static List<CurrencyModel> currencies;
       public static List<string> icons;
       public static List<AnotherUserModel> usersPublicInfo;
-      public static List<WalletModel> wallets;
       public static UserModel userLoggedInfo;
       public static void Init()
       {
@@ -41,7 +39,6 @@ namespace MoneyHater.Helpers
          categoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
          userRepo = DependencyService.Resolve<IRepository<UserModel>>();
          iconRepo = DependencyService.Resolve<IRepository<IconModel>>();
-         walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
       }
 
       public static void clear()
@@ -50,7 +47,7 @@ namespace MoneyHater.Helpers
          if (icons != null) { icons.Clear(); }
          if (currencies != null) { currencies.Clear(); }
          if (usersPublicInfo != null) { usersPublicInfo.Clear(); }
-         if (wallets != null) { wallets.Clear(); }
+         if (walletService != null) { walletService = new WalletService(); }
          userLoggedInfo = null;
       }
 
@@ -61,22 +58,22 @@ namespace MoneyHater.Helpers
 
          var loadCategories = LoadCategories();
          var loadCurrencies = LoadCurrencies();
+         var loadIcons = LoadIcons();
 
          //var loadUsersPublicInfo = userRepo.GetAll();
-         //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
-         //var loadUserLoggedInfo = auth.GetUserAsync();
+         var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { loadCategories, loadCurrencies });
+         Task taskReturned = Task.WhenAll(new Task[] { loadCategories, loadCurrencies, loadIcons });
          try
          {
             await taskReturned;
             await loadCategories;
             await loadCurrencies;
-            //icons = (await loadIcons).Icons;
+            await loadIcons;
             //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
-            //userLoggedInfo = await loadUserLoggedInfo;
+            userLoggedInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
          }
          catch
@@ -139,7 +136,52 @@ namespace MoneyHater.Helpers
             throw ex;
          }
       }
+      public static async Task LoadIcons()
+      {
+         var json = string.Empty;
+         if (!Barrel.Current.IsExpired(nameof(icons)))
+            json = Barrel.Current.Get<string>(nameof(icons));
 
+         try
+         {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+               var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
+               icons = (await loadIcons).Icons;
+               json = JsonConvert.SerializeObject(icons);
+               Barrel.Current.Add(nameof(icons), json, TimeSpan.FromDays(10));
+            }
+            else
+            {
+               icons = JsonConvert.DeserializeObject<List<string>>(json);
+            }
+         }
+         catch (Exception ex)
+         {
+            Debug.WriteLine($"Unable to get information from server {ex}");
+            throw ex;
+         }
+      }
+
+
+      public static async Task UpdateProfile(UserModel userModel)
+      {
+         userModel.Id = userLoggedInfo.Id;
+         userModel.Password = userLoggedInfo.Password;
+         if (userLoggedInfo.PremiumStatus != userModel.PremiumStatus)
+         {
+            if (userLoggedInfo.PremiumStatus)
+            {
+               userModel.PremiumTo = (userLoggedInfo.PremiumTo < DateTime.Now ? DateTime.Now : userLoggedInfo.PremiumTo).AddDays(365);
+            }
+            else
+            {
+               userModel.PremiumTo = DateTime.Now;
+            }
+         }
+         userLoggedInfo = userModel;
+         await userRepo.Save(userModel, userLoggedInfo.Id);
+      }
 
    }
 

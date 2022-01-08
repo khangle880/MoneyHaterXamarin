@@ -14,7 +14,6 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupCategoryPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupCurrencyPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupUserPage.xaml.g.cs
-D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\PlanningPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\RegistrationPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\ReportPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\SettingsPage.xaml.g.cs
@@ -30,3 +29,13 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\ref\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.pdb
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.csproj.AssemblyReference.cache
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\CategoryPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\IconPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\ManageWalletPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\UpdateProfilePage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PlanningPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\BudgetPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\EventPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\RecurringTransactionPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\TransactionModelPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\WalletDetailPage.xaml.g.cs

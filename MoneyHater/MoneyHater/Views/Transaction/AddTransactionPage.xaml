@@ -62,7 +62,7 @@
 				 VerticalOptions="CenterAndExpand"
 				 Title="Choose Event" />
 			<RadioButton Margin="0,20,0,0" Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
-			<Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Margin="0,20,0,0" Text="Create Transaction" Command="{Binding CreateCommand}"/>
+			<Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Margin="0,20,0,0" Text="Complete" Command="{Binding CreateCommand}"/>
 		 </StackLayout>
 	  </ScrollView>
    </ContentPage.Content>

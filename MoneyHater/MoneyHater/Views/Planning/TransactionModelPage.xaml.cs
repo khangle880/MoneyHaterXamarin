@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MoneyHater.Views.Planning
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class PlanningPage : ContentPage
+   public partial class TransactionModelPage : ContentPage
    {
-      public PlanningPage()
+      public TransactionModelPage()
       {
          InitializeComponent();
       }

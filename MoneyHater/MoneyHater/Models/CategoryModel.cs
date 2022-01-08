@@ -3,6 +3,7 @@ using MoneyHater.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace MoneyHater.Models
@@ -17,7 +18,18 @@ namespace MoneyHater.Models
       public List<CategoryModel> Children { get; set; }
 
       public ImageSource ImageSource => SvgImageSource.FromUri(new Uri(Icon));
-      public ImageSource ImageSourceLocal => SvgImageSource.FromResource($"MoneyHater.Resources.Category.{IconName}");
+      public ImageSource ImageSourceLocal => SvgImageSource.FromResource($"MoneyHater.Resources.Category.{LocalPath}");
       public int ChildrenSize => Children == null ? 0 : Children.Count * 50;
+      public string LocalPath
+      {
+         get
+         {
+            var s = Icon;
+            s = Regex.Replace(s, @".*%2F", "");
+            s = Regex.Replace(s, @"\?alt.*", "");
+            return s;
+         }
+      }
+
    }
 }

@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using MoneyHater.Helpers;
 using MoneyHater.Models;
+using MoneyHater.Services;
 using MoneyHater.Views.PickupPage;
 using MvvmHelpers.Commands;
 using System;
@@ -52,28 +53,29 @@ namespace MoneyHater.ViewModels.Transaction
 
       public AddTransactionVM()
       {
+         Remind = DateTime.Now;
          Task.Run(async () =>
+           {
+              await Task.Delay(200);
+              if (TransactionId != null)
+              {
+                 WalletModel = FirebaseService.walletService.currentWallet;
+                 TransactionModel = (WalletModel.Transactions ?? new List<TransactionModel>() { }).Find(x => x.Id == TransactionId);
+                 if (TransactionModel != null)
                  {
-                    await Task.Delay(200);
-                    if (TransactionId != null)
-                    {
-                       WalletModel = FirebaseService.walletService.currentWallet;
-                       TransactionModel = (WalletModel.Transactions ?? new List<TransactionModel>() { }).Find(x => x.Id == TransactionId);
-                       if (TransactionModel != null)
-                       {
-                          isEdit = true;
-                          oldTransactionModel = TransactionModel;
-                          Amount = TransactionModel.Amount;
-                          CategoryModel = TransactionModel.CategoryModel;
-                          CurrencyModel = TransactionModel.CurrencyModel;
-                          EventModel = TransactionModel.EventModel;
-                          ExcludedFromReport = TransactionModel.ExcludedFromReport;
-                          Note = TransactionModel.Note;
-                          Remind = TransactionModel.Remind;
-                          With = TransactionModel.With;
-                       }
-                    }
-                 });
+                    isEdit = true;
+                    oldTransactionModel = TransactionModel;
+                    Amount = TransactionModel.Amount;
+                    CategoryModel = TransactionModel.CategoryModel;
+                    CurrencyModel = TransactionModel.CurrencyModel;
+                    EventModel = TransactionModel.EventModel;
+                    ExcludedFromReport = TransactionModel.ExcludedFromReport;
+                    Note = TransactionModel.Note;
+                    Remind = TransactionModel.Remind;
+                    With = TransactionModel.With;
+                 }
+              }
+           });
 
          CreateCommand = new AsyncCommand(CreateTransaction);
          Events = FirebaseService.walletService.currentWallet.Events;
@@ -128,7 +130,7 @@ namespace MoneyHater.ViewModels.Transaction
                   WithUserId = With?.Id,
                };
 
-               newTransaction = await FirebaseService.walletService.AddTransaction(newTransaction, isEdit, oldTransactionModel);
+               newTransaction = await TransactionService.AddTransaction(newTransaction, isEdit, oldTransactionModel);
                MessagingCenter.Send<object, TransactionModel>(this, "Add transaction", newTransaction);
                await Shell.Current.GoToAsync($"..");
             }

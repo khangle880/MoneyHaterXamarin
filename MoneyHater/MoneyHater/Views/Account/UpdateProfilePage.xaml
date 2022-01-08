@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.Account.UpdateProfilePage"
+			  xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
+             x:DataType="viewmodels:UpdateProfileVM"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+			 Shell.PresentationMode="Modal"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:UpdateProfileVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <Label Text="Edit Profile"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Entry Text="{Binding Name}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding Email}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <RadioButton 
+			    Content="Premium Status"
+				IsChecked="{Binding PremiumStatus}"	  
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

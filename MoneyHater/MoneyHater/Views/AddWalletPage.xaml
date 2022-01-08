@@ -37,7 +37,7 @@
 			<Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
 			<RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
 			<RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
-			<Button Text="Create Wallet" Command="{Binding RegisterCommand}"/>
+			<Button Text="Complete" Command="{Binding RegisterCommand}"/>
 		 </StackLayout>
 	  </ScrollView>
    </ContentPage.Content>

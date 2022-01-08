@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("MoneyHater.Views.Planning.PlanningPage.xaml", "Views/Planning/PlanningPage.xaml", typeof(global::MoneyHater.Views.Planning.PlanningPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("MoneyHater.Views.Planning.TransactionModelPage.xaml", "Views/Planning/TransactionModelPage.xaml", typeof(global::MoneyHater.Views.Planning.TransactionModelPage))]
 
 namespace MoneyHater.Views.Planning {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\Planning\\PlanningPage.xaml")]
-    public partial class PlanningPage : global::Xamarin.Forms.ContentPage {
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\Planning\\TransactionModelPage.xaml")]
+    public partial class TransactionModelPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(PlanningPage));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(TransactionModelPage));
         }
     }
 }

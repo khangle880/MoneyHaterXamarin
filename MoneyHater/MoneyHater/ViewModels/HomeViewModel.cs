@@ -1,6 +1,7 @@
 ﻿using FFImageLoading.Svg.Forms;
 using MoneyHater.Helpers;
 using MoneyHater.Models;
+using MoneyHater.Services;
 using MoneyHater.ViewModels.Transaction;
 using MoneyHater.Views;
 using MoneyHater.Views.Transaction;
@@ -58,7 +59,6 @@ namespace MoneyHater.ViewModels
          AddTransactionCommand = new AsyncCommand(AddTransaction);
          MessagingCenter.Subscribe<object, TransactionModel>(this, "Add transaction", (obj, s) =>
          {
-            //Transactions.Insert(0, s);
             ReloadPage(Transactions);
          });
          MessagingCenter.Subscribe<object, WalletModel>(this, "Add wallet", (obj, s) =>
@@ -134,7 +134,6 @@ namespace MoneyHater.ViewModels
       }
       async Task EditItem(TransactionModel transaction)
       {
-         // todo: test (check id of local currencies)
          if (transaction == null) return;
          var route = $"{nameof(AddTransactionPage)}?TransactionId={transaction.Id}";
          await Shell.Current.GoToAsync(route);
@@ -143,10 +142,9 @@ namespace MoneyHater.ViewModels
       {
 
          if (transaction == null) return;
-         await FirebaseService.walletService.DeleteTransaction(transaction);
+         await TransactionService.DeleteTransaction(transaction);
          ReloadPage(Wallet.Transactions);
       }
-
 
    }
 }

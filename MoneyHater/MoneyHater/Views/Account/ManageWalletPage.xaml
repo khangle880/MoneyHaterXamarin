@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.Account.ManageWalletPage"
+			 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
+             x:DataType="viewmodels:ManageWalletVM"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+			 Shell.PresentationMode="Modal"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:ManageWalletVM />
+   </ContentPage.BindingContext>
+
+   <StackLayout>
+
+	  <ListView
+            BackgroundColor="Transparent"
+            ItemsSource="{Binding Wallets}"
+            SelectionMode="Single">
+		 <ListView.ItemTemplate>
+			<DataTemplate x:DataType="models:WalletModel">
+			   <ViewCell>
+
+				  <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
+                               BackgroundColor="{AppThemeBinding 
+                                Dark={StaticResource WindowBackgroundColorDark}, 
+                                Light={StaticResource WindowBackgroundColor}}">
+					 <SwipeView.RightItems>
+						<SwipeItems>
+						   <SwipeItem
+                                    BackgroundColor="Red"
+									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=DeleteItemCommand}"
+                                    CommandParameter="{Binding .}"
+                                    IsDestructive="True"
+                                    Text="Delete" />
+						   <SwipeItem
+                                    BackgroundColor="Orange"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=EditItemCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Edit" />
+
+						</SwipeItems>
+					 </SwipeView.RightItems>
+					 <Grid Padding="10">
+						<Grid.GestureRecognizers>
+						   <TapGestureRecognizer
+							  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=SelectedItemCommand}"
+                              CommandParameter="{Binding .}"/>
+						</Grid.GestureRecognizers>
+						<StackLayout Orientation="Horizontal" IsEnabled="{Binding State}">
+						   <ffSvg:SvgCachedImage
+							  Margin="0"
+							  HeightRequest="40"
+							  Source="{Binding ImageSource}"
+							  WidthRequest="40" />
+						   <StackLayout VerticalOptions="Center">
+							  <Label
+								Style="{StaticResource LabelLarge}"
+								Text="{Binding Balance}"
+								VerticalOptions="Center" />
+							  <Label
+								Style="{StaticResource LabelLarge}"
+								Text="{Binding CurrencyModel.Iso}"
+								VerticalOptions="Center" />
+
+						   </StackLayout>
+						</StackLayout>
+					 </Grid>
+				  </SwipeView>
+			   </ViewCell>
+			</DataTemplate>
+		 </ListView.ItemTemplate>
+		 <ListView.Header>
+			<StackLayout Orientation="Horizontal">
+			   <Label
+                        HorizontalOptions="Center"
+                        Style="{StaticResource LabelMedium}"
+                        Text="Coffee of the World" />
+			</StackLayout>
+		 </ListView.Header>
+	  </ListView>
+	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+   </StackLayout>
+</ContentPage>

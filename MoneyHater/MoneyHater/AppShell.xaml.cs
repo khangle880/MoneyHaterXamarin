@@ -1,7 +1,9 @@
 ﻿using MoneyHater.Helpers;
 using MoneyHater.ViewModels.Transaction;
 using MoneyHater.Views;
+using MoneyHater.Views.Account;
 using MoneyHater.Views.PickupPage;
+using MoneyHater.Views.Planning;
 using MoneyHater.Views.Transaction;
 using Xamarin.Forms;
 
@@ -23,6 +25,26 @@ namespace MoneyHater
              typeof(PickupCategoryPage));
          Routing.RegisterRoute(nameof(TransactionDetailPage),
              typeof(TransactionDetailPage));
+         Routing.RegisterRoute(nameof(UpdateProfilePage),
+             typeof(UpdateProfilePage));
+         Routing.RegisterRoute(nameof(CategoryPage),
+             typeof(CategoryPage));
+         Routing.RegisterRoute(nameof(IconPage),
+             typeof(IconPage));
+         Routing.RegisterRoute(nameof(ManageWalletPage),
+             typeof(ManageWalletPage));
+         Routing.RegisterRoute(nameof(BudgetPage),
+             typeof(BudgetPage));
+         Routing.RegisterRoute(nameof(EventPage),
+             typeof(EventPage));
+         Routing.RegisterRoute(nameof(TransactionModelPage),
+             typeof(TransactionModelPage));
+         Routing.RegisterRoute(nameof(RecurringTransactionPage),
+             typeof(RecurringTransactionPage));
+         Routing.RegisterRoute(nameof(WalletDetailPage),
+             typeof(WalletDetailPage));
+         Routing.RegisterRoute(nameof(AddWalletPage),
+             typeof(AddWalletPage));
 
 
          //Routing.RegisterRoute(nameof(TransactionPage),

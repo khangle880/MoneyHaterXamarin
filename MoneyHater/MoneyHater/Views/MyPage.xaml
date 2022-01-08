@@ -18,6 +18,32 @@
 		 <Label Text="Hello!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding Name}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding Email}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <RadioButton 
+			    Content="Premium Status"
+				IsChecked="{Binding PremiumStatus}"	  
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Button 
+			Text="Update Profile"
+			Command="{Binding GotoUpdateProfileCommand}"/>
+		 <Button 
+			Text="Wallets"
+			Command="{Binding GotoWalletsCommand}"/>
+		 <Button 
+			Text="Categories"
+			Command="{Binding GotoCategoriesCommand}"/>
+		 <Button 
+			Text="Icons"
+			Command="{Binding GotoIconsCommand}"/>
+		 <Button 
+			Text="SignOut"
+			Command="{Binding SignOutCommand}"/>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>
