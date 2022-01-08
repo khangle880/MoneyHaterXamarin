@@ -20,7 +20,9 @@ namespace MoneyHater.Models
       public DateTime Remind { get; set; }
       public string WithUserId { get; set; }
 
-      public EventModel EventModel { get; set; }
+      public string AmountText => $"{Amount} {CurrencyModel.Iso}";
+
+      public EventModel EventModel => FirebaseService.walletService.currentWallet.Events.Find(x => x.Id == EventId);
       public CategoryModel CategoryModel
       {
          get

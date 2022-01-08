@@ -18,10 +18,10 @@
 		 <StackLayout Padding="25" VerticalOptions="StartAndExpand"
                      HorizontalOptions="FillAndExpand">
 			<StackLayout Padding="0,0,0,30" HorizontalOptions="CenterAndExpand">
-				<Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+			   <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
 			</StackLayout>
 			<StackLayout Orientation="Horizontal" VerticalOptions="Center">
-				<ffSvg:SvgCachedImage
+			   <ffSvg:SvgCachedImage
 				   HeightRequest="30"
 				   Grid.Row="0"
 				   Grid.Column="1"
@@ -41,8 +41,10 @@
 			   <Button Text="Pick" BackgroundColor="SlateGray" FontSize="14" TextColor="White" Margin="0,20,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupCategoryCommand}"/>
 			</StackLayout>
 			<Entry Margin="0,20,0,0" PlaceholderColor="DarkGray" Placeholder="Note" Text="{Binding Note}" TextColor="Black" />
-			<!-- Remind -->
-			<!-- Wallet -->
+			<DatePicker MinimumDate="01/01/2000"
+			   MaximumDate="12/31/2200"
+			   Date="{Binding Remind}" />
+			<Label Text="{Binding WalletModel.Name}" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
 			<Picker
 				Margin="0,20,0,0"
 				 ItemsSource="{Binding AnotherUsers}"

@@ -154,7 +154,7 @@
           "lib/xamarinios10/Xamarin.CommunityToolkit.dll": {}
         },
         "build": {
-          "build/_._": {}
+          "build/Xamarin.CommunityToolkit.targets": {}
         }
       },
       "Xamarin.Essentials/1.7.0": {
@@ -612,7 +612,7 @@
           "lib/xamarinios10/Xamarin.CommunityToolkit.dll": {}
         },
         "build": {
-          "build/_._": {}
+          "build/Xamarin.CommunityToolkit.targets": {}
         }
       },
       "Xamarin.Essentials/1.7.0": {
@@ -1073,7 +1073,7 @@
           "lib/xamarinios10/Xamarin.CommunityToolkit.dll": {}
         },
         "build": {
-          "build/_._": {}
+          "build/Xamarin.CommunityToolkit.targets": {}
         }
       },
       "Xamarin.Essentials/1.7.0": {
@@ -1534,7 +1534,7 @@
           "lib/xamarinios10/Xamarin.CommunityToolkit.dll": {}
         },
         "build": {
-          "build/_._": {}
+          "build/Xamarin.CommunityToolkit.targets": {}
         }
       },
       "Xamarin.Essentials/1.7.0": {
@@ -2843,6 +2843,7 @@
       "Newtonsoft.Json >= 13.0.1",
       "SkiaSharp >= 2.80.3",
       "Xamarin.Build.Download >= 0.11.0",
+      "Xamarin.CommunityToolkit >= 1.3.1",
       "Xamarin.Essentials >= 1.7.0",
       "Xamarin.FFImageLoading >= 2.4.11.982",
       "Xamarin.FFImageLoading.Forms >= 2.4.11.982",
@@ -2913,6 +2914,10 @@
           "Xamarin.Build.Download": {
             "target": "Package",
             "version": "[0.11.0, )"
+          },
+          "Xamarin.CommunityToolkit": {
+            "target": "Package",
+            "version": "[1.3.1, )"
           },
           "Xamarin.Essentials": {
             "target": "Package",

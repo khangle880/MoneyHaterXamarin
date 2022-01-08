@@ -9,5 +9,6 @@
     <Import Project="$(NuGetPackageRoot)xamarin.firebase.ios.core\6.10.4\buildTransitive\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('$(NuGetPackageRoot)xamarin.firebase.ios.core\6.10.4\buildTransitive\Xamarin.Firebase.iOS.Core.targets')" />
     <Import Project="$(NuGetPackageRoot)xamarin.firebase.ios.analytics\6.9.0\buildTransitive\Xamarin.Firebase.iOS.Analytics.targets" Condition="Exists('$(NuGetPackageRoot)xamarin.firebase.ios.analytics\6.9.0\buildTransitive\Xamarin.Firebase.iOS.Analytics.targets')" />
     <Import Project="$(NuGetPackageRoot)skiasharp\2.80.3\buildTransitive\xamarinios1.0\SkiaSharp.targets" Condition="Exists('$(NuGetPackageRoot)skiasharp\2.80.3\buildTransitive\xamarinios1.0\SkiaSharp.targets')" />
+    <Import Project="$(NuGetPackageRoot)xamarin.communitytoolkit\1.3.1\build\Xamarin.CommunityToolkit.targets" Condition="Exists('$(NuGetPackageRoot)xamarin.communitytoolkit\1.3.1\build\Xamarin.CommunityToolkit.targets')" />
   </ImportGroup>
 </Project>

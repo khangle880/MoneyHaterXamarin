@@ -9,6 +9,6 @@ namespace MoneyHater.Droid.Services
    public class CurrencyRepository : BaseRepository<CurrencyModel>
    {
       public override string DocumentPath =>
-          "currencies";
+          "currencies1";
    }
 }

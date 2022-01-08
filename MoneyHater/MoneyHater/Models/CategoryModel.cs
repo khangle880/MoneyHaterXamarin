@@ -11,11 +11,13 @@ namespace MoneyHater.Models
    {
       public string Id { get; set; }
       public string Icon { get; set; }
+      public string IconName { get; set; }
       public string Name { get; set; }
       public string Type { get; set; }
       public List<CategoryModel> Children { get; set; }
 
       public ImageSource ImageSource => SvgImageSource.FromUri(new Uri(Icon));
+      public ImageSource ImageSourceLocal => SvgImageSource.FromResource($"MoneyHater.Resources.Category.{IconName}");
       public int ChildrenSize => Children == null ? 0 : Children.Count * 50;
    }
 }

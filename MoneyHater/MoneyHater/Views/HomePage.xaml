@@ -31,7 +31,7 @@
 			   <ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<Label Text="{Binding Wallet.BalanceText}"
+			<Label Text="{Binding BalanceText}"
 				Grid.Row="0"
 				Grid.Column="0"/>
 			<Label Text="Available balance"
@@ -79,18 +79,26 @@
                                 Light={StaticResource WindowBackgroundColor}}">
 					 <SwipeView.RightItems>
 						<SwipeItems>
-						   <!--<SwipeItem
-                                    BackgroundColor="Orange"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CoffeeEquipmentViewModel}}, Path=FavoriteCommand}"
-                                    CommandParameter="{Binding .}"
-                                    Text="Favorite" />-->
 						   <SwipeItem
                                     BackgroundColor="Red"
+									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DeleteItemCommand}"
+                                    CommandParameter="{Binding .}"
                                     IsDestructive="True"
                                     Text="Delete" />
+						   <SwipeItem
+                                    BackgroundColor="Orange"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=EditItemCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Edit" />
+
 						</SwipeItems>
 					 </SwipeView.RightItems>
 					 <Grid Padding="10">
+						<Grid.GestureRecognizers>
+						   <TapGestureRecognizer
+							  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=SelectedItemCommand}"
+                              CommandParameter="{Binding .}"/>
+						</Grid.GestureRecognizers>
 						<StackLayout Orientation="Horizontal">
 						   <ffSvg:SvgCachedImage
 							  Margin="0"

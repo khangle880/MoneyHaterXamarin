@@ -43,7 +43,7 @@
 				  <ffSvg:SvgCachedImage
 					 Margin="0"
 					 HeightRequest="50"
-					 Source="{Binding ImageSource}"
+					 Source="{Binding ImageSourceLocal}"
 					 WidthRequest="50" />
 				  <Label
 					   Style="{StaticResource LabelLarge}"
@@ -66,7 +66,7 @@
 								 <ffSvg:SvgCachedImage
 									Margin="0"
 									HeightRequest="40"
-									Source="{Binding ImageSource}"
+									Source="{Binding ImageSourceLocal}"
 									WidthRequest="40" />
 								 <Label
 								   Style="{StaticResource LabelLarge}"

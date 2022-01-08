@@ -1,8 +1,11 @@
 ﻿using MoneyHater.Models;
 using MoneyHater.Services;
 using MoneyHater.Services.Account;
+using MonkeyCache.FileStore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,25 +56,25 @@ namespace MoneyHater.Helpers
 
       public static async Task LoadDataLoggeduser()
       {
-
-         currencies = new List<CurrencyModel>() { };
          categories = new List<CategoryModel>() { };
          usersPublicInfo = new List<AnotherUserModel>() { };
-         //var loadCurrencies = currencyRepo.GetAll();
-         //var loadCategories = categoryService.LoadCategories();
+
+         var loadCategories = LoadCategories();
+         var loadCurrencies = LoadCurrencies();
+
          //var loadUsersPublicInfo = userRepo.GetAll();
          //var loadIcons = iconRepo.Get("YnKsVORKhhXO4Wln2C8M");
          //var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { });
+         Task taskReturned = Task.WhenAll(new Task[] { loadCategories, loadCurrencies });
          try
          {
             await taskReturned;
+            await loadCategories;
+            await loadCurrencies;
             //icons = (await loadIcons).Icons;
-            //currencies = (await loadCurrencies) as List<CurrencyModel>;
-            //categories = await loadCategories;
             //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
             //userLoggedInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
@@ -81,6 +84,63 @@ namespace MoneyHater.Helpers
             await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
          }
       }
+
+      public static async Task LoadCurrencies()
+      {
+         var json = string.Empty;
+
+         if (!Barrel.Current.IsExpired(nameof(currencies)))
+            json = Barrel.Current.Get<string>(nameof(currencies));
+
+         try
+         {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+               var loadCurrencies = currencyRepo.GetAll();
+               currencies = (await loadCurrencies) as List<CurrencyModel>;
+               json = JsonConvert.SerializeObject(currencies);
+               Barrel.Current.Add(nameof(currencies), json, TimeSpan.FromDays(10));
+            }
+            else
+            {
+               currencies = JsonConvert.DeserializeObject<List<CurrencyModel>>(json);
+            }
+         }
+         catch (Exception ex)
+         {
+            Debug.WriteLine($"Unable to get information from server {ex}");
+            throw ex;
+         }
+
+      }
+      public static async Task LoadCategories()
+      {
+         var json = string.Empty;
+         if (!Barrel.Current.IsExpired(nameof(categories)))
+            json = Barrel.Current.Get<string>(nameof(categories));
+
+         try
+         {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+               var loadCategories = categoryService.LoadCategories();
+               categories = await loadCategories;
+               json = JsonConvert.SerializeObject(categories);
+               Barrel.Current.Add(nameof(categories), json, TimeSpan.FromDays(10));
+            }
+            else
+            {
+               categories = JsonConvert.DeserializeObject<List<CategoryModel>>(json);
+            }
+         }
+         catch (Exception ex)
+         {
+            Debug.WriteLine($"Unable to get information from server {ex}");
+            throw ex;
+         }
+      }
+
+
    }
 
    public interface IAuth

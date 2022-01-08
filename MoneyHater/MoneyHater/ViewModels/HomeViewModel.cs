@@ -3,6 +3,7 @@ using MoneyHater.Helpers;
 using MoneyHater.Models;
 using MoneyHater.ViewModels.Transaction;
 using MoneyHater.Views;
+using MoneyHater.Views.Transaction;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
@@ -17,11 +18,16 @@ namespace MoneyHater.ViewModels
    class HomeViewModel : ViewModelBase
    {
       public AsyncCommand LogOutCommand { get; }
+      public AsyncCommand<TransactionModel> SelectedItemCommand { get; }
+      public AsyncCommand<TransactionModel> EditItemCommand { get; }
+      public AsyncCommand<TransactionModel> DeleteItemCommand { get; }
       public AsyncCommand AddTransactionCommand { get; }
       List<TransactionModel> transactions;
       WalletModel wallet;
+      string balanceText;
       public List<TransactionModel> Transactions { get => transactions; set => SetProperty(ref transactions, value); }
       public WalletModel Wallet { get => wallet; set => SetProperty(ref wallet, value); }
+      public string BalanceText { get => balanceText; set => SetProperty(ref balanceText, value); }
       public ImageSource BellIcon { get; set; }
       public ImageSource AppIcon { get; set; }
       public TransactionModel transactionSelected;
@@ -43,29 +49,39 @@ namespace MoneyHater.ViewModels
          }
          else
          {
-            ReloadTransaction(Wallet.Transactions);
+            ReloadPage(Wallet.Transactions);
          }
          LogOutCommand = new AsyncCommand(LogOut);
+         SelectedItemCommand = new AsyncCommand<TransactionModel>(SelectedItem);
+         EditItemCommand = new AsyncCommand<TransactionModel>(EditItem);
+         DeleteItemCommand = new AsyncCommand<TransactionModel>(DeleteItem);
          AddTransactionCommand = new AsyncCommand(AddTransaction);
          MessagingCenter.Subscribe<object, TransactionModel>(this, "Add transaction", (obj, s) =>
          {
             //Transactions.Insert(0, s);
-            ReloadTransaction(Transactions);
+            ReloadPage(Transactions);
          });
          MessagingCenter.Subscribe<object, WalletModel>(this, "Add wallet", (obj, s) =>
          {
             if (Wallet == null)
             {
                Wallet = FirebaseService.walletService.currentWallet;
-               ReloadTransaction(Wallet.Transactions);
+               ReloadPage(Wallet.Transactions);
             }
          });
 
       }
 
-      void ReloadTransaction(List<TransactionModel> value)
+      void ReloadPage(List<TransactionModel> value)
       {
+         if (Wallet == null) return;
          if (value == null) return;
+         Task.Run(async () =>
+                 {
+                    await Task.Delay(500);
+                    BalanceText = Wallet.BalanceText;
+                 });
+
          Transactions = value;
          TransactionsGrouped.Clear();
          var sorted = from transaction in transactions
@@ -109,6 +125,28 @@ namespace MoneyHater.ViewModels
             await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}");
          }
       }
+
+      async Task SelectedItem(TransactionModel transaction)
+      {
+         if (transaction == null) return;
+         var route = $"{nameof(TransactionDetailPage)}?TransactionId={transaction.Id}";
+         await Shell.Current.GoToAsync(route);
+      }
+      async Task EditItem(TransactionModel transaction)
+      {
+         // todo: test (check id of local currencies)
+         if (transaction == null) return;
+         var route = $"{nameof(AddTransactionPage)}?TransactionId={transaction.Id}";
+         await Shell.Current.GoToAsync(route);
+      }
+      async Task DeleteItem(TransactionModel transaction)
+      {
+
+         if (transaction == null) return;
+         await FirebaseService.walletService.DeleteTransaction(transaction);
+         ReloadPage(Wallet.Transactions);
+      }
+
 
    }
 }

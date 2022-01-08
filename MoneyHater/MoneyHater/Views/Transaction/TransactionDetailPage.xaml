@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.Transaction.TransactionDetailPage"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Transaction"
+			 xmlns:controls="clr-namespace:MoneyHater.Controls"
+             x:DataType="viewmodels:TransactionDetailVM"
+			 xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:TransactionDetailVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <Label Text="{Binding TransactionModel.AmountText}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding TransactionModel.CategoryModel}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding TransactionModel.Note}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding TransactionModel.ExecutedDate, StringFormat='{0:dd/MM/YYYY}'}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding WalletModel.Name}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding TransactionModel.EventModel.Name}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <Label Text="{Binding TransactionModel.Remind, StringFormat='{0:dd/MM/YYYY}'}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+		 <RadioButton
+		    	Margin="0,20,0,0"
+		    	Content="Excluded From Report" 
+			    IsChecked="{Binding TransactionModel.ExcludedFromReport}"
+		    	IsEnabled="False"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+	  </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

@@ -85,7 +85,7 @@ namespace MoneyHater.ViewModels
             }
             catch (Exception e)
             {
-               await App.Current.MainPage.DisplayAlert("Alert", "Register New Wallet Failed", "Ok");
+               await App.Current.MainPage.DisplayAlert("Alert", $"Register New Wallet Failed.\n{e.Message}", "Ok");
             }
          }
 

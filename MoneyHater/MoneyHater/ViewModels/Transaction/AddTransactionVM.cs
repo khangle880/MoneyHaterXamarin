@@ -11,8 +11,15 @@ using Xamarin.Forms;
 
 namespace MoneyHater.ViewModels.Transaction
 {
+   [QueryProperty(nameof(TransactionId), nameof(TransactionId))]
    class AddTransactionVM : ViewModelBase
    {
+      string transactionId;
+      public string TransactionId { get => transactionId; set => SetProperty(ref transactionId, Uri.UnescapeDataString(value)); }
+      TransactionModel oldTransactionModel;
+      TransactionModel transactionModel;
+      public TransactionModel TransactionModel { get => transactionModel; set => SetProperty(ref transactionModel, value); }
+
       double amount;
       CurrencyModel currencyModel;
       CategoryModel categoryModel;
@@ -41,8 +48,33 @@ namespace MoneyHater.ViewModels.Transaction
       public AsyncCommand CreateCommand { get; }
       public AsyncCommand PickupCategoryCommand { get; }
 
+      public bool isEdit = false;
+
       public AddTransactionVM()
       {
+         Task.Run(async () =>
+                 {
+                    await Task.Delay(200);
+                    if (TransactionId != null)
+                    {
+                       WalletModel = FirebaseService.walletService.currentWallet;
+                       TransactionModel = (WalletModel.Transactions ?? new List<TransactionModel>() { }).Find(x => x.Id == TransactionId);
+                       if (TransactionModel != null)
+                       {
+                          isEdit = true;
+                          oldTransactionModel = TransactionModel;
+                          Amount = TransactionModel.Amount;
+                          CategoryModel = TransactionModel.CategoryModel;
+                          CurrencyModel = TransactionModel.CurrencyModel;
+                          EventModel = TransactionModel.EventModel;
+                          ExcludedFromReport = TransactionModel.ExcludedFromReport;
+                          Note = TransactionModel.Note;
+                          Remind = TransactionModel.Remind;
+                          With = TransactionModel.With;
+                       }
+                    }
+                 });
+
          CreateCommand = new AsyncCommand(CreateTransaction);
          Events = FirebaseService.walletService.currentWallet.Events;
          PickupCategoryCommand = new AsyncCommand(PickupCategory);
@@ -96,13 +128,13 @@ namespace MoneyHater.ViewModels.Transaction
                   WithUserId = With?.Id,
                };
 
-               newTransaction = await FirebaseService.walletService.AddTransaction(newTransaction);
+               newTransaction = await FirebaseService.walletService.AddTransaction(newTransaction, isEdit, oldTransactionModel);
                MessagingCenter.Send<object, TransactionModel>(this, "Add transaction", newTransaction);
                await Shell.Current.GoToAsync($"..");
             }
             catch (Exception e)
             {
-               await App.Current.MainPage.DisplayAlert("Alert", "Register New Transaction Failed", "Ok");
+               await App.Current.MainPage.DisplayAlert("Alert", $"Register New Transaction Failed.\n{e.Message}", "Ok");
             }
          }
          UserDialogs.Instance.HideLoading();
