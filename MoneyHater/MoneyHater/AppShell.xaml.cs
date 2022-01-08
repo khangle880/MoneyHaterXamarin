@@ -15,6 +15,8 @@ namespace MoneyHater
       {
          InitializeComponent();
 
+         Shell.SetTabBarIsVisible(this, false);
+
          Routing.RegisterRoute(nameof(AddTransactionPage),
              typeof(AddTransactionPage));
          Routing.RegisterRoute(nameof(PickupUserPage),
