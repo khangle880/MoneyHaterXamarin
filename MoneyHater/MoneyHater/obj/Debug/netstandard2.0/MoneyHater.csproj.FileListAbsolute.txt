@@ -39,3 +39,4 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\RecurringTransactionPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Planning\TransactionModelPage.xaml.g.cs
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\Account\WalletDetailPage.xaml.g.cs
+D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\PickupPage\PickupIconPage.xaml.g.cs

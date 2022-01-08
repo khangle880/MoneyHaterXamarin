@@ -8,7 +8,7 @@ namespace MoneyHater.Droid.Services
 {
    public class TransactionRepository : BaseRepository<TransactionModel>
    {
-      public override string DocumentPath =>
+      public override string DocumentPath => Path ??
           previousPath
           + "/transactions";
    }

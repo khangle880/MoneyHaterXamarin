@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rg1MNsV5Tql51H+NNNEUr/BFJSVzK0Rgy4wfi7YOPyfrMl1SelbJFOJvZHRB+DWejDBtJcMm6/c/9RmRH/QMvw==",
+  "dgSpecHash": "GmX0BTaGoh17aSgAaM75RORsZUZyByDqfZ+gjtGhSJr9GEk2KeR2YcXYecv1aPgk97+xPV2VZGHVRVWHGVYOcg==",
   "success": true,
   "projectFilePath": "D:\\School\\xamarin\\New folder\\MoneyHater\\MoneyHater\\MoneyHater.iOS\\MoneyHater.iOS.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\KhangLe\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\refractored.mvvmhelpers\\1.6.2\\refractored.mvvmhelpers.1.6.2.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\skiasharp\\2.80.3\\skiasharp.2.80.3.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\webp.touch\\1.0.8\\webp.touch.1.0.8.nupkg.sha512",
@@ -27,7 +28,8 @@
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.firebase.ios.cloudfirestore\\1.19.0\\xamarin.firebase.ios.cloudfirestore.1.19.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.firebase.ios.core\\6.10.4\\xamarin.firebase.ios.core.6.10.4.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.firebase.ios.installations\\1.7.0\\xamarin.firebase.ios.installations.1.7.0.nupkg.sha512",
-    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms\\5.0.0.2291\\xamarin.forms.5.0.0.2291.nupkg.sha512"
+    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms\\5.0.0.2291\\xamarin.forms.5.0.0.2291.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms.pancakeview\\2.3.0.759\\xamarin.forms.pancakeview.2.3.0.759.nupkg.sha512"
   ],
   "logs": []
 }

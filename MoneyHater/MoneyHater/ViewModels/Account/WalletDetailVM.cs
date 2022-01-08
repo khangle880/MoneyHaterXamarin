@@ -17,21 +17,35 @@ namespace MoneyHater.ViewModels.Account
       WalletModel walletModel;
       public WalletModel WalletModel { get => walletModel; set => SetProperty(ref walletModel, value); }
 
+      public string membersName;
+      public string MembersName { get => membersName; set => SetProperty(ref membersName, value); }
+      public List<AnotherUserModel> members;
+      public List<AnotherUserModel> Members { get => members; set => SetProperty(ref members, value); }
       public AsyncCommand CompleteCommand { get; }
+      public AsyncCommand SwitchToCurrentCommand { get; }
+      public bool switchEnable;
+      public bool SwitchEnable { get => switchEnable; set => SetProperty(ref switchEnable, value); }
 
       public WalletDetailVM()
       {
          CompleteCommand = new AsyncCommand(Complete);
+         SwitchToCurrentCommand = new AsyncCommand(SwitchToCurrent);
+         Members = new List<AnotherUserModel>();
+         SwitchEnable = true;
          Task.Run(async () =>
          {
             await Task.Delay(200);
             if (WalletId != null)
             {
                WalletModel = FirebaseService.walletService.wallets.Find(x => x.Id == WalletId);
+               SwitchEnable = WalletModel.Id != FirebaseService.walletService.currentWallet.Id;
                if (WalletModel == null)
                {
                   WalletModel = new WalletModel() { };
                }
+               Members = WalletModel.Members ?? new List<AnotherUserModel>();
+               var term = Members.ConvertAll<string>((e) => e.Name);
+               MembersName = string.Join(", ", term);
             }
          });
       }
@@ -40,6 +54,13 @@ namespace MoneyHater.ViewModels.Account
       {
          await Shell.Current.GoToAsync("..");
       }
+      async Task SwitchToCurrent()
+      {
+         FirebaseService.walletService.currentWallet = WalletModel;
+         MessagingCenter.Send<object, WalletModel>(this, "Switch wallet", WalletModel);
+         await Shell.Current.GoToAsync("..");
+      }
+
 
    }
 }

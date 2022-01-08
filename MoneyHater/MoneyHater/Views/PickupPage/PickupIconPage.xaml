@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyHater.Views.PickupPage.PickupIconPage"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+			 Shell.PresentationMode="Modal"
+             x:DataType="viewmodels:PickupIconVM"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+
+   <ContentPage.BindingContext>
+	  <viewmodels:PickupIconVM />
+   </ContentPage.BindingContext>
+
+   <StackLayout>
+	  <ListView ItemsSource="{Binding Icons}" SelectedItem="{Binding IconSelected}">
+		 <ListView.ItemTemplate>
+			<DataTemplate x:DataType="models:IconSvg">
+			   <ViewCell>
+				  <StackLayout Orientation="Horizontal">
+					 <ffSvg:SvgCachedImage
+						Margin="0"
+						HeightRequest="50"
+						Source="{Binding ImageSource}"
+						WidthRequest="50" />
+					 <Label Text="{Binding LocalName}"/>
+				  </StackLayout>
+			   </ViewCell>
+			</DataTemplate>
+		 </ListView.ItemTemplate>
+	  </ListView>
+	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+   </StackLayout>
+</ContentPage>

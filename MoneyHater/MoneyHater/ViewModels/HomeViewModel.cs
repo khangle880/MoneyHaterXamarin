@@ -38,19 +38,18 @@ namespace MoneyHater.ViewModels
 
       public HomeViewModel()
       {
-         //Transactions = new List<TransactionModel> { };
-         //ReloadTransaction(Transactions);
+         Transactions = new List<TransactionModel> { };
+         ReloadPage(Transactions);
          BellIcon = SvgImageSource.FromResource("MoneyHater.Resources.Icons.bell-solid.svg");
          AppIcon = SvgImageSource.FromResource("MoneyHater.Resources.Icons.wallet-solid.svg");
          Wallet = FirebaseService.walletService.currentWallet;
          TransactionsGrouped = new ObservableRangeCollection<Grouping<DateTime, TransactionModel>>();
-         if (Wallet == null)
+         if (Wallet != null)
          {
-            Shell.Current.GoToAsync($"//{nameof(AddWalletPage)}");
+            ReloadPage(Wallet.Transactions);
          }
          else
          {
-            ReloadPage(Wallet.Transactions);
          }
          LogOutCommand = new AsyncCommand(LogOut);
          SelectedItemCommand = new AsyncCommand<TransactionModel>(SelectedItem);
@@ -61,9 +60,24 @@ namespace MoneyHater.ViewModels
          {
             ReloadPage(Transactions);
          });
+         MessagingCenter.Subscribe<object, WalletModel>(this, "Switch wallet", (obj, s) =>
+         {
+            Wallet = s;
+            ReloadPage(s.Transactions);
+         });
+         MessagingCenter.Subscribe<object, WalletModel>(this, "Update current wallet", (obj, s) =>
+           {
+              if (Wallet != s && s != null)
+              {
+                 Wallet = s;
+                 ReloadPage(s.Transactions);
+              }
+           });
+
+
          MessagingCenter.Subscribe<object, WalletModel>(this, "Add wallet", (obj, s) =>
          {
-            if (Wallet == null)
+            if (Wallet == null || Wallet.Id == s.Id)
             {
                Wallet = FirebaseService.walletService.currentWallet;
                ReloadPage(Wallet.Transactions);
@@ -75,14 +89,9 @@ namespace MoneyHater.ViewModels
       void ReloadPage(List<TransactionModel> value)
       {
          if (Wallet == null) return;
-         if (value == null) return;
-         Task.Run(async () =>
-                 {
-                    await Task.Delay(500);
-                    BalanceText = Wallet.BalanceText;
-                 });
+         BalanceText = Wallet.BalanceText;
 
-         Transactions = value;
+         Transactions = value ?? new List<TransactionModel>();
          TransactionsGrouped.Clear();
          var sorted = from transaction in transactions
                       orderby transaction.ExecutedTime

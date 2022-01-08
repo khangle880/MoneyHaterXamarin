@@ -17,6 +17,7 @@ namespace MoneyHater.ViewModels.Account
       public List<WalletModel> wallets;
       public List<WalletModel> Wallets { get => wallets; set => SetProperty(ref wallets, value); }
       public AsyncCommand CompleteCommand { get; }
+      public AsyncCommand AddCommand { get; }
       public AsyncCommand<WalletModel> SelectedItemCommand { get; }
       public AsyncCommand<WalletModel> EditItemCommand { get; }
       public AsyncCommand<WalletModel> DeleteItemCommand { get; }
@@ -25,6 +26,7 @@ namespace MoneyHater.ViewModels.Account
       {
          Wallets = FirebaseService.walletService.wallets;
          CompleteCommand = new AsyncCommand(Complete);
+         AddCommand = new AsyncCommand(AddWallet);
          SelectedItemCommand = new AsyncCommand<WalletModel>(SelectedItem);
          EditItemCommand = new AsyncCommand<WalletModel>(EditItem);
          DeleteItemCommand = new AsyncCommand<WalletModel>(DeleteItem);
@@ -32,7 +34,6 @@ namespace MoneyHater.ViewModels.Account
          {
             ReloadPage(FirebaseService.walletService.wallets);
          });
-
       }
 
       void ReloadPage(List<WalletModel> value)
@@ -45,6 +46,11 @@ namespace MoneyHater.ViewModels.Account
       {
          await Shell.Current.GoToAsync("..");
       }
+      async Task AddWallet()
+      {
+         await Shell.Current.GoToAsync($"{nameof(AddWalletPage)}");
+      }
+
 
       async Task SelectedItem(WalletModel wallet)
       {
@@ -61,8 +67,10 @@ namespace MoneyHater.ViewModels.Account
       async Task DeleteItem(WalletModel wallet)
       {
          if (wallet == null) return;
-         await FirebaseService.walletService.DeleteWallet(wallet);
-         ReloadPage(FirebaseService.walletService.wallets);
+         var currentWallet = await FirebaseService.walletService.DeleteWallet(wallet);
+         Wallets = new List<WalletModel>();
+         Wallets = FirebaseService.walletService.wallets;
+         MessagingCenter.Send<object, WalletModel>(this, "Update current wallet", currentWallet);
       }
 
    }

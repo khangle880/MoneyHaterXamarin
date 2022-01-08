@@ -28,7 +28,7 @@ namespace MoneyHater.ViewModels
       {
          IsBusy = true;
          UserDialogs.Instance.ShowLoading();
-         if (Name == null)
+         if (string.IsNullOrWhiteSpace(Name))
          {
             await App.Current.MainPage.DisplayAlert("Alert", "Name Can Not Empty", "Ok");
          }

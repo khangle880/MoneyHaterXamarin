@@ -6,6 +6,7 @@
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
              x:DataType="viewmodels:PickupCategoryVM"
+			 Shell.PresentationMode="Modal"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -14,44 +15,39 @@
    <ContentPage.BindingContext>
 	  <viewmodels:PickupCategoryVM />
    </ContentPage.BindingContext>
-   <ContentPage.ToolbarItems>
-	  <ToolbarItem
-            Text="Done"
-            Command="{Binding CompleteCommand}">
-	  </ToolbarItem>
-   </ContentPage.ToolbarItems>
 
-   <ListView
+   <StackLayout>
+	  <ListView
             BackgroundColor="Transparent"
             IsGroupingEnabled="True"
 			GroupDisplayBinding="{Binding Key}"
 			HasUnevenRows="True"
             ItemsSource="{Binding CategoriesGrouped}"
             SelectedItem="{Binding CategorySelected, Mode=TwoWay}">
-	  <ListView.ItemTemplate>
-		 <DataTemplate x:DataType="models:CategoryModel">
-			<ViewCell>
-			   <Grid Padding="10">
-				  <Grid.RowDefinitions>
-					 <RowDefinition Height="Auto"/>
-					 <RowDefinition Height="Auto"/>
-				  </Grid.RowDefinitions>
-				  <Grid.ColumnDefinitions>
-					 <ColumnDefinition Width="*"/>
-					 <ColumnDefinition Width="5*"/>
-				  </Grid.ColumnDefinitions>
-				  <ffSvg:SvgCachedImage
+		 <ListView.ItemTemplate>
+			<DataTemplate x:DataType="models:CategoryModel">
+			   <ViewCell>
+				  <Grid Padding="10">
+					 <Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+					 </Grid.RowDefinitions>
+					 <Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="5*"/>
+					 </Grid.ColumnDefinitions>
+					 <ffSvg:SvgCachedImage
 					 Margin="0"
 					 HeightRequest="50"
 					 Source="{Binding ImageSourceLocal}"
 					 WidthRequest="50" />
-				  <Label
+					 <Label
 					   Style="{StaticResource LabelLarge}"
 					   Text="{Binding Name}"
 					   Grid.Row="0"
 					   Grid.Column="1"
 					   VerticalOptions="Center" />
-				  <ListView
+					 <ListView
 					   HasUnevenRows="True"
 					   HeightRequest="{Binding ChildrenSize}"
 					   Grid.Row="1"
@@ -59,37 +55,40 @@
 					   ItemsSource="{Binding Children}"
 					   SelectedItem="{Binding Source={x:Reference PickCategoryPage}, Path=BindingContext.CategorySelected}"
 					   SelectionMode="Single">
-					 <ListView.ItemTemplate>
-						<DataTemplate x:DataType="models:CategoryModel">
-						   <ViewCell>
-							  <StackLayout Orientation="Horizontal">
-								 <ffSvg:SvgCachedImage
+						<ListView.ItemTemplate>
+						   <DataTemplate x:DataType="models:CategoryModel">
+							  <ViewCell>
+								 <StackLayout Orientation="Horizontal">
+									<ffSvg:SvgCachedImage
 									Margin="0"
 									HeightRequest="40"
 									Source="{Binding ImageSourceLocal}"
 									WidthRequest="40" />
-								 <Label
+									<Label
 								   Style="{StaticResource LabelLarge}"
 								   Text="{Binding Name}"
 								   Grid.Row="0"
 								   Grid.Column="1"
 								   VerticalOptions="Center" />
-							  </StackLayout>
-						   </ViewCell>
-						</DataTemplate>
-					 </ListView.ItemTemplate>
-				  </ListView>
-			   </Grid>
-			</ViewCell>
-		 </DataTemplate>
-	  </ListView.ItemTemplate>
-	  <ListView.Header>
-		 <StackLayout Orientation="Horizontal">
-			<Label
+								 </StackLayout>
+							  </ViewCell>
+						   </DataTemplate>
+						</ListView.ItemTemplate>
+					 </ListView>
+				  </Grid>
+			   </ViewCell>
+			</DataTemplate>
+		 </ListView.ItemTemplate>
+		 <ListView.Header>
+			<StackLayout Orientation="Horizontal">
+			   <Label
                         HorizontalOptions="Center"
                         Style="{StaticResource LabelMedium}"
                         Text="Category of transaction" />
-		 </StackLayout>
-	  </ListView.Header>
-   </ListView>
+			</StackLayout>
+		 </ListView.Header>
+	  </ListView>
+	  <Button Text="Done" Command="{Binding CompleteCommand}"/>
+   </StackLayout>
+
 </ContentPage>

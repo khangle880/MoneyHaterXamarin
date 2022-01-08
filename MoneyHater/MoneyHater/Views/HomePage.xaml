@@ -18,16 +18,15 @@
    <ContentPage.ToolbarItems>
 	  <ToolbarItem Command="{Binding LogOutCommand}" Text="Logout" />
    </ContentPage.ToolbarItems>
-   <AbsoluteLayout BackgroundColor="#f2f2f7">
-	  <StackLayout>
-		  <yummy:PancakeView BackgroundColor="#2194f3" CornerRadius="0,0,15,15" HeightRequest="120">
-			  <StackLayout>
-				  <Label Text="Available balance" TextColor="White" Margin="10,20,00,0"
+   <StackLayout>
+	  <yummy:PancakeView BackgroundColor="#2194f3" CornerRadius="0,0,15,15" HeightRequest="120">
+		 <StackLayout>
+			<Label Text="Available balance" TextColor="White" Margin="10,20,00,0"
 						/>
-				  <StackLayout Orientation="Horizontal">
-					<Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding BalanceText}" TextColor="White" Margin="10,0,0,0" FontAttributes="Bold" FontSize="20"
+			<StackLayout Orientation="Horizontal">
+			   <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding BalanceText}" TextColor="White" Margin="10,0,0,0" FontAttributes="Bold" FontSize="20"
 						/>
-					<Button
+			   <Button
 					 Command="{Binding AddTransactionCommand}"
 						HorizontalOptions="EndAndExpand" 
 						AbsoluteLayout.LayoutBounds="0.95,0.95,10,10"
@@ -40,84 +39,98 @@
 						CornerRadius="40"
 						HeightRequest="50"
 						WidthRequest="50" />
-				  </StackLayout>
-			  </StackLayout>
-		  </yummy:PancakeView>
+			</StackLayout>
+		 </StackLayout>
+	  </yummy:PancakeView>
 
-		 <CollectionView
+	  <CollectionView
             BackgroundColor="Transparent"
-			 Margin="0"
+			Margin="0"
             IsGrouped="True"
-            ItemSizingStrategy="MeasureAllItems"
-            ItemsLayout="VerticalList"
             ItemsSource="{Binding TransactionsGrouped}"
             SelectedItem="{Binding TransactionSelected, Mode=TwoWay}"
             SelectionMode="Single">
-			<CollectionView.EmptyView>
+		 <CollectionView.EmptyView>
+			<StackLayout Padding="12">
+			   <Label HorizontalOptions="Center" Text="No Transaction" />
+			</StackLayout>
+		 </CollectionView.EmptyView>
+		 <CollectionView.GroupHeaderTemplate>
+			<DataTemplate x:DataType="{x:Null}">
 			   <StackLayout Padding="12">
-				  <Label HorizontalOptions="Center" Text="No Transaction" />
+				  <Label Style="{StaticResource LabelMedium}" Text="{Binding Key, StringFormat='{0:dd MMM yyyy}'}" />
 			   </StackLayout>
-			</CollectionView.EmptyView>
-			<CollectionView.GroupHeaderTemplate>
-			   <DataTemplate x:DataType="{x:Null}">
-				  <StackLayout Padding="12">
-					 <Label Style="{StaticResource LabelMedium}" Text="{Binding Key}" />
-				  </StackLayout>
-			   </DataTemplate>
-			</CollectionView.GroupHeaderTemplate>
-			<CollectionView.ItemTemplate>
-			   <DataTemplate x:DataType="models:TransactionModel">
-				   <Frame BackgroundColor="#f2f2f7" HeightRequest="120" Padding="15,0,15,15">
-					
-					<yummy:PancakeView BackgroundColor="Transparent" CornerRadius="15,15,15,15">
-					   <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
+			</DataTemplate>
+		 </CollectionView.GroupHeaderTemplate>
+		 <CollectionView.ItemTemplate>
+			<DataTemplate x:DataType="models:TransactionModel">
+			   <Frame BackgroundColor="#f2f2f7" HeightRequest="120" Padding="15,0,15,15">
+
+				  <yummy:PancakeView BackgroundColor="Transparent" CornerRadius="15,15,15,15">
+					 <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
                                BackgroundColor="{AppThemeBinding 
                                 Dark={StaticResource WindowBackgroundColorDark}, 
                                 Light={StaticResource WindowBackgroundColor}}">
-					 <SwipeView.RightItems>
-						<SwipeItems>
-						   <SwipeItem
+						<SwipeView.RightItems>
+						   <SwipeItems>
+							  <SwipeItem
                                     BackgroundColor="Red"
 									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DeleteItemCommand}"
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
                                     Text="Delete" />
-						   <SwipeItem
+							  <SwipeItem
                                     BackgroundColor="Orange"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=EditItemCommand}"
                                     CommandParameter="{Binding .}"
                                     Text="Edit" />
 
-						</SwipeItems>
-					 </SwipeView.RightItems>
-					 <Grid Padding="0" HorizontalOptions="FillAndExpand">
-						<Grid.GestureRecognizers>
-						   <TapGestureRecognizer
+						   </SwipeItems>
+						</SwipeView.RightItems>
+						<Grid Padding="0" HorizontalOptions="FillAndExpand">
+						   <Grid.GestureRecognizers>
+							  <TapGestureRecognizer
 							  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=SelectedItemCommand}"
                               CommandParameter="{Binding .}"/>
-						</Grid.GestureRecognizers>
-						
-						<StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-							<yummy:PancakeView WidthRequest="100" BackgroundColor="#edfeff">
-								<StackLayout>
-									<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40">
-									<ffSvg:SvgCachedImage
+						   </Grid.GestureRecognizers>
+
+						   <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+							  <yummy:PancakeView WidthRequest="100" BackgroundColor="#edfeff">
+								 <StackLayout VerticalOptions="Center">
+									<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" Padding="0">
+									   <ffSvg:SvgCachedImage
 									  Margin="0"
 									  HeightRequest="20"
 
 									  Source="{Binding CategoryModel.ImageSource}"
 									  WidthRequest="20" />
 									</Frame>
-									<Label Text="Time here" VerticalOptions="Center" HorizontalOptions="Center"/>
-								</StackLayout>
-								
-								
-							</yummy:PancakeView>
-						   
-						   <StackLayout Margin="10,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-								<StackLayout HorizontalOptions="StartAndExpand"
+									<Label Text="{Binding CategoryModel.Name}" VerticalOptions="Center" HorizontalOptions="Center"/>
+								 </StackLayout>
+
+
+							  </yummy:PancakeView>
+
+							  <StackLayout Margin="10,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+								 <StackLayout HorizontalOptions="StartAndExpand"
 								VerticalOptions="Center" >
 									<Label
+										HorizontalOptions="Center"
+										TextColor="#92A9BD"
+										Style="{StaticResource LabelLarge}"
+										Text="By Wallet"
+										FontSize="14"
+										/>
+									<Label
+										HorizontalOptions="Center"
+										Style="{StaticResource LabelLarge}"
+										Text="{Binding AmountByWallet}"
+										/>
+								 </StackLayout>
+								 
+								 <StackLayout HorizontalOptions="Center" >
+									<Label
+										HorizontalOptions="Center"
 										TextColor="#92A9BD"
 										Style="{StaticResource LabelLarge}"
 										Text="Amount"
@@ -128,23 +141,11 @@
 										Style="{StaticResource LabelLarge}"
 										Text="{Binding Amount}"
 									/>
-								</StackLayout>
-								<StackLayout HorizontalOptions="Center" >
-									<Label
-										TextColor="#92A9BD"
-										Style="{StaticResource LabelLarge}"
-										Text="Amount"
-										FontSize="14"
-										/>
+								 </StackLayout>
+								 
+								 <StackLayout HorizontalOptions="EndAndExpand" >
 									<Label
 										HorizontalOptions="Center"
-										Style="{StaticResource LabelLarge}"
-										Text="{Binding AmountByWallet}"
-										/>
-								</StackLayout>
-
-								<StackLayout HorizontalOptions="EndAndExpand" >
-									<Label
 										TextColor="#92A9BD"
 										Style="{StaticResource LabelLarge}"
 										Text="Currency"
@@ -155,18 +156,18 @@
 										Style="{StaticResource LabelLarge}"
 										Text="{Binding CurrencyModel.Iso}"
 										/>
-								</StackLayout>
+								 </StackLayout>
+							  </StackLayout>
 						   </StackLayout>
-						</StackLayout>
-					 </Grid>
-				  </SwipeView>
-					</yummy:PancakeView>
-					</Frame>
-				  
-				  
-			   </DataTemplate>
-			</CollectionView.ItemTemplate>
-			<!--<CollectionView.Header>
+						</Grid>
+					 </SwipeView>
+				  </yummy:PancakeView>
+			   </Frame>
+
+
+			</DataTemplate>
+		 </CollectionView.ItemTemplate>
+		 <!--<CollectionView.Header>
 			   <StackLayout Orientation="Horizontal">
 				  <Label
                         HorizontalOptions="Center"
@@ -174,11 +175,9 @@
                         Text="Coffee of the World" />
 			   </StackLayout>
 			</CollectionView.Header>-->
-		 </CollectionView>
+	  </CollectionView>
 
 
-	  </StackLayout>
+   </StackLayout>
 
-	  
-   </AbsoluteLayout>
 </ContentPage>

@@ -7,7 +7,6 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:ManageWalletVM"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-			 Shell.PresentationMode="Modal"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -16,73 +15,74 @@
    </ContentPage.BindingContext>
 
    <StackLayout>
-
-	  <ListView
+	  <CollectionView
             BackgroundColor="Transparent"
             ItemsSource="{Binding Wallets}"
             SelectionMode="Single">
-		 <ListView.ItemTemplate>
+		 <CollectionView.ItemTemplate>
 			<DataTemplate x:DataType="models:WalletModel">
-			   <ViewCell>
 
-				  <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
+			   <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
                                BackgroundColor="{AppThemeBinding 
                                 Dark={StaticResource WindowBackgroundColorDark}, 
                                 Light={StaticResource WindowBackgroundColor}}">
-					 <SwipeView.RightItems>
-						<SwipeItems>
-						   <SwipeItem
+				  <SwipeView.RightItems>
+					 <SwipeItems>
+						<SwipeItem
                                     BackgroundColor="Red"
 									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=DeleteItemCommand}"
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
                                     Text="Delete" />
-						   <SwipeItem
+						<SwipeItem
                                     BackgroundColor="Orange"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=EditItemCommand}"
                                     CommandParameter="{Binding .}"
                                     Text="Edit" />
 
-						</SwipeItems>
-					 </SwipeView.RightItems>
-					 <Grid Padding="10">
-						<Grid.GestureRecognizers>
-						   <TapGestureRecognizer
+					 </SwipeItems>
+				  </SwipeView.RightItems>
+				  <Grid Padding="10">
+					 <Grid.GestureRecognizers>
+						<TapGestureRecognizer
 							  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=SelectedItemCommand}"
                               CommandParameter="{Binding .}"/>
-						</Grid.GestureRecognizers>
-						<StackLayout Orientation="Horizontal" IsEnabled="{Binding State}">
-						   <ffSvg:SvgCachedImage
+					 </Grid.GestureRecognizers>
+					 <StackLayout Orientation="Horizontal" IsEnabled="{Binding State}">
+						<ffSvg:SvgCachedImage
 							  Margin="0"
 							  HeightRequest="40"
 							  Source="{Binding ImageSource}"
 							  WidthRequest="40" />
-						   <StackLayout VerticalOptions="Center">
-							  <Label
+						<StackLayout VerticalOptions="Center">
+						   <Label
+								Style="{StaticResource LabelLarge}"
+								Text="{Binding Name}"
+								VerticalOptions="Center" />
+						   <Label
 								Style="{StaticResource LabelLarge}"
 								Text="{Binding Balance}"
 								VerticalOptions="Center" />
-							  <Label
+						   <Label
 								Style="{StaticResource LabelLarge}"
 								Text="{Binding CurrencyModel.Iso}"
 								VerticalOptions="Center" />
 
-						   </StackLayout>
 						</StackLayout>
-					 </Grid>
-				  </SwipeView>
-			   </ViewCell>
+					 </StackLayout>
+				  </Grid>
+			   </SwipeView>
 			</DataTemplate>
-		 </ListView.ItemTemplate>
-		 <ListView.Header>
+		 </CollectionView.ItemTemplate>
+		 <CollectionView.Header>
 			<StackLayout Orientation="Horizontal">
 			   <Label
                         HorizontalOptions="Center"
                         Style="{StaticResource LabelMedium}"
                         Text="Coffee of the World" />
 			</StackLayout>
-		 </ListView.Header>
-	  </ListView>
-	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+		 </CollectionView.Header>
+	  </CollectionView>
+	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Add New Wallet" Command="{Binding AddCommand}"/>
    </StackLayout>
 </ContentPage>

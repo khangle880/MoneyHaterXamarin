@@ -1,12 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoneyHater.Views.Account.WalletDetailPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="MoneyHater.Views.Account.WalletDetailPage"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
+             x:DataType="viewmodels:WalletDetailVM"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+			 Shell.PresentationMode="Modal"
+             BackgroundColor="{AppThemeBinding 
+                        Dark={StaticResource WindowBackgroundColorDark}, 
+                        Light={StaticResource WindowBackgroundColor}}">
+   <ContentPage.BindingContext>
+	  <viewmodels:WalletDetailVM />
+   </ContentPage.BindingContext>
+
+   <ContentPage.Content>
+	  <StackLayout>
+		 <Label Text="Wallet Name:"/>
+		 <Label Text="{Binding WalletModel.Name}"/>
+		 <Label Text="Balance:"/>
+		 <Label Text="{Binding WalletModel.Balance}"  />
+		 <Label Text="Currency:"/>
+		 <Label Text="{Binding WalletModel.CurrencyModel.Name}"  />
+		 <Label Text="Icon:"/>
+		 <ffSvg:SvgCachedImage
+					 Margin="0"
+					 HeightRequest="50"
+					 Source="{Binding WalletModel.ImageSource}"
+					 WidthRequest="50" />
+		 <CollectionView ItemsSource="{Binding Members}">
+			<CollectionView.ItemTemplate>
+			   <DataTemplate x:DataType="models:AnotherUserModel">
+				  <Label Text="{Binding Name}"/>
+			   </DataTemplate>
+			</CollectionView.ItemTemplate>
+		 </CollectionView>
+		 <RadioButton Content="Enable Notification" IsChecked="{Binding WalletModel.EnableNotification}" IsEnabled="False"/>
+		 <RadioButton Content="Excluded From Total" IsChecked="{Binding WalletModel.ExcludedFromTotal}" IsEnabled="False"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Set Current Wallet" Command="{Binding SwitchToCurrentCommand}" IsEnabled="{Binding SwitchEnable}"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}" />
+
+	  </StackLayout>
+   </ContentPage.Content>
 </ContentPage>

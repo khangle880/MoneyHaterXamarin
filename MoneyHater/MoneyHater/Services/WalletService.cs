@@ -11,32 +11,17 @@ namespace MoneyHater.Services
    public class WalletService
    {
       public IRepository<WalletModel> walletRepo { get; set; }
-      public IRepository<AnotherUserModel> memberRepo { get; set; }
-      public IRepository<BudgetModel> budgetRepo { get; set; }
-      public IRepository<CategoryModel> customCategoryRepo { get; set; }
-      public IRepository<DebtModel> debtRepo { get; set; }
-      public IRepository<EventModel> eventRepo { get; set; }
-      public IRepository<ReadyExecutedTransactionModel> readyExecutedTransactionRepo { get; set; }
-      public IRepository<RecurringTransactionModel> recurringTransactionRepo { get; set; }
-      public IRepository<TransactionModel> transactionRepo { get; set; }
       public WalletModel currentWallet { get; set; }
       public List<WalletModel> wallets { get; set; }
 
       public WalletService()
       {
          walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
-         memberRepo = DependencyService.Resolve<IRepository<AnotherUserModel>>();
-         budgetRepo = DependencyService.Resolve<IRepository<BudgetModel>>();
-         customCategoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
-         debtRepo = DependencyService.Resolve<IRepository<DebtModel>>();
-         eventRepo = DependencyService.Resolve<IRepository<EventModel>>();
-         readyExecutedTransactionRepo = DependencyService.Resolve<IRepository<ReadyExecutedTransactionModel>>();
-         recurringTransactionRepo = DependencyService.Resolve<IRepository<RecurringTransactionModel>>();
-         transactionRepo = DependencyService.Resolve<IRepository<TransactionModel>>();
       }
 
       public async Task AddWallet(WalletModel wallet, bool isEdit, WalletModel oldWallet)
       {
+         IRepository<AnotherUserModel> memberRepo = DependencyService.Resolve<IRepository<AnotherUserModel>>();
          if (isEdit)
          {
             wallet.Id = oldWallet.Id;
@@ -86,15 +71,29 @@ namespace MoneyHater.Services
                await memberRepo.Save(item, item.Id);
             }
             wallets.Insert(0, wallet);
-            currentWallet = wallets[wallets.Count - 1];
+            if (currentWallet == null)
+            {
+               currentWallet = wallets[wallets.Count - 1];
+            }
          }
       }
 
-      public async Task DeleteWallet(WalletModel wallet)
+      public async Task<WalletModel> DeleteWallet(WalletModel wallet)
       {
+         var isDeleteCurrentWallet = wallet.Id == currentWallet.Id;
+
          int index = wallets.FindIndex(x => x.Id == wallet.Id);
          wallets.RemoveAt(index);
          await walletRepo.Delete(wallet);
+         if (isDeleteCurrentWallet)
+         {
+            if (wallets.Count != 0)
+            {
+               currentWallet = wallets[0];
+            }
+            else { currentWallet = null; }
+         }
+         return currentWallet;
       }
 
 
@@ -137,19 +136,29 @@ namespace MoneyHater.Services
          string id = wallet.Id;
 
          string previousPath = walletRepo.DocumentPath + $"/{id}";
+         IRepository<AnotherUserModel> memberRepo = DependencyService.Resolve<IRepository<AnotherUserModel>>();
+         IRepository<BudgetModel> budgetRepo = DependencyService.Resolve<IRepository<BudgetModel>>();
+         IRepository<CategoryModel> customCategoryRepo = DependencyService.Resolve<IRepository<CategoryModel>>();
+         IRepository<DebtModel> debtRepo = DependencyService.Resolve<IRepository<DebtModel>>();
+         IRepository<EventModel> eventRepo = DependencyService.Resolve<IRepository<EventModel>>();
+         IRepository<ReadyExecutedTransactionModel> readyExecutedTransactionRepo = DependencyService.Resolve<IRepository<ReadyExecutedTransactionModel>>();
+         IRepository<RecurringTransactionModel> recurringTransactionRepo = DependencyService.Resolve<IRepository<RecurringTransactionModel>>();
+         IRepository<TransactionModel> transactionRepo = DependencyService.Resolve<IRepository<TransactionModel>>();
+
+         // load event before
+         eventRepo.previousPath = previousPath;
+         wallet.Events = new List<EventModel>() { };
+         var loadEvents = eventRepo.GetAll();
+         wallet.Events = (await loadEvents) as List<EventModel>;
+
          memberRepo.Path = previousPath + "/members";
          budgetRepo.previousPath = previousPath;
          customCategoryRepo.Path = previousPath + "/custom_categories";
          debtRepo.previousPath = previousPath;
-         eventRepo.previousPath = previousPath;
          readyExecutedTransactionRepo.previousPath = previousPath;
          recurringTransactionRepo.previousPath = previousPath;
-         transactionRepo.previousPath = previousPath;
+         transactionRepo.Path = previousPath + "/transactions";
 
-         // load event before
-         wallet.Events = new List<EventModel>() { };
-         var loadEvents = eventRepo.GetAll();
-         wallet.Events = (await loadEvents) as List<EventModel>;
 
          List<Task> tasks = new List<Task> { };
          var loadMembers = memberRepo.GetAll();

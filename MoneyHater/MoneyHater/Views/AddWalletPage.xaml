@@ -5,6 +5,7 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:AddWalletViewModel"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -16,6 +17,7 @@
 	  <ScrollView>
 		 <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
+			<Label Text="{Binding HeaderText}"/>
 			<Label Text="Wallet Name:"/>
 			<Entry Placeholder="Name" Text="{Binding Name}"/>
 			<Label Text="Balance:"/>
@@ -32,7 +34,15 @@
 			  Padding="6, 10, 6, 10"
 			  VerticalOptions="CenterAndExpand"
 			  Title="Choose Your Currency" />
-			<Label Text="Members:"/>
+			<Label Text="Icon:"/>
+			<Label Text="{Binding IconSelected.LocalName}" TextColor="Black"/>
+			<ffSvg:SvgCachedImage
+					 Margin="0"
+					 HeightRequest="50"
+					 Source="{Binding IconSelected.ImageSource}"
+					 WidthRequest="50" />
+			<Button Text="Pick Icon" Command="{Binding PickupIconCommand}"/>
+
 			<Label Text="{Binding MembersName}" TextColor="Black"/>
 			<Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
 			<RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />

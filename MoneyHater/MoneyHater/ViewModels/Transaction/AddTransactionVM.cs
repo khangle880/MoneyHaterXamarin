@@ -28,6 +28,7 @@ namespace MoneyHater.ViewModels.Transaction
       bool excludedFromReport;
       string note;
       DateTime remind;
+      DateTime executedTime;
       AnotherUserModel with;
       WalletModel walletModel;
       public WalletModel WalletModel { get => walletModel; set => SetProperty(ref walletModel, value); }
@@ -41,6 +42,7 @@ namespace MoneyHater.ViewModels.Transaction
       public EventModel EventModel { get => eventModel; set => SetProperty(ref eventModel, value); }
       public AnotherUserModel With { get => with; set => SetProperty(ref with, value); }
       public DateTime Remind { get => remind; set => SetProperty(ref remind, value); }
+      public DateTime ExecutedTime { get => executedTime; set => SetProperty(ref executedTime, value); }
       public CurrencyModel CurrencyModel { get => currencyModel; set => SetProperty(ref currencyModel, value); }
       public string Note { get => note; set => SetProperty(ref note, value); }
       public double Amount { get => amount; set => SetProperty(ref amount, value); }
@@ -50,10 +52,10 @@ namespace MoneyHater.ViewModels.Transaction
       public AsyncCommand PickupCategoryCommand { get; }
 
       public bool isEdit = false;
-
       public AddTransactionVM()
       {
          Remind = DateTime.Now;
+         ExecutedTime = DateTime.Now;
          Task.Run(async () =>
            {
               await Task.Delay(200);
@@ -72,6 +74,7 @@ namespace MoneyHater.ViewModels.Transaction
                     ExcludedFromReport = TransactionModel.ExcludedFromReport;
                     Note = TransactionModel.Note;
                     Remind = TransactionModel.Remind;
+                    ExecutedTime = TransactionModel.ExecutedTime;
                     With = TransactionModel.With;
                  }
               }
@@ -119,12 +122,12 @@ namespace MoneyHater.ViewModels.Transaction
                var newTransaction = new TransactionModel()
                {
                   Amount = Amount,
-                  AmountByWallet = Math.Round(calcAmount, 2),
+                  AmountByWallet = Math.Round(calcAmount, 1),
                   CategoryId = CategoryModel.Id,
                   CurrencyId = (CurrencyModel ?? WalletModel.CurrencyModel).Id,
                   EventId = EventModel?.Id,
                   ExcludedFromReport = ExcludedFromReport,
-                  ExecutedTime = DateTime.Now,
+                  ExecutedTime = ExecutedTime,
                   Note = Note,
                   Remind = Remind,
                   WithUserId = With?.Id,

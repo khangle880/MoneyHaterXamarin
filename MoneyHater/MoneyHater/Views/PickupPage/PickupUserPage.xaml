@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.PickupPage.PickupUserPage"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+			 Shell.PresentationMode="Modal"
              x:DataType="viewmodels:PickupUserViewModel"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 

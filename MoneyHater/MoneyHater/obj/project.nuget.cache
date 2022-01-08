@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "EnVGgHP04iWLE2X/tD4yAzTWjoKiaBjo0A5bayrXGQ8izTd+SCUvE8vdp92/xYHpnIDpJOWuJNGt29hb3ZqSow==",
+  "dgSpecHash": "W02bB4/FSLhgZEd4XNX5olnJbHS2h3eCQSRxGZwKC9NwIScDo7N13yDjTeEl84DZKjts4sJQZuUVXVfwQaXTrg==",
   "success": true,
   "projectFilePath": "D:\\School\\xamarin\\New folder\\MoneyHater\\MoneyHater\\MoneyHater\\MoneyHater.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KhangLe\\.nuget\\packages\\acr.userdialogs\\7.2.0.562\\acr.userdialogs.7.2.0.562.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\monkeycache\\1.5.2\\monkeycache.1.5.2.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\monkeycache.filestore\\1.5.2\\monkeycache.filestore.1.5.2.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
@@ -13,10 +14,12 @@
     "C:\\Users\\KhangLe\\.nuget\\packages\\refractored.mvvmhelpers\\1.6.2\\refractored.mvvmhelpers.1.6.2.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\skiasharp\\2.80.3\\skiasharp.2.80.3.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.7.0\\system.reflection.emit.ilgeneration.4.7.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
@@ -28,7 +31,8 @@
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.ffimageloading.svg\\2.4.11.982\\xamarin.ffimageloading.svg.2.4.11.982.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.ffimageloading.svg.forms\\2.4.11.982\\xamarin.ffimageloading.svg.forms.2.4.11.982.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.ffimageloading.transformations\\2.4.11.982\\xamarin.ffimageloading.transformations.2.4.11.982.nupkg.sha512",
-    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms\\5.0.0.2291\\xamarin.forms.5.0.0.2291.nupkg.sha512"
+    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms\\5.0.0.2291\\xamarin.forms.5.0.0.2291.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\xamarin.forms.pancakeview\\2.3.0.759\\xamarin.forms.pancakeview.2.3.0.759.nupkg.sha512"
   ],
   "logs": []
 }

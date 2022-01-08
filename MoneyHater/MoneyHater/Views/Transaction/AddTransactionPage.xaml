@@ -14,27 +14,27 @@
    </ContentPage.BindingContext>
 
    <ContentPage.Content>
-		<StackLayout>
-			 <ScrollView>
-		 <StackLayout Padding="25" VerticalOptions="StartAndExpand"
+	  <StackLayout>
+		 <ScrollView>
+			<StackLayout Padding="25" VerticalOptions="StartAndExpand"
                      HorizontalOptions="FillAndExpand">
 
-			
-			
-				<Label Text="Amount of money"
+
+
+			   <Label Text="Amount of money"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                 VerticalOptions="StartAndExpand" 
                />
-				 
-		
-			 
-			 <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,10,0,0">
-			  
-			   <Entry HorizontalOptions="FillAndExpand" Placeholder="Balance" Text="{Binding Amount}" Keyboard="Numeric" />
-			   <controls:StandardPicker
+
+
+
+			   <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,10,0,0">
+
+				  <Entry HorizontalOptions="FillAndExpand" Placeholder="Balance" Text="{Binding Amount}" Keyboard="Numeric" />
+				  <controls:StandardPicker
 				 WidthRequest="80"
 				 FontAttributes="Bold"
 				 ItemsSource="{Binding Currencies}"
@@ -46,44 +46,54 @@
 				 VerticalOptions="CenterAndExpand"
 				 Padding="20,0,0,0"
 				 Title="{Binding WalletModel.CurrencyModel.Iso}" />
-			</StackLayout>
-			 <Label Text="Catalory"
+			   </StackLayout>
+			   <Label Text="Catalory"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				 Margin="0,20,0,0"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
-			<StackLayout Orientation="Horizontal" VerticalOptions="Center">
-			   <Entry PlaceholderColor="DarkGray" Placeholder="Example: Travel" HorizontalOptions="FillAndExpand" Text="{Binding CategoryModel.Name}" TextColor="Black" />
-			   <Button Text="Pick" BackgroundColor="Transparent" WidthRequest="80" FontSize="17" TextColor="{StaticResource ColorAccent}" Margin="0,20,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupCategoryCommand}"/>
-			</StackLayout>
-			 <Label Text="Note"
+			   <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+				  <Entry PlaceholderColor="DarkGray" Placeholder="Example: Travel" HorizontalOptions="FillAndExpand" Text="{Binding CategoryModel.Name}" TextColor="Black" />
+				  <Button Text="Pick" BackgroundColor="Transparent" WidthRequest="80" FontSize="17" TextColor="{StaticResource ColorAccent}" Margin="0,20,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupCategoryCommand}"/>
+			   </StackLayout>
+			   <Label Text="Note"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				Margin="0,20,0,0"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
-			<Entry  PlaceholderColor="DarkGray" Placeholder="Example: Money for Da Lat" Text="{Binding Note}" TextColor="Black" />
-			 <Label Text="Date"
+			   <Entry  PlaceholderColor="DarkGray" Placeholder="Example: Money for Da Lat" Text="{Binding Note}" TextColor="Black" />
+			   <Label Text="Executed Time"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				Margin="0,20,0,0"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
-			<DatePicker MinimumDate="01/01/2000"
+			   <DatePicker MinimumDate="01/01/2000"
+				MaximumDate="12/31/2200"
+			    Date="{Binding ExecutedTime}" />
+			   <Label Text="Date"
+				TextColor="{StaticResource ColorAccent}"
+				FontAttributes="Bold"
+				FontSize="17"
+				Margin="0,20,0,0"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
+			   <DatePicker MinimumDate="01/01/2000"
 			   MaximumDate="12/31/2200"
 			   Date="{Binding Remind}" />
-			<Label Text="Partner"
+			   <Label Text="Partner"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				Margin="0,20,0,0"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
-			<Picker
+			   <Picker
 				Margin="0,20,0,0"
 				 ItemsSource="{Binding AnotherUsers}"
 				 SelectedItem="{Binding With}"
@@ -91,14 +101,14 @@
 				 BackgroundColor="Transparent"
 				 VerticalOptions="CenterAndExpand"
 				 Title="Choose Partner" />
-			 <Label Text="Event"
+			   <Label Text="Event"
 				TextColor="{StaticResource ColorAccent}"
 				FontAttributes="Bold"
 				FontSize="17"
 				Margin="0,20,0,0"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
-			<Picker
+			   <Picker
 				Margin="0,20,0,0"
 				 ItemsSource="{Binding Events}"
 				 SelectedItem="{Binding EventModel}"
@@ -106,14 +116,14 @@
 				 BackgroundColor="Transparent"
 				 VerticalOptions="CenterAndExpand"
 				 Title="Choose Event" />
-			<RadioButton Margin="0,20,0,0" Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
-			<Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Margin="0,20,0,0" Text="Complete" Command="{Binding CreateCommand}"/>
-			 <!--<Label Text="{Binding WalletModel.Name}" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>-->
-			
-		 </StackLayout>
-	  </ScrollView>
-			<Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Margin="0,0,0,0" Text="Create Transaction" Command="{Binding CreateCommand}" CornerRadius="0"/>
-		</StackLayout>
-	 
+			   <RadioButton Margin="0,20,0,0" Content="Excluded From Report" IsChecked="{Binding ExcludedFromReport}" />
+			   <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Margin="0,20,0,0" Text="Complete" Command="{Binding CreateCommand}"/>
+			   <!--<Label Text="{Binding WalletModel.Name}" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>-->
+
+			</StackLayout>
+		 </ScrollView>
+		 <Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Margin="0,0,0,0" Text="Complete" Command="{Binding CreateCommand}" CornerRadius="0"/>
+	  </StackLayout>
+
    </ContentPage.Content>
 </ContentPage>

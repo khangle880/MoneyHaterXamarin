@@ -35,22 +35,28 @@ namespace MoneyHater.ViewModels
       public List<AnotherUserModel> Members { get => members; set => SetProperty(ref members, value); }
       public string MembersName { get => membersName; set => SetProperty(ref membersName, value); }
 
-      public List<IconSvg> icons;
-      public List<IconSvg> Icons { get => icons; set => SetProperty(ref icons, value); }
-
+      public string headerText;
+      public string HeaderText { get => headerText; set => SetProperty(ref headerText, value); }
       public List<CurrencyModel> currencies;
       public List<CurrencyModel> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
       public AsyncCommand RegisterCommand { get; }
       public AsyncCommand PickupMemberCommand { get; }
       public AsyncCommand PickupCategoryCommand { get; }
+      public AsyncCommand PickupIconCommand { get; }
       public bool isEdit = false;
 
       public AddWalletViewModel()
       {
          currencies = FirebaseService.currencies;
-         var list = FirebaseService.icons.Select(x => new IconSvg() { url = x });
-         Icons = list.ToList();
-
+         if (FirebaseService.walletService.currentWallet == null)
+         {
+            HeaderText = "Create Your First Wallet";
+         }
+         else
+         {
+            HeaderText = "Create New Wallet";
+         }
+         IconSelected = new IconSvg() { url = "https://firebasestorage.googleapis.com/v0/b/moneyhater-e3629.appspot.com/o/icon%2Ficons8-wallet-64.svg?alt=media&token=27167c8a-818a-4b46-a076-9aebfd46c9ea" };
 
          Task.Run(async () =>
            {
@@ -61,6 +67,7 @@ namespace MoneyHater.ViewModels
                  if (WalletModel != null)
                  {
                     isEdit = true;
+                    HeaderText = "Edit Wallet";
                     oldWalletModel = WalletModel;
                     Name = WalletModel.Name;
                     if (WalletModel.Icon != null)
@@ -72,7 +79,8 @@ namespace MoneyHater.ViewModels
                     EnableNotification = WalletModel.EnableNotification;
                     ExcludedFromTotal = WalletModel.ExcludedFromTotal;
                     Members = WalletModel.Members;
-                    MembersName = string.Join(", ", Members);
+                    var term = Members.ConvertAll<string>((e) => e.Name);
+                    MembersName = string.Join(", ", term);
                  }
               }
            });
@@ -83,10 +91,15 @@ namespace MoneyHater.ViewModels
             var term = members.ConvertAll<string>((e) => e.Name);
             MembersName = string.Join(", ", term);
          });
+         MessagingCenter.Subscribe<object, IconSvg>(this, "Pick icon", (obj, s) =>
+         {
+            IconSelected = s;
+         });
 
          RegisterCommand = new AsyncCommand(RegisterWallet);
          PickupMemberCommand = new AsyncCommand(PickupMember);
          PickupCategoryCommand = new AsyncCommand(PickupCategory);
+         PickupIconCommand = new AsyncCommand(PickupIcon);
       }
 
       async Task RegisterWallet()
@@ -106,22 +119,20 @@ namespace MoneyHater.ViewModels
          {
             try
             {
-               List<AnotherUserModel> memberList = new List<AnotherUserModel>();
-               memberList = members;
-               memberList.Add(FirebaseService.userLoggedInfo as AnotherUserModel);
-               await FirebaseService.walletService.AddWallet(new WalletModel()
+               var newWallet = new WalletModel()
                {
                   Balance = Balance,
                   CurrencyId = CurrencyModel?.Id,
                   EnableNotification = EnableNotification,
                   ExcludedFromTotal = ExcludedFromTotal,
-                  Members = memberList,
+                  Members = Members ?? new List<AnotherUserModel>(),
                   Name = Name,
-                  Icon = IconSelected.url,
+                  Icon = IconSelected?.url,
                   State = true,
-               }, isEdit, oldWalletModel);
-               MessagingCenter.Send<object, WalletModel>(this, "Add wallet", null);
-               await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+               };
+               await FirebaseService.walletService.AddWallet(newWallet, isEdit, oldWalletModel);
+               MessagingCenter.Send<object, WalletModel>(this, "Add wallet", newWallet);
+               await Shell.Current.GoToAsync("..");
             }
             catch (Exception e)
             {
@@ -141,6 +152,10 @@ namespace MoneyHater.ViewModels
       async Task PickupCategory()
       {
          await Shell.Current.GoToAsync($"{nameof(PickupCategoryPage)}");
+      }
+      async Task PickupIcon()
+      {
+         await Shell.Current.GoToAsync($"{nameof(PickupIconPage)}");
       }
 
    }
