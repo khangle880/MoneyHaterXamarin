@@ -30,7 +30,7 @@
 				IsChecked="{Binding PremiumStatus}"	  
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="SAVE" Command="{Binding SaveCommand}"/>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>

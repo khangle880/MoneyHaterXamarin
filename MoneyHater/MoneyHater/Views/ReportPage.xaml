@@ -5,6 +5,7 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
              x:DataType="viewmodels:ReportVM"
 			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -13,11 +14,36 @@
 	  <viewmodels:ReportVM />
    </ContentPage.BindingContext>
 
-   <ContentPage.Content>
-	  <StackLayout>
-		 <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-	  </StackLayout>
-   </ContentPage.Content>
+   <chart:SfChart>
+	  <chart:SfChart.Title>
+		 <chart:ChartTitle Text="Report Transactions"/>
+	  </chart:SfChart.Title>
+
+	  <chart:SfChart.Legend>
+		 <chart:ChartLegend/>
+	  </chart:SfChart.Legend>
+
+	  <chart:SfChart.PrimaryAxis>
+		 <chart:CategoryAxis	/>
+	  </chart:SfChart.PrimaryAxis>
+
+	  <chart:SfChart.SecondaryAxis>
+		 <chart:NumericalAxis>
+		 </chart:NumericalAxis>
+	  </chart:SfChart.SecondaryAxis>
+
+	  <chart:ColumnSeries
+		 ItemsSource="{Binding ChartInfos}"
+		 XBindingPath="Date"
+		 YBindingPath="Income"
+		 Color="Blue"
+		 Label="Income"/>
+
+	  <chart:ColumnSeries
+		 ItemsSource="{Binding ChartInfos}"
+		 XBindingPath="Date"
+		 YBindingPath="Expense"
+		 Color="OrangeRed"
+		 Label="Expense"/>
+   </chart:SfChart>
 </ContentPage>

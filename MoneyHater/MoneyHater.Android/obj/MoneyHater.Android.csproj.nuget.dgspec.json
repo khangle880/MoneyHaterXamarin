@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[2.80.3, )"
             },
+            "Syncfusion.Xamarin.SfChart": {
+              "target": "Package",
+              "version": "[19.4.0.41, )"
+            },
             "Xamarin.Build.Download": {
               "target": "Package",
               "version": "[0.11.0, )"
@@ -175,6 +179,10 @@
             "SkiaSharp": {
               "target": "Package",
               "version": "[2.80.3, )"
+            },
+            "Syncfusion.Xamarin.SfChart": {
+              "target": "Package",
+              "version": "[19.4.0.41, )"
             },
             "Xamarin.Build.Download": {
               "target": "Package",

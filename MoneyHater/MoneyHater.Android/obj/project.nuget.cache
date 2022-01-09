@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v1L/7+kEJ+vU5s6PfjQ64rD7W28qvhUpTQPj5d17xO2v5F5mJeWPMFvlfXGfSamPUc8NLt2DKUfAg4ZM9o1u3g==",
+  "dgSpecHash": "ICrDA7iGyiq695F3hbNY24mvZxTuGPKLT+EmDdVrva5oRbWy5IvxkQ582yjbBQERG4zG/A7mZGgvzT3T41dSkA==",
   "success": true,
   "projectFilePath": "D:\\School\\xamarin\\New folder\\MoneyHater\\MoneyHater\\MoneyHater.Android\\MoneyHater.Android.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,9 @@
     "C:\\Users\\KhangLe\\.nuget\\packages\\skiasharp\\2.80.3\\skiasharp.2.80.3.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\square.okhttp\\2.7.5.1\\square.okhttp.2.7.5.1.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\square.okio\\1.13.0.1\\square.okio.1.13.0.1.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\syncfusion.licensing\\19.4.0.41\\syncfusion.licensing.19.4.0.41.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\syncfusion.xamarin.core\\19.4.0.41\\syncfusion.xamarin.core.19.4.0.41.nupkg.sha512",
+    "C:\\Users\\KhangLe\\.nuget\\packages\\syncfusion.xamarin.sfchart\\19.4.0.41\\syncfusion.xamarin.sfchart.19.4.0.41.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\KhangLe\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

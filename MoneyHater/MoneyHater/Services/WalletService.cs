@@ -74,6 +74,7 @@ namespace MoneyHater.Services
             if (currentWallet == null)
             {
                currentWallet = wallets[wallets.Count - 1];
+               MessagingCenter.Send<object, WalletModel>(this, "Change wallet", currentWallet);
             }
          }
       }
@@ -92,6 +93,7 @@ namespace MoneyHater.Services
                currentWallet = wallets[0];
             }
             else { currentWallet = null; }
+            MessagingCenter.Send<object, WalletModel>(this, "Change wallet", currentWallet);
          }
          return currentWallet;
       }

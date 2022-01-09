@@ -4,7 +4,6 @@
              x:Class="MoneyHater.Views.PickupPage.PickupCurrencyPage"
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
-			 Shell.PresentationMode="Modal"
              x:DataType="viewmodels:PickupCurrencyVM"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 

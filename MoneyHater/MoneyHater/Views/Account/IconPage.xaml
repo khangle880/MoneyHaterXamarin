@@ -14,7 +14,7 @@
 	  <viewmodels:IconVm />
    </ContentPage.BindingContext>
    <StackLayout>
-	  <ListView ItemsSource="{Binding Icons1}" >
+	  <ListView ItemsSource="{Binding Icons1}" SelectionMode="None">
 		 <ListView.ItemTemplate>
 			<DataTemplate x:DataType="models:IconSvg">
 			   <ViewCell>

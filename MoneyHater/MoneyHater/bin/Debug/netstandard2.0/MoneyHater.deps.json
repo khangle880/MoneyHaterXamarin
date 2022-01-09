@@ -15,6 +15,7 @@
           "Newtonsoft.Json": "13.0.1",
           "Refractored.MvvmHelpers": "1.6.2",
           "SkiaSharp": "2.80.3",
+          "Syncfusion.Xamarin.SfChart": "19.4.0.41",
           "Xamarin.Build.Download": "0.11.0",
           "Xamarin.CommunityToolkit": "1.3.1",
           "Xamarin.Essentials": "1.7.0",
@@ -95,6 +96,38 @@
           "lib/netstandard2.0/SkiaSharp.dll": {
             "assemblyVersion": "2.80.0.0",
             "fileVersion": "2.80.3.0"
+          }
+        }
+      },
+      "Syncfusion.Licensing/19.4.0.41": {
+        "runtime": {
+          "lib/netstandard2.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "19.4.0.41",
+            "fileVersion": "19.4.0.41"
+          }
+        }
+      },
+      "Syncfusion.Xamarin.Core/19.4.0.41": {
+        "dependencies": {
+          "Syncfusion.Licensing": "19.4.0.41",
+          "Xamarin.Forms": "5.0.0.2291"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Syncfusion.Core.XForms.dll": {
+            "assemblyVersion": "19.4451.0.41",
+            "fileVersion": "19.4451.0.41"
+          }
+        }
+      },
+      "Syncfusion.Xamarin.SfChart/19.4.0.41": {
+        "dependencies": {
+          "Syncfusion.Xamarin.Core": "19.4.0.41",
+          "Xamarin.Forms": "5.0.0.2291"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Syncfusion.SfChart.XForms.dll": {
+            "assemblyVersion": "19.4451.0.41",
+            "fileVersion": "19.4451.0.41"
           }
         }
       },
@@ -365,6 +398,27 @@
       "sha512": "sha512-qX6tGNP3+MXNYe2pKm0PCRiJ/cx+LTeLaggwZifB7sUMXhECfKKKHJq45VqZKt37xQegnCCdf1jHXwmHeJQs5Q==",
       "path": "skiasharp/2.80.3",
       "hashPath": "skiasharp.2.80.3.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/19.4.0.41": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-M10JzoM14jTV5MqSr4o0JgQhB1pnahpfjtp/9PN2oNY/tWlbFa3YJUsGHmH+vyMekZ+8ZbhFnz61/bpb/AMseg==",
+      "path": "syncfusion.licensing/19.4.0.41",
+      "hashPath": "syncfusion.licensing.19.4.0.41.nupkg.sha512"
+    },
+    "Syncfusion.Xamarin.Core/19.4.0.41": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-574qJlhWMLneZEIxxpfKkq7ZxV0BJH6yjZg+xoeZjaooSKzyM8PDFL13atbLgGohEnObFHj7zEdpsrDCimBSCw==",
+      "path": "syncfusion.xamarin.core/19.4.0.41",
+      "hashPath": "syncfusion.xamarin.core.19.4.0.41.nupkg.sha512"
+    },
+    "Syncfusion.Xamarin.SfChart/19.4.0.41": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RtNbufvLZm+xQzKox5iLwZzvM7x6z3qYMp9bFohV+Sstj3olHm/iqEqdxhAuB+HOEWSPwTP7EO0dkFlyfBUZCw==",
+      "path": "syncfusion.xamarin.sfchart/19.4.0.41",
+      "hashPath": "syncfusion.xamarin.sfchart.19.4.0.41.nupkg.sha512"
     },
     "System.Buffers/4.4.0": {
       "type": "package",

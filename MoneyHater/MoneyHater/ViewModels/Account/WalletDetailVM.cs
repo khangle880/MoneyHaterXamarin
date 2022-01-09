@@ -57,7 +57,7 @@ namespace MoneyHater.ViewModels.Account
       async Task SwitchToCurrent()
       {
          FirebaseService.walletService.currentWallet = WalletModel;
-         MessagingCenter.Send<object, WalletModel>(this, "Switch wallet", WalletModel);
+         MessagingCenter.Send<object, WalletModel>(this, "Change wallet", walletModel);
          await Shell.Current.GoToAsync("..");
       }
 

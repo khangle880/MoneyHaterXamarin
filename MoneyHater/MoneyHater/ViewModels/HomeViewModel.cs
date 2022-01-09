@@ -48,9 +48,6 @@ namespace MoneyHater.ViewModels
          {
             ReloadPage(Wallet.Transactions);
          }
-         else
-         {
-         }
          LogOutCommand = new AsyncCommand(LogOut);
          SelectedItemCommand = new AsyncCommand<TransactionModel>(SelectedItem);
          EditItemCommand = new AsyncCommand<TransactionModel>(EditItem);
@@ -60,11 +57,6 @@ namespace MoneyHater.ViewModels
          {
             ReloadPage(Transactions);
          });
-         MessagingCenter.Subscribe<object, WalletModel>(this, "Switch wallet", (obj, s) =>
-         {
-            Wallet = s;
-            ReloadPage(s.Transactions);
-         });
          MessagingCenter.Subscribe<object, WalletModel>(this, "Update current wallet", (obj, s) =>
            {
               if (Wallet != s && s != null)
@@ -73,15 +65,10 @@ namespace MoneyHater.ViewModels
                  ReloadPage(s.Transactions);
               }
            });
-
-
-         MessagingCenter.Subscribe<object, WalletModel>(this, "Add wallet", (obj, s) =>
+         MessagingCenter.Subscribe<object, WalletModel>(this, "Change wallet", (obj, s) =>
          {
-            if (Wallet == null || Wallet.Id == s.Id)
-            {
-               Wallet = FirebaseService.walletService.currentWallet;
-               ReloadPage(Wallet.Transactions);
-            }
+            Wallet = s;
+            ReloadPage(s.Transactions);
          });
 
       }
