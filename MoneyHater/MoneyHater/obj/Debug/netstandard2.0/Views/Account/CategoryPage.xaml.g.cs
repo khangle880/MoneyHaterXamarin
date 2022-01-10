@@ -14,11 +14,15 @@ namespace MoneyHater.Views.Account {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\Account\\CategoryPage.xaml")]
-    public partial class CategoryPage : global::Xamarin.Forms.ContentPage {
+    public partial class CategoryPage : global::Xamarin.Forms.TabbedPage {
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
+        private global::Xamarin.Forms.TabbedPage CategoryName;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(CategoryPage));
+            CategoryName = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.TabbedPage>(this, "CategoryName");
         }
     }
 }

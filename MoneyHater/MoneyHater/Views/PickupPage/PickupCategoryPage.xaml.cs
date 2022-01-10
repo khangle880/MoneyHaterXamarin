@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace MoneyHater.Views.PickupPage
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class PickupCategoryPage : ContentPage
+   public partial class PickupCategoryPage : TabbedPage
    {
       public PickupCategoryPage()
       {

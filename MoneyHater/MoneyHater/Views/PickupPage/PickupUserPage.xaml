@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.PickupPage.PickupUserPage"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
+			 Title="Select Members"
              x:DataType="viewmodels:PickupUserViewModel"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -13,19 +14,49 @@
 
    <ContentPage.Content>
 	  <StackLayout>
-		 <ListView ItemsSource="{Binding SelectableUsers}">
+		 <ListView ItemsSource="{Binding SelectableUsers}"
+				   SeparatorVisibility="None"
+				   HasUnevenRows="True"
+				   Margin="25,0,15,0"
+				   SelectionMode="None"
+				   >
 			<ListView.ItemTemplate>
 			   <DataTemplate x:DataType="viewmodels:SelectableUser">
-				  <ViewCell>
-					 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-						<CheckBox IsChecked="{Binding IsSelected}" HorizontalOptions="EndAndExpand" Color="Black"/>
-						<Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-					 </StackLayout>
+				  <ViewCell >
+					 <Grid Padding="0,10,0,10">
+						<Grid.RowDefinitions>
+						   <RowDefinition/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+						   <ColumnDefinition/>
+						   <ColumnDefinition Width="4*"/>
+						   <ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<CheckBox
+							  Grid.Column="0"
+							  IsChecked="{Binding IsSelected}"
+							  HorizontalOptions="StartAndExpand"
+							  Color="Black" Margin="0,0,10,0"/>
+						<StackLayout VerticalOptions="Center"
+										Grid.Column="1"
+								 HorizontalOptions="FillAndExpand">
+						   <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16"
+									 VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+						   <Label Text="{Binding Email}" FontSize="16"
+									 VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+						</StackLayout>
+						<Image
+						   IsVisible="{Binding PremiumStatus}"
+						   Grid.Column="2"
+						   WidthRequest="30"
+						   HeightRequest="30"
+						   HorizontalOptions="EndAndExpand"
+						   Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PickupUserViewModel}}, Path=PremiumSource}"/>
+					 </Grid>
 				  </ViewCell>
 			   </DataTemplate>
 			</ListView.ItemTemplate>
 		 </ListView>
-		 <Button Text="Done" Command="{Binding CompleteCommand}"></Button>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>

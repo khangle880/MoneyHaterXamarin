@@ -5,8 +5,8 @@
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:IconVm"
+			 Title="Icon Store"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-			 Shell.PresentationMode="Modal"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -14,22 +14,33 @@
 	  <viewmodels:IconVm />
    </ContentPage.BindingContext>
    <StackLayout>
-	  <ListView ItemsSource="{Binding Icons1}" SelectionMode="None">
+	  <ListView 
+		 ItemsSource="{Binding Icons1}"
+		 SelectionMode="None"
+		 HasUnevenRows="True"
+		 SeparatorVisibility="None"
+		 Margin="0,10,0,10"
+				>
 		 <ListView.ItemTemplate>
 			<DataTemplate x:DataType="models:IconSvg">
 			   <ViewCell>
-				  <StackLayout Orientation="Horizontal">
+				  <StackLayout Orientation="Horizontal"
+							   Margin="15,5,15,5"
+							   >
 					 <ffSvg:SvgCachedImage
-					 Margin="0"
-					 HeightRequest="50"
-					 Source="{Binding ImageSource}"
-					 WidthRequest="50" />
-					 <Label Text="{Binding LocalName}"/>
+						HeightRequest="45"
+						Source="{Binding ImageSource}"
+						WidthRequest="45" 
+						Margin="0,0,15,0"/>
+					 <Label Text="{Binding LocalName}"
+							VerticalOptions="Center"
+							Margin="0,2,0,0"
+							FontSize="16"
+							FontAttributes="Bold"/>
 				  </StackLayout>
 			   </ViewCell>
 			</DataTemplate>
 		 </ListView.ItemTemplate>
 	  </ListView>
-	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
    </StackLayout>
 </ContentPage>

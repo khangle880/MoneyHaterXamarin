@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.Account.UpdateProfilePage"
-			  xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:models="clr-namespace:MoneyHater.Models"
+			 xmlns:controls="clr-namespace:MoneyHater.Controls"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:UpdateProfileVM"
+			 Title="Update Profile"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-			 Shell.PresentationMode="Modal"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -16,21 +17,39 @@
 
    <ContentPage.Content>
 	  <StackLayout>
-		 <Label Text="Edit Profile"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Entry Text="{Binding Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding Email}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <RadioButton 
-			    Content="Premium Status"
-				IsChecked="{Binding PremiumStatus}"	  
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="SAVE" Command="{Binding SaveCommand}"/>
+		 <ImageButton 
+			Margin="0,30,0,0"
+			Source="{Binding PremiumSource}"
+			HeightRequest="120"
+			WidthRequest="300"
+			Command="{Binding UpgradePremiumCommand}"
+			IsEnabled="{Binding PremiumStatus}"
+			HorizontalOptions="CenterAndExpand"
+			/>
+		 <Label Text="Upgrade Premium"
+				TextColor="Black"
+                VerticalOptions="CenterAndExpand"
+				FontSize="20"
+				Margin="0,0,0,20"
+                HorizontalOptions="Center" />
+
+		 <Label Text="Edit Profile!"
+				TextColor="Black"
+                VerticalOptions="CenterAndExpand"
+				FontSize="40"
+                HorizontalOptions="Center" />
+		 <controls:StandardEntry
+			   Padding="10,12,12,10"
+			   Margin="20"
+			   BackgroundColor="White"
+			   BorderColor="Black"
+			   BorderThickness="1"
+			   CornerRadius="8"
+			   Text="{Binding Name}"
+			   Placeholder="Your Name" />
+		 <Button BackgroundColor="{StaticResource ColorAccent}"
+				 TextColor="#edfeff" FontAttributes="Bold"
+				 Margin="40,200,40,80" Text="Save" Command="{Binding SaveCommand}" CornerRadius="0"/>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>

@@ -59,6 +59,7 @@ gradient;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\o
 HorizontalScrollView;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\14\jl\res\layout\chart_legend.xml
 ImageView;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\1\jl\res\layout\loadingimage.xml
 item;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\83\jl\res\values\styles.xml
+item;obj\Debug\110\res\values\styles.xml
 LinearLayout;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\14\jl\res\layout\chart_legend.xml
 LinearLayout;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\14\jl\res\layout\chart_legend_item.xml
 LinearLayout;D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater.Android\obj\Debug\110\lp\83\jl\res\layout\bottomtablayout.xml

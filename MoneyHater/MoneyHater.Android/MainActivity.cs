@@ -5,6 +5,10 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Firebase;
+using MoneyHater.Services;
+using Android.Widget;
+using Xamarin.Essentials;
+using MoneyHater.Helpers;
 
 namespace MoneyHater.Droid
 {
@@ -29,5 +33,34 @@ namespace MoneyHater.Droid
          base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
       }
 
+   }
+
+   public class Toaster : IToast
+   {
+      public void MakeToast(string message)
+      {
+         Toast.MakeText(Platform.AppContext, message, ToastLength.Long).Show();
+      }
+   }
+
+   public class Environment : IEnvironment
+   {
+      public void SetStatusBarColor(System.Drawing.Color color, bool darkStatusBarTint)
+      {
+         if (Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.Lollipop)
+            return;
+
+         var activity = Platform.CurrentActivity;
+         var window = activity.Window;
+         window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
+         window.ClearFlags(Android.Views.WindowManagerFlags.TranslucentStatus);
+         window.SetStatusBarColor(color.ToPlatformColor());
+
+         if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
+         {
+            var flag = (Android.Views.StatusBarVisibility)Android.Views.SystemUiFlags.LightStatusBar;
+            window.DecorView.SystemUiVisibility = darkStatusBarTint ? flag : 0;
+         }
+      }
    }
 }

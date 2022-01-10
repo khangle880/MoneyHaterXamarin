@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace MoneyHater.Views.Account
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class CategoryPage : ContentPage
+   public partial class CategoryPage : TabbedPage
    {
       public CategoryPage()
       {

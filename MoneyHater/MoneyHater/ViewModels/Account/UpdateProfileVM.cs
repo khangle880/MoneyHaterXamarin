@@ -21,21 +21,31 @@ namespace MoneyHater.ViewModels.Account
       public bool PremiumStatus { get => premiumStatus; set => SetProperty(ref premiumStatus, value); }
       public AsyncCommand CompleteCommand { get; }
       public AsyncCommand SaveCommand { get; }
+      public AsyncCommand UpgradePremiumCommand { get; }
+      public ImageSource PremiumSource { get; set; }
 
       public UpdateProfileVM()
       {
+         PremiumSource = ImageSource.FromResource("MoneyHater.Resources.Images.premium2.png");
          var userInfo = FirebaseService.userLoggedInfo;
          Name = userInfo.Name;
          Email = userInfo.Email;
          PremiumStatus = userInfo.PremiumStatus;
          SaveCommand = new AsyncCommand(SaveInfo);
          CompleteCommand = new AsyncCommand(Complete);
+         UpgradePremiumCommand = new AsyncCommand(UpgradePremium);
       }
 
       async Task Complete()
       {
          await Shell.Current.GoToAsync("..");
       }
+
+      async Task UpgradePremium()
+      {
+         PremiumStatus = !PremiumStatus;
+      }
+
 
       async Task SaveInfo()
       {
@@ -62,8 +72,6 @@ namespace MoneyHater.ViewModels.Account
 
          UserDialogs.Instance.HideLoading();
          IsBusy = false;
-
-
       }
 
    }

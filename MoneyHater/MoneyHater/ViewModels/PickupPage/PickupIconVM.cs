@@ -17,17 +17,25 @@ namespace MoneyHater.ViewModels.PickupPage
       public IconSvg iconSelected;
       public IconSvg IconSelected { get => iconSelected; set => SetProperty(ref iconSelected, value); }
       public AsyncCommand CompleteCommand { get; }
+      public AsyncCommand<IconSvg> SelectedCommand { get; }
 
       public PickupIconVM()
       {
          var list = FirebaseService.icons.Select(x => new IconSvg() { url = x });
          Icons = list.ToList();
          CompleteCommand = new AsyncCommand(Complete);
+         SelectedCommand = new AsyncCommand<IconSvg>(Selected);
       }
 
       async Task Complete()
       {
          MessagingCenter.Send<object, IconSvg>(this, "Pick icon", IconSelected);
+         await Shell.Current.GoToAsync("..");
+      }
+      async Task Selected(IconSvg icon)
+      {
+         if (icon == null) return;
+         MessagingCenter.Send<object, IconSvg>(this, "Pick icon", icon);
          await Shell.Current.GoToAsync("..");
       }
 

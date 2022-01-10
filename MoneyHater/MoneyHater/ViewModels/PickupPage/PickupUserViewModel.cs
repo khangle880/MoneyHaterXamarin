@@ -16,15 +16,19 @@ namespace MoneyHater.ViewModels.PickupPage
       public List<SelectableUser> SelectableUsers { get => selectableUsers; set => SetProperty(ref selectableUsers, value); }
 
       public AsyncCommand CompleteCommand { get; }
+      public ImageSource PremiumSource { get; set; }
 
       public PickupUserViewModel()
       {
-         selectableUsers = FirebaseService.usersPublicInfo.Select(x => new SelectableUser()
+         PremiumSource = ImageSource.FromResource("MoneyHater.Resources.Images.premium3.png");
+         var list = FirebaseService.usersPublicInfo.Where(x => x.Id != FirebaseService.userLoggedInfo.Id);
+         selectableUsers = list.Select(x => new SelectableUser()
          {
             Email = x.Email,
             Id = x.Id,
             IsSelected = false,
             Name = x.Name,
+            PremiumStatus = x.PremiumStatus,
          }).ToList();
          CompleteCommand = new AsyncCommand(Complete);
       }

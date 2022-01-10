@@ -60,19 +60,19 @@ namespace MoneyHater.Helpers
          var loadCurrencies = LoadCurrencies();
          var loadIcons = LoadIcons();
 
-         //var loadUsersPublicInfo = userRepo.GetAll();
+         var loadUsersPublicInfo = userRepo.GetAll();
          var loadUserLoggedInfo = auth.GetUserAsync();
 
          //Task taskReturned = Task.WhenAll(new Task[] { loadIcons, loadCurrencies,
          //   loadCategories, loadUsersPublicInfo, loadUserLoggedInfo});
-         Task taskReturned = Task.WhenAll(new Task[] { loadCategories, loadCurrencies, loadIcons });
+         Task taskReturned = Task.WhenAll(new Task[] { loadCategories, loadCurrencies, loadIcons, loadUsersPublicInfo });
          try
          {
             await taskReturned;
             await loadCategories;
             await loadCurrencies;
             await loadIcons;
-            //usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
+            usersPublicInfo = ((await loadUsersPublicInfo) as List<UserModel>).Cast<AnotherUserModel>().ToList();
             userLoggedInfo = await loadUserLoggedInfo;
             await walletService.LoadWallets();
          }

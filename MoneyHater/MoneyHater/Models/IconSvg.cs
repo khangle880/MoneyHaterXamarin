@@ -21,7 +21,7 @@ namespace MoneyHater.Models
             s = Regex.Replace(s, @"icons8-", "");
             s = Regex.Replace(s, @"-", " ");
             s = Regex.Replace(s, @"64\.svg", "");
-            return s;
+            return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower()); ;
          }
       }
    }

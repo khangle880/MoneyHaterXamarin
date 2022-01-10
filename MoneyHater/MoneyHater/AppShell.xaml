@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:MoneyHater.Views"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     Title="MyCoffeeApp"
+	FlyoutHeaderTemplate="{DataTemplate local:FlyoutHeader}"
     FlyoutBackgroundColor="{AppThemeBinding 
                     Dark={StaticResource WindowBackgroundColorDark}, 
                     Light={StaticResource WindowBackgroundColor}}"
@@ -20,12 +21,12 @@
    <Shell.Resources>
 	  <ResourceDictionary>
 		 <Style x:Key="BaseStyle" TargetType="Element">
-			<Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
-			<Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
-			<Setter Property="Shell.TitleColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+			<Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=#952194f3}" />
+			<Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Dark=White, Light=White}" />
+			<Setter Property="Shell.TitleColor" Value="{AppThemeBinding Dark=White, Light=White}" />
 			<Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
 			<Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
-			<Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
+			<Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
 			<Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
 			<Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
 			<Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Dark=White, Light=Black}" />

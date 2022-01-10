@@ -1,91 +1,254 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.Account.CategoryPage"
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:CategoryVM"
+			 x:Name="CategoryName"
+			 Title="Categories"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-			 Shell.PresentationMode="Modal"
+			 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
-   <ContentPage.BindingContext>
+   <TabbedPage.BindingContext>
 	  <viewmodels:CategoryVM />
-   </ContentPage.BindingContext>
+   </TabbedPage.BindingContext>
 
-   <StackLayout>
+   <TabbedPage.Resources>
+	  <ResourceDictionary>
+		 <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+	  </ResourceDictionary>
+   </TabbedPage.Resources>
 
-	  <ListView
+   <TabbedPage.Children>
+	  <ContentPage Title="DEBT - LOAN">
+		 <ListView
             BackgroundColor="Transparent"
-            IsGroupingEnabled="True"
-			GroupDisplayBinding="{Binding Key}"
-			SelectionMode="None"
 			HasUnevenRows="True"
-            ItemsSource="{Binding CategoriesGrouped}">
-		 <ListView.ItemTemplate>
-			<DataTemplate x:DataType="models:CategoryModel">
-			   <ViewCell>
-				  <Grid Padding="10">
-					 <Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					 </Grid.RowDefinitions>
-					 <Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="5*"/>
-					 </Grid.ColumnDefinitions>
-					 <ffSvg:SvgCachedImage
-					 Margin="0"
-					 HeightRequest="50"
-					 Source="{Binding ImageSourceLocal}"
-					 WidthRequest="50" />
-					 <Label
-					   Style="{StaticResource LabelLarge}"
-					   Text="{Binding Name}"
-					   Grid.Row="0"
-					   Grid.Column="1"
-					   VerticalOptions="Center" />
-					 <ListView
-					   HasUnevenRows="True"
-					   HeightRequest="{Binding ChildrenSize}"
-					   Grid.Row="1"
-					   Grid.Column="1"
-					   SelectionMode="None"
-					   ItemsSource="{Binding Children}"	>
-						<ListView.ItemTemplate>
-						   <DataTemplate x:DataType="models:CategoryModel">
-							  <ViewCell>
-								 <StackLayout Orientation="Horizontal">
-									<ffSvg:SvgCachedImage
-									Margin="0"
-									HeightRequest="40"
-									Source="{Binding ImageSourceLocal}"
-									WidthRequest="40" />
-									<Label
-								   Style="{StaticResource LabelLarge}"
-								   Text="{Binding Name}"
-								   Grid.Row="0"
-								   Grid.Column="1"
-								   VerticalOptions="Center" />
-								 </StackLayout>
-							  </ViewCell>
-						   </DataTemplate>
-						</ListView.ItemTemplate>
-					 </ListView>
-				  </Grid>
-			   </ViewCell>
-			</DataTemplate>
-		 </ListView.ItemTemplate>
-		 <ListView.Header>
-			<StackLayout Orientation="Horizontal">
-			   <Label
-			   HorizontalOptions="Center"
-			   Style="{StaticResource LabelMedium}"
-			   Text="Category of transaction" />
-			</StackLayout>
-		 </ListView.Header>
-	  </ListView>
-	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
-   </StackLayout>
-</ContentPage>
+			Margin="20,15,20,20"
+			SeparatorVisibility="None"
+			SelectionMode="None"
+            ItemsSource="{Binding DebtLoanList}">
+			<ListView.Behaviors>
+			   <xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+			</ListView.Behaviors>
+			<ListView.ItemTemplate>
+			   <DataTemplate x:DataType="models:CategoryModel">
+				  <ViewCell>
+					 <Grid Padding="0">
+						<Grid.RowDefinitions>
+						   <RowDefinition Height="Auto"/>
+						   <RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+						   <ColumnDefinition Width="*"/>
+						   <ColumnDefinition Width="5*"/>
+						</Grid.ColumnDefinitions>
+						<ffSvg:SvgCachedImage
+						   Margin="0,0,10,0"
+						   HeightRequest="50"
+						   Source="{Binding ImageSourceLocal}"
+						   WidthRequest="50" />
+						<Label
+						  Style="{StaticResource LabelLarge}"
+						  Text="{Binding Name}"
+						  Grid.Row="0"
+						  Grid.Column="1"
+						  VerticalOptions="Center" />
+						<ListView
+						  HasUnevenRows="True"
+						  HeightRequest="{Binding ChildrenSize}"
+						  Grid.Row="1"
+						  Grid.Column="1"
+						  SeparatorVisibility="None"
+						  ItemsSource="{Binding Children}"
+						  SelectionMode="Single">
+						   <ListView.Behaviors>
+							  <xct:EventToCommandBehavior
+								  EventName="ItemSelected"
+								  Command="{Binding Source={x:Reference CategoryName}, Path=BindingContext.SelectedCommand}"
+								  EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+						   </ListView.Behaviors>
+						   <ListView.ItemTemplate>
+							  <DataTemplate x:DataType="models:CategoryModel">
+								 <ViewCell>
+									<StackLayout Orientation="Horizontal">
+									   <ffSvg:SvgCachedImage
+										  Margin="0,5,10,5"
+										  HeightRequest="45"
+										  Source="{Binding ImageSourceLocal}"
+										  WidthRequest="45" />
+									   <Label
+										 Style="{StaticResource LabelLarge}"
+										 Text="{Binding Name}"
+										 VerticalOptions="Center" />
+									</StackLayout>
+								 </ViewCell>
+							  </DataTemplate>
+						   </ListView.ItemTemplate>
+						</ListView>
+					 </Grid>
+				  </ViewCell>
+			   </DataTemplate>
+			</ListView.ItemTemplate>
+		 </ListView>
+	  </ContentPage>
+	  <ContentPage Title="EXPENSE">
+		 <ListView
+            BackgroundColor="Transparent"
+			HasUnevenRows="True"
+			Margin="20,15,20,20"
+			SelectionMode="None"
+			SeparatorVisibility="None"
+            ItemsSource="{Binding ExpenseList}">
+			<ListView.Behaviors>
+			   <xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+			</ListView.Behaviors>
+			<ListView.ItemTemplate>
+			   <DataTemplate x:DataType="models:CategoryModel">
+				  <ViewCell>
+					 <Grid >
+						<Grid.RowDefinitions>
+						   <RowDefinition Height="Auto"/>
+						   <RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+						   <ColumnDefinition Width="*"/>
+						   <ColumnDefinition Width="5*"/>
+						</Grid.ColumnDefinitions>
+						<ffSvg:SvgCachedImage
+						   Margin="0,0,10,0"
+						   HeightRequest="50"
+						   Source="{Binding ImageSourceLocal}"
+						   WidthRequest="50" />
+						<Label
+						  Style="{StaticResource LabelLarge}"
+						  Text="{Binding Name}"
+						  Grid.Row="0"
+						  Grid.Column="1"
+						  VerticalOptions="Center" />
+						<ListView
+						  HasUnevenRows="True"
+						  HeightRequest="{Binding ChildrenSize}"
+						  Grid.Row="1"
+						  Grid.Column="1"
+						  SeparatorVisibility="None"
+						  ItemsSource="{Binding Children}"
+						  SelectionMode="Single">
+						   <ListView.Behaviors>
+							  <xct:EventToCommandBehavior
+								  EventName="ItemSelected"
+								  Command="{Binding Source={x:Reference CategoryName}, Path=BindingContext.SelectedCommand}"
+								  EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+						   </ListView.Behaviors>
+						   <ListView.ItemTemplate>
+							  <DataTemplate x:DataType="models:CategoryModel">
+								 <ViewCell>
+									<StackLayout Orientation="Horizontal">
+									   <ffSvg:SvgCachedImage
+										  Margin="0,5,10,5"
+										  HeightRequest="45"
+										  Source="{Binding ImageSourceLocal}"
+										  WidthRequest="45" />
+									   <Label
+										 Style="{StaticResource LabelLarge}"
+										 Text="{Binding Name}"
+										 VerticalOptions="Center" />
+									</StackLayout>
+								 </ViewCell>
+							  </DataTemplate>
+						   </ListView.ItemTemplate>
+						</ListView>
+					 </Grid>
+				  </ViewCell>
+			   </DataTemplate>
+			</ListView.ItemTemplate>
+		 </ListView>
+	  </ContentPage>
+	  <ContentPage Title="INCOME">
+		 <ListView
+            BackgroundColor="Transparent"
+			HasUnevenRows="True"
+			Margin="20,15,20,20"
+			SelectionMode="None"
+			SeparatorVisibility="None"
+            ItemsSource="{Binding IncomeList}">
+			<ListView.Behaviors>
+			   <xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+			</ListView.Behaviors>
+			<ListView.ItemTemplate>
+			   <DataTemplate x:DataType="models:CategoryModel">
+				  <ViewCell>
+					 <Grid >
+						<Grid.RowDefinitions>
+						   <RowDefinition Height="Auto"/>
+						   <RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+						   <ColumnDefinition Width="*"/>
+						   <ColumnDefinition Width="5*"/>
+						</Grid.ColumnDefinitions>
+						<ffSvg:SvgCachedImage
+						   Margin="0,0,10,0"
+						   HeightRequest="50"
+						   Source="{Binding ImageSourceLocal}"
+						   WidthRequest="50" />
+						<Label
+						  Style="{StaticResource LabelLarge}"
+						  Text="{Binding Name}"
+						  Grid.Row="0"
+						  Grid.Column="1"
+						  VerticalOptions="Center" />
+						<ListView
+						  HasUnevenRows="True"
+						  HeightRequest="{Binding ChildrenSize}"
+						  Grid.Row="1"
+						  Grid.Column="1"
+						  SeparatorVisibility="None"
+						  ItemsSource="{Binding Children}"
+						  SelectionMode="Single">
+						   <ListView.Behaviors>
+							  <xct:EventToCommandBehavior
+								  EventName="ItemSelected"
+								  Command="{Binding Source={x:Reference CategoryName}, Path=BindingContext.SelectedCommand}"
+								  EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+						   </ListView.Behaviors>
+						   <ListView.ItemTemplate>
+							  <DataTemplate x:DataType="models:CategoryModel">
+								 <ViewCell>
+									<StackLayout Orientation="Horizontal">
+									   <ffSvg:SvgCachedImage
+										  Margin="0,5,10,5"
+										  HeightRequest="45"
+										  Source="{Binding ImageSourceLocal}"
+										  WidthRequest="45" />
+									   <Label
+										 Style="{StaticResource LabelLarge}"
+										 Text="{Binding Name}"
+										 VerticalOptions="Center" />
+									</StackLayout>
+								 </ViewCell>
+							  </DataTemplate>
+						   </ListView.ItemTemplate>
+						</ListView>
+					 </Grid>
+				  </ViewCell>
+			   </DataTemplate>
+			</ListView.ItemTemplate>
+		 </ListView>
+	  </ContentPage>
+
+   </TabbedPage.Children>
+
+</TabbedPage>

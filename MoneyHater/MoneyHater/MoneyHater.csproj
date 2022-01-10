@@ -170,6 +170,7 @@
       <None Remove="Resources\Icons\calculator-solid.svg" />
       <None Remove="Resources\Icons\calendar.svg" />
       <None Remove="Resources\Icons\category.svg" />
+      <None Remove="Resources\Icons\category2.svg" />
       <None Remove="Resources\Icons\chart-bar-solid.svg" />
       <None Remove="Resources\Icons\file-alt-solid.svg" />
       <None Remove="Resources\Icons\google-brands.svg" />
@@ -179,10 +180,19 @@
       <None Remove="Resources\Icons\money.svg" />
       <None Remove="Resources\Icons\note.svg" />
       <None Remove="Resources\Icons\plus-square-regular.svg" />
+      <None Remove="Resources\Icons\profile.svg" />
+      <None Remove="Resources\Icons\rightArrow.svg" />
+      <None Remove="Resources\Icons\signout.svg" />
+      <None Remove="Resources\Icons\stack.svg" />
       <None Remove="Resources\Icons\unlock-alt-solid.svg" />
       <None Remove="Resources\Icons\user-circle-solid.svg" />
       <None Remove="Resources\Icons\wallet-solid.svg" />
       <None Remove="Resources\Icons\wallet.svg" />
+      <None Remove="Resources\Icons\wallet2.svg" />
+      <None Remove="Resources\Images\category.png" />
+      <None Remove="Resources\Images\premium.png" />
+      <None Remove="Resources\Images\premium2.png" />
+      <None Remove="Resources\Images\premium3.png" />
    </ItemGroup>
 
    <ItemGroup>
@@ -345,6 +355,7 @@
       <EmbeddedResource Include="Resources\Icons\calculator-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\calendar.svg" />
       <EmbeddedResource Include="Resources\Icons\category.svg" />
+      <EmbeddedResource Include="Resources\Icons\category2.svg" />
       <EmbeddedResource Include="Resources\Icons\chart-bar-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\file-alt-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\google-brands.svg" />
@@ -354,10 +365,19 @@
       <EmbeddedResource Include="Resources\Icons\money.svg" />
       <EmbeddedResource Include="Resources\Icons\note.svg" />
       <EmbeddedResource Include="Resources\Icons\plus-square-regular.svg" />
+      <EmbeddedResource Include="Resources\Icons\profile.svg" />
+      <EmbeddedResource Include="Resources\Icons\rightArrow.svg" />
+      <EmbeddedResource Include="Resources\Icons\signout.svg" />
+      <EmbeddedResource Include="Resources\Icons\stack.svg" />
       <EmbeddedResource Include="Resources\Icons\unlock-alt-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\user-circle-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\wallet-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\wallet.svg" />
+      <EmbeddedResource Include="Resources\Icons\wallet2.svg" />
+      <EmbeddedResource Include="Resources\Images\category.png" />
+      <EmbeddedResource Include="Resources\Images\premium.png" />
+      <EmbeddedResource Include="Resources\Images\premium2.png" />
+      <EmbeddedResource Include="Resources\Images\premium3.png" />
    </ItemGroup>
 
    <ItemGroup>
@@ -402,6 +422,9 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Account\WalletDetailPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\FlyoutHeader.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\MyPage.xaml">

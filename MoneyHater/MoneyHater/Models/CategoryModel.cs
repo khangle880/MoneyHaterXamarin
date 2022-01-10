@@ -19,7 +19,7 @@ namespace MoneyHater.Models
 
       public ImageSource ImageSource => SvgImageSource.FromUri(new Uri(Icon));
       public ImageSource ImageSourceLocal => SvgImageSource.FromResource($"MoneyHater.Resources.Category.{LocalPath}");
-      public int ChildrenSize => Children == null ? 0 : Children.Count * 50;
+      public int ChildrenSize => Children == null ? 0 : Children.Count * 58;
       public string LocalPath
       {
          get

@@ -6,6 +6,8 @@
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:ManageWalletVM"
+			 xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+			 Title="Wallets"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -18,71 +20,94 @@
 	  <CollectionView
             BackgroundColor="Transparent"
             ItemsSource="{Binding Wallets}"
+		    Margin="0,15,0,0"
             SelectionMode="Single">
 		 <CollectionView.ItemTemplate>
 			<DataTemplate x:DataType="models:WalletModel">
 
-			   <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
+			   <Frame BackgroundColor="#f2f2f7" HeightRequest="120" Padding="15,0,15,15">
+
+				  <yummy:PancakeView BackgroundColor="Transparent" CornerRadius="15,15,15,15">
+					 <SwipeView android:SwipeView.SwipeTransitionMode="Drag"
                                BackgroundColor="{AppThemeBinding 
                                 Dark={StaticResource WindowBackgroundColorDark}, 
                                 Light={StaticResource WindowBackgroundColor}}">
-				  <SwipeView.RightItems>
-					 <SwipeItems>
-						<SwipeItem
+						<SwipeView.RightItems>
+						   <SwipeItems>
+							  <SwipeItem
                                     BackgroundColor="Red"
 									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=DeleteItemCommand}"
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
                                     Text="Delete" />
-						<SwipeItem
+							  <SwipeItem
                                     BackgroundColor="Orange"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=EditItemCommand}"
                                     CommandParameter="{Binding .}"
                                     Text="Edit" />
 
-					 </SwipeItems>
-				  </SwipeView.RightItems>
-				  <Grid Padding="10">
-					 <Grid.GestureRecognizers>
-						<TapGestureRecognizer
+						   </SwipeItems>
+						</SwipeView.RightItems>
+						<Grid Padding="0" HorizontalOptions="FillAndExpand">
+						   <Grid.GestureRecognizers>
+							  <TapGestureRecognizer
 							  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ManageWalletVM}}, Path=SelectedItemCommand}"
                               CommandParameter="{Binding .}"/>
-					 </Grid.GestureRecognizers>
-					 <StackLayout Orientation="Horizontal" IsEnabled="{Binding State}">
-						<ffSvg:SvgCachedImage
-							  Margin="0"
-							  HeightRequest="40"
-							  Source="{Binding ImageSource}"
-							  WidthRequest="40" />
-						<StackLayout VerticalOptions="Center">
-						   <Label
-								Style="{StaticResource LabelLarge}"
-								Text="{Binding Name}"
-								VerticalOptions="Center" />
-						   <Label
-								Style="{StaticResource LabelLarge}"
-								Text="{Binding Balance}"
-								VerticalOptions="Center" />
-						   <Label
-								Style="{StaticResource LabelLarge}"
-								Text="{Binding CurrencyModel.Iso}"
-								VerticalOptions="Center" />
+						   </Grid.GestureRecognizers>
 
-						</StackLayout>
-					 </StackLayout>
-				  </Grid>
-			   </SwipeView>
+						   <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+							  <yummy:PancakeView WidthRequest="100" BackgroundColor="#edfeff">
+								 <StackLayout VerticalOptions="Center">
+									<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" Padding="0">
+									   <ffSvg:SvgCachedImage
+									  Margin="0"
+									  HeightRequest="20"
+									  Source="{Binding ImageSource}"
+									  WidthRequest="20" />
+									</Frame>
+									<Label Text="{Binding Name}" FontSize="15" VerticalOptions="Center" HorizontalOptions="Center"/>
+								 </StackLayout>
+							  </yummy:PancakeView>
+
+							  <StackLayout Margin="25,0,35,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+								 <StackLayout HorizontalOptions="Center" >
+									<Label
+										HorizontalOptions="Center"
+										TextColor="#92A9BD"
+										Style="{StaticResource LabelLarge}"
+										Text="Balance"
+										FontSize="14"
+									/>
+									<Label
+										HorizontalOptions="Center"
+										Style="{StaticResource LabelLarge}"
+										Text="{Binding Balance}"
+									/>
+								 </StackLayout>
+
+								 <StackLayout HorizontalOptions="EndAndExpand" >
+									<Label
+										HorizontalOptions="Center"
+										TextColor="#92A9BD"
+										Style="{StaticResource LabelLarge}"
+										Text="Currency"
+										FontSize="14"
+										/>
+									<Label
+										HorizontalOptions="Center"
+										Style="{StaticResource LabelLarge}"
+										Text="{Binding CurrencyModel.Iso}"
+										/>
+								 </StackLayout>
+							  </StackLayout>
+						   </StackLayout>
+						</Grid>
+					 </SwipeView>
+				  </yummy:PancakeView>
+			   </Frame>
 			</DataTemplate>
 		 </CollectionView.ItemTemplate>
-		 <CollectionView.Header>
-			<StackLayout Orientation="Horizontal">
-			   <Label
-                        HorizontalOptions="Center"
-                        Style="{StaticResource LabelMedium}"
-                        Text="Coffee of the World" />
-			</StackLayout>
-		 </CollectionView.Header>
 	  </CollectionView>
-	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Add New Wallet" Command="{Binding AddCommand}"/>
+	  <Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Margin="0,0,0,0" Text="Add New Wallet" Command="{Binding AddCommand}"/>
    </StackLayout>
 </ContentPage>

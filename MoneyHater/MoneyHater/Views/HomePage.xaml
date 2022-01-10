@@ -52,7 +52,11 @@
             SelectionMode="Single">
 		 <CollectionView.EmptyView>
 			<StackLayout Padding="12">
-			   <Label HorizontalOptions="Center" Text="No Transaction" />
+			   <Label HorizontalOptions="Center"
+					  Text="No Transaction"
+					  FontAttributes="Bold"
+					  FontSize="20"
+					  />
 			</StackLayout>
 		 </CollectionView.EmptyView>
 		 <CollectionView.GroupHeaderTemplate>

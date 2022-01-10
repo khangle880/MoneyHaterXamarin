@@ -5,6 +5,8 @@
 			 xmlns:models="clr-namespace:MoneyHater.Models"
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.PickupPage"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+			 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+			 Title="Select Icon"
              x:DataType="viewmodels:PickupIconVM"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -13,24 +15,45 @@
    <ContentPage.BindingContext>
 	  <viewmodels:PickupIconVM />
    </ContentPage.BindingContext>
+   <ContentPage.Resources>
+	  <ResourceDictionary>
+		 <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+	  </ResourceDictionary>
+   </ContentPage.Resources>
 
    <StackLayout>
-	  <ListView ItemsSource="{Binding Icons}" SelectedItem="{Binding IconSelected}">
+	  <ListView 
+		 ItemsSource="{Binding Icons}"
+		 HasUnevenRows="True"
+		 SeparatorVisibility="None"
+		 Margin="0,10,0,10"	>
+		 <ListView.Behaviors>
+			<xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+		 </ListView.Behaviors>
+
 		 <ListView.ItemTemplate>
 			<DataTemplate x:DataType="models:IconSvg">
 			   <ViewCell>
-				  <StackLayout Orientation="Horizontal">
+				  <StackLayout Orientation="Horizontal"
+							   Margin="15,5,15,5"
+							   >
 					 <ffSvg:SvgCachedImage
-						Margin="0"
-						HeightRequest="50"
+						HeightRequest="45"
 						Source="{Binding ImageSource}"
-						WidthRequest="50" />
-					 <Label Text="{Binding LocalName}"/>
+						WidthRequest="45" 
+						Margin="0,0,15,0"/>
+					 <Label Text="{Binding LocalName}"
+							VerticalOptions="Center"
+							Margin="0,2,0,0"
+							FontSize="16"
+							FontAttributes="Bold"/>
 				  </StackLayout>
 			   </ViewCell>
 			</DataTemplate>
 		 </ListView.ItemTemplate>
 	  </ListView>
-	  <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
    </StackLayout>
 </ContentPage>

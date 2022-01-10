@@ -8,7 +8,6 @@ namespace MoneyHater.Models
 {
    public class UserModel : AnotherUserModel
    {
-      public bool PremiumStatus { get; set; }
       public DateTime PremiumTo { get; set; }
       public string Password { get; set; }
    }
