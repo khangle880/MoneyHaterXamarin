@@ -5,7 +5,9 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Transaction"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:TransactionDetailVM"
+			 Shell.PresentationMode="ModalAnimated"
 			 xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
@@ -14,34 +16,79 @@
    </ContentPage.BindingContext>
 
    <ContentPage.Content>
-	  <StackLayout>
-		 <Label Text="{Binding TransactionModel.AmountText}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding TransactionModel.CategoryModel}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding TransactionModel.Note}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding TransactionModel.ExecutedDate, StringFormat='{0:dd/MM/YYYY}'}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding WalletModel.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding TransactionModel.EventModel.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <Label Text="{Binding TransactionModel.Remind, StringFormat='{0:dd/MM/YYYY}'}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-		 <RadioButton
+	   <StackLayout HorizontalOptions="FillAndExpand">
+           <StackLayout Margin="20,30,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <yummy:PancakeView HeightRequest="100" BackgroundColor="#007AFF" CornerRadius="35,35,0,0">
+			<StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+				<StackLayout HorizontalOptions="StartAndExpand">
+					<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" Padding="0" Margin="20,15,10,0">
+					<ffSvg:SvgCachedImage 
+						Margin="0"
+						HeightRequest="20"
+						Source="{Binding TransactionModel.CategoryModel.ImageSourceLocal}" 
+						WidthRequest="20"/>
+					</Frame>
+					<Label Margin="25,0,0,0" TextColor="#edfeff" FontAttributes="Bold" Text="{Binding TransactionModel.CategoryModel.Name}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
+				</StackLayout>
+				<StackLayout HorizontalOptions="EndAndExpand">
+					<Label
+						HorizontalTextAlignment="End"
+						Text="{Binding WalletModel.Name}"
+						TextColor="Aquamarine"
+						Margin="0,32,25,0"/>
+					<Label
+						Text="{Binding TransactionModel.ExecutedDate, StringFormat='{0:dd / MM / yyyy}'}"
+						TextColor="#edfeff"
+						FontSize="20"
+						Margin="0,0,25,0"
+						FontAttributes="Bold"
+						VerticalOptions="CenterAndExpand" 
+						HorizontalOptions="CenterAndExpand" />
+				</StackLayout>
+			</StackLayout>
+		</yummy:PancakeView>
+		<yummy:PancakeView HeightRequest="300" BackgroundColor="White" CornerRadius="0,0,35,35">
+			<StackLayout HorizontalOptions="FillAndExpand">
+				<StackLayout Orientation="Horizontal" HeightRequest="150">
+					<StackLayout Margin="20,15,0,0" HorizontalOptions="StartAndExpand">
+						<Label Text="Amount" FontSize="20"/>
+						<Label Text="{Binding TransactionModel.AmountText}" FontSize="30" FontAttributes="Bold"
+							/>
+					</StackLayout>
+					<StackLayout Margin="0,15,20,0" HorizontalOptions="EndAndExpand">
+						<Label Text="Partner" FontSize="20" HorizontalTextAlignment="End"/>
+						<Label Text="{Binding TransactionModel.With.Name}"
+							FontSize="30"
+							FontAttributes="Bold"
+							HorizontalTextAlignment="End"
+						 />
+					</StackLayout>
+				</StackLayout>
+
+				<BoxView
+				   HorizontalOptions="FillAndExpand"
+                   HeightRequest="1"
+                   Color="LightGray"
+                   Margin ="0, 0, 0, 0"/>
+
+				<Label Margin="20,15,0,0" Text="Note" FontSize="20"/>
+				<Label Text="{Binding TransactionModel.Note}"
+					  Margin="20,15,0,0"
+					  FontSize="20" TextColor="Black"/>
+
+			</StackLayout>
+			
+		</yummy:PancakeView>
+		<RadioButton
 		    	Margin="0,20,0,0"
 		    	Content="Excluded From Report" 
 			    IsChecked="{Binding TransactionModel.ExcludedFromReport}"
 		    	IsEnabled="False"/>
-		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
-	  </StackLayout>
+		</StackLayout>
+
+		<Button CornerRadius="0" BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}"/>
+
+	   </StackLayout>
+	  
    </ContentPage.Content>
 </ContentPage>

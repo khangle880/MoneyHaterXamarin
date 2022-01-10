@@ -14,41 +14,79 @@
    </ContentPage.BindingContext>
 
    <ContentPage.Content>
-	  <ScrollView>
+	   <StackLayout>
+           <ScrollView HorizontalOptions="FillAndExpand">
 		 <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
-			<Label Text="{Binding HeaderText}"/>
-			<Label Text="Wallet Name:"/>
-			<Entry Placeholder="Name" Text="{Binding Name}"/>
-			<Label Text="Balance:"/>
+			<Label Text="Wallet Name"
+				TextColor="{StaticResource ColorAccent}"
+				FontAttributes="Bold"
+				FontSize="17"
+				HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                VerticalOptions="StartAndExpand" 
+               />
+			<Entry PlaceholderColor="DarkGray" Placeholder="Examples: Happy Wallet" Text="{Binding Name}" TextColor="Black"/>
+			<Label Text="Balance" Margin="0,10,0,0"
+				TextColor="{StaticResource ColorAccent}"
+				FontAttributes="Bold"
+				FontSize="17"
+				HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                VerticalOptions="StartAndExpand" 
+               />
 			<Entry Placeholder="Balance" Text="{Binding Balance}" Keyboard="Numeric" />
-			<Label Text="Currency:"/>
-			<controls:StandardPicker
+			<Label Text="Currency" Margin="0,10,0,0"
+				TextColor="{StaticResource ColorAccent}"
+				FontAttributes="Bold"
+				FontSize="17"
+				HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                VerticalOptions="StartAndExpand" 
+               />
+			<Picker
 			  ItemsSource="{Binding Currencies}"
 			  SelectedItem="{Binding CurrencyModel}"
 			  ItemDisplayBinding="{Binding Name}"
-			  BackgroundColor="White"
-			  BorderColor="Black"
-			  BorderThickness="2"
-			  CornerRadius="8"
-			  Padding="6, 10, 6, 10"
+			  BackgroundColor="Transparent"
 			  VerticalOptions="CenterAndExpand"
-			  Title="Choose Your Currency" />
-			<Label Text="Icon:"/>
-			<Label Text="{Binding IconSelected.LocalName}" TextColor="Black"/>
-			<ffSvg:SvgCachedImage
-					 Margin="0"
+			  Title="Choose Currency"/>
+			<Label Text="Icon" Margin="0,10,0,0"
+				TextColor="{StaticResource ColorAccent}"
+				FontAttributes="Bold"
+				FontSize="17"
+				HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                VerticalOptions="StartAndExpand" 
+               />
+			<StackLayout Orientation="Horizontal">
+				
+					<ffSvg:SvgCachedImage
+					
+					 Margin="0,10,0,0"
 					 HeightRequest="50"
 					 Source="{Binding IconSelected.ImageSource}"
 					 WidthRequest="50" />
-			<Button Text="Pick Icon" Command="{Binding PickupIconCommand}"/>
-
-			<Label Text="{Binding MembersName}" TextColor="Black"/>
-			<Button Text="Pick Members" Command="{Binding PickupMemberCommand}"/>
-			<RadioButton Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
-			<RadioButton Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
-			<Button Text="Complete" Command="{Binding RegisterCommand}"/>
+				
+				<Button Text="Pick" BackgroundColor="Transparent" WidthRequest="80" FontSize="17" TextColor="{StaticResource ColorAccent}" Margin="0,20,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupIconCommand}"/>
+			</StackLayout>
+			<BoxView
+				   HorizontalOptions="FillAndExpand"
+                   HeightRequest="1"
+                   Color="LightGray"
+                   Margin ="0, 0, 0, 0"/>
+			 <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+				 <Label FontSize="16" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding MembersName}" TextColor="Black" WidthRequest="200"/>
+				 <Button Text="Pick Member" BackgroundColor="Transparent" WidthRequest="150" FontSize="17" TextColor="{StaticResource ColorAccent}" Margin="0,0,0,0" FontAttributes="Bold" CornerRadius="5" Command="{Binding PickupMemberCommand}"/>
+			 </StackLayout>
+			 <BoxView
+				   HorizontalOptions="FillAndExpand"
+                   HeightRequest="1"
+                   Color="LightGray"
+                   Margin ="0, 10, 0, 0"/>
+			 <RadioButton Margin ="0, 10, 0, 0" Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
+			 <RadioButton Margin ="0, 10, 0, 0" Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
+			 
 		 </StackLayout>
 	  </ScrollView>
+		   <Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Margin="0,0,0,0" Text="Complete" Command="{Binding RegisterCommand}" CornerRadius="0"/>
+	   </StackLayout>
+	  
    </ContentPage.Content>
 </ContentPage>
