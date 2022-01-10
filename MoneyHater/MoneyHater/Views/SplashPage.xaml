@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyHater.Views.SplashPage"
 			 NavigationPage.HasNavigationBar="False"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
                         Light={StaticResource WindowBackgroundColor}}">
    <ContentPage.Content>
 	  <StackLayout Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand">
-		 <Label Text="splash"
-				TextColor="red"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+		 <ffSvg:SvgCachedImage
+			HeightRequest="200"
+			Source="resource://MoneyHater.Resources.Icons.moneyintro.svg"
+			WidthRequest="200" />
 
 	  </StackLayout>
    </ContentPage.Content>

@@ -172,12 +172,15 @@
       <None Remove="Resources\Icons\category.svg" />
       <None Remove="Resources\Icons\category2.svg" />
       <None Remove="Resources\Icons\chart-bar-solid.svg" />
+      <None Remove="Resources\Icons\empty.svg" />
       <None Remove="Resources\Icons\file-alt-solid.svg" />
       <None Remove="Resources\Icons\google-brands.svg" />
+      <None Remove="Resources\Icons\gradient.svg" />
       <None Remove="Resources\Icons\hand-holding-usd-solid.svg" />
       <None Remove="Resources\Icons\home-solid.svg" />
       <None Remove="Resources\Icons\money-bill-wave-solid.svg" />
       <None Remove="Resources\Icons\money.svg" />
+      <None Remove="Resources\Icons\moneyIntro.svg" />
       <None Remove="Resources\Icons\note.svg" />
       <None Remove="Resources\Icons\plus-square-regular.svg" />
       <None Remove="Resources\Icons\profile.svg" />
@@ -357,12 +360,15 @@
       <EmbeddedResource Include="Resources\Icons\category.svg" />
       <EmbeddedResource Include="Resources\Icons\category2.svg" />
       <EmbeddedResource Include="Resources\Icons\chart-bar-solid.svg" />
+      <EmbeddedResource Include="Resources\Icons\empty.svg" />
       <EmbeddedResource Include="Resources\Icons\file-alt-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\google-brands.svg" />
+      <EmbeddedResource Include="Resources\Icons\gradient.svg" />
       <EmbeddedResource Include="Resources\Icons\hand-holding-usd-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\home-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\money-bill-wave-solid.svg" />
       <EmbeddedResource Include="Resources\Icons\money.svg" />
+      <EmbeddedResource Include="Resources\Icons\moneyintro.svg" />
       <EmbeddedResource Include="Resources\Icons\note.svg" />
       <EmbeddedResource Include="Resources\Icons\plus-square-regular.svg" />
       <EmbeddedResource Include="Resources\Icons\profile.svg" />
@@ -422,9 +428,6 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Account\WalletDetailPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\FlyoutHeader.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\MyPage.xaml">

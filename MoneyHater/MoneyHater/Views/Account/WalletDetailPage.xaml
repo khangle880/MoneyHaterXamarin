@@ -6,6 +6,7 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels.Account"
              x:DataType="viewmodels:WalletDetailVM"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
 			 Shell.PresentationMode="Modal"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -15,7 +16,7 @@
    </ContentPage.BindingContext>
 
    <ContentPage.Content>
-	  <StackLayout>
+	  <!-- <StackLayout>
 		 <Label Text="Wallet Name:"/>
 		 <Label Text="{Binding WalletModel.Name}"/>
 		 <Label Text="Balance:"/>
@@ -37,9 +38,100 @@
 		 </CollectionView>
 		 <RadioButton Content="Enable Notification" IsChecked="{Binding WalletModel.EnableNotification}" IsEnabled="False"/>
 		 <RadioButton Content="Excluded From Total" IsChecked="{Binding WalletModel.ExcludedFromTotal}" IsEnabled="False"/>
-		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Set Current Wallet" Command="{Binding SwitchToCurrentCommand}" IsEnabled="{Binding SwitchEnable}"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" IsVisible="{Binding SwitchEnable}" FontAttributes="Bold" Text="Set Current Wallet" Command="{Binding SwitchToCurrentCommand}"/>
 		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}" />
 
+	  </StackLayout> -->
+
+	  <StackLayout HorizontalOptions="FillAndExpand">
+		 <StackLayout Margin="20,50,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			<yummy:PancakeView HeightRequest="100" BackgroundColor="#007AFF" CornerRadius="35,35,0,0">
+			   <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+				  <StackLayout HorizontalOptions="StartAndExpand">
+					 <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" Padding="0" Margin="20,15,10,0">
+						<ffSvg:SvgCachedImage 
+						Margin="0"
+						HeightRequest="20"
+						Source="{Binding WalletModel.ImageSource}" 
+						WidthRequest="20"/>
+					 </Frame>
+					 <Label Margin="25,0,0,0" TextColor="#edfeff" FontAttributes="Bold" Text="{Binding WalletModel.Name}" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
+				  </StackLayout>
+				  <StackLayout HorizontalOptions="EndAndExpand">
+					 <Label
+						HorizontalTextAlignment="End"
+					    FontSize="14"
+						Text="Balance"
+						TextColor="Aqua"
+						Margin="0,32,25,0"/>
+					 <Label
+						Text="{Binding WalletModel.BalanceText}"
+						TextColor="#edfeff"
+						FontSize="20"
+						Margin="0,0,25,0"
+						FontAttributes="Bold"
+						VerticalOptions="CenterAndExpand" 
+						HorizontalOptions="CenterAndExpand" />
+				  </StackLayout>
+			   </StackLayout>
+			</yummy:PancakeView>
+			<yummy:PancakeView HeightRequest="300" BackgroundColor="White" CornerRadius="0,0,35,35">
+			   <StackLayout HorizontalOptions="FillAndExpand"
+							Padding="8"
+							>
+				  <Label Text="Members" FontSize="20" Padding="8"/>
+				  <CollectionView 
+					 ItemsSource="{Binding Members}"
+					 SelectionMode="None"
+					 Margin="30,0,0,10">
+					 <CollectionView.EmptyView>
+						<StackLayout Padding="12">
+						   <Label HorizontalOptions="Center"
+							   Text="No Another Member"
+							   FontAttributes="Bold"
+							   FontSize="20,20,20,10"
+							/>
+						</StackLayout>
+					 </CollectionView.EmptyView>
+
+					 <CollectionView.ItemTemplate>
+						<DataTemplate x:DataType="models:AnotherUserModel">
+						   <StackLayout Orientation="Horizontal" Padding="0,5,0,5">
+							  <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16"
+											  VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+
+							  <Label Text="{Binding Email}" FontSize="16"
+											  VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+							  <Image
+									IsVisible="{Binding PremiumStatus}"
+									WidthRequest="30"
+									HeightRequest="30"
+									HorizontalOptions="EndAndExpand"
+									Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WalletDetailVM}}, Path=PremiumSource}"/>
+						   </StackLayout>
+						</DataTemplate>
+					 </CollectionView.ItemTemplate>
+				  </CollectionView>
+			   </StackLayout>
+
+			</yummy:PancakeView>
+			<RadioButton
+		    	Margin="0,20,0,0"
+				TextColor="Aquamarine"
+		    	Content="Enable Notification" 
+			    IsChecked="{Binding WalletModel.EnableNotification}"
+		    	IsEnabled="False"/>
+			<RadioButton
+		    	Margin="0,20,0,0"
+				TextColor="Aquamarine"
+		    	Content="Excluded From Total" 
+			    IsChecked="{Binding WalletModel.ExcludedFromTotal}"
+		    	IsEnabled="False"/>
+		 </StackLayout>
+
+		 <Button BackgroundColor="DarkBlue" TextColor="White" IsVisible="{Binding SwitchEnable}" FontAttributes="Bold" Text="Set Current Wallet" Command="{Binding SwitchToCurrentCommand}"/>
+		 <Button BackgroundColor="DarkBlue" TextColor="White" FontAttributes="Bold" Text="Done" Command="{Binding CompleteCommand}" />
 	  </StackLayout>
+
    </ContentPage.Content>
 </ContentPage>

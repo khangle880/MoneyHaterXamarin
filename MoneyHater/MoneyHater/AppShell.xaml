@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MoneyHater.Views"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     Title="MyCoffeeApp"
-	FlyoutHeaderTemplate="{DataTemplate local:FlyoutHeader}"
+	xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     FlyoutBackgroundColor="{AppThemeBinding 
                     Dark={StaticResource WindowBackgroundColorDark}, 
                     Light={StaticResource WindowBackgroundColor}}"
@@ -17,6 +17,18 @@
         
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
+
+   <Shell.FlyoutHeaderTemplate>
+	  <DataTemplate>
+		 <Grid BackgroundColor="Black"
+                  HeightRequest="150">
+			<ffSvg:SvgCachedImage
+			   Aspect="AspectFill" 
+			   Source="resource://MoneyHater.Resources.Icons.gradient.svg"
+			 />
+		 </Grid>
+	  </DataTemplate>
+   </Shell.FlyoutHeaderTemplate>
 
    <Shell.Resources>
 	  <ResourceDictionary>
@@ -100,44 +112,11 @@
                              Color="{AppThemeBinding 
                                     Dark=White, 
                                     Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Wallet}"/>
 	  </ShellItem.FlyoutIcon>
 	  <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
    </ShellItem>
 
-   <!-- <FlyoutItem Title="Equipment - CV">
-	  <FlyoutItem.Icon>
-		 <FontImageSource FontFamily="FAS"
-                             Color="{AppThemeBinding 
-                                    Dark=White, 
-                                    Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.MugHot}"/>
-	  </FlyoutItem.Icon>
-	  <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage" />
-   </FlyoutItem>
-
-   <FlyoutItem Title="My Coffee">
-	  <FlyoutItem.Icon>
-		 <FontImageSource FontFamily="FAS"
-                             Color="{AppThemeBinding 
-                                    Dark=White, 
-                                    Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.List}"/>
-	  </FlyoutItem.Icon>
-	   <ShellContent ContentTemplate="{DataTemplate local:MyStoredCoffeePage}" Route="MyStoredCoffeePage" />
-   </FlyoutItem>
-
-
-   <FlyoutItem Title="Internet Coffee">
-	  <FlyoutItem.Icon>
-		 <FontImageSource FontFamily="FAS"
-                             Color="{AppThemeBinding 
-                                    Dark=White, 
-                                    Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Wifi}"/>
-	  </FlyoutItem.Icon>
-	 <ShellContent ContentTemplate="{DataTemplate local:InternetCoffeePage}" Route="InternetCoffeePage" /> 
-   </FlyoutItem> -->
 
    <FlyoutItem Title="Report">
 	  <FlyoutItem.Icon>
@@ -145,7 +124,7 @@
                              Color="{AppThemeBinding 
                                     Dark=White, 
                                     Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.ChartBar}"/>
 	  </FlyoutItem.Icon>
 	  <ShellContent Route="ReportPage" ContentTemplate="{DataTemplate local:ReportPage}"/>
    </FlyoutItem>
@@ -156,7 +135,7 @@
                              Color="{AppThemeBinding 
                                     Dark=White, 
                                     Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.CalendarCheck}"/>
 	  </FlyoutItem.Icon>
 	  <ShellContent Route="PlanningPage" ContentTemplate="{DataTemplate local:PlanningPage}"/>
    </FlyoutItem>
@@ -167,7 +146,7 @@
                              Color="{AppThemeBinding 
                                     Dark=White, 
                                     Light={StaticResource SystemGray5Dark}}"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"/>
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.PeopleCarry}"/>
 	  </FlyoutItem.Icon>
 	  <ShellContent Route="MyPage" ContentTemplate="{DataTemplate local:MyPage}"/>
    </FlyoutItem>

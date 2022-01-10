@@ -107,29 +107,29 @@ namespace MoneyHater.Services
             currentWallet = wallets[0];
          }
          else { currentWallet = null; }
-         //List<Task<WalletModel>> tasks = new List<Task<WalletModel>>() { };
-         //for (int i = 0; i < wallets.Count; ++i)
-         //{
-         //   var index = i;
-         //   WalletModel item = new WalletModel { };
-         //   item = wallets[index];
-         //   tasks.Add(GetWalletDetails(item));
-         //}
+         List<Task<WalletModel>> tasks = new List<Task<WalletModel>>() { };
+         for (int i = 0; i < wallets.Count; ++i)
+         {
+            var index = i;
+            WalletModel item = new WalletModel { };
+            item = wallets[index];
+            tasks.Add(GetWalletDetails(item));
+         }
 
-         //Task taskReturned = Task.WhenAll(tasks);
-         //try
-         //{
-         //   await taskReturned;
-         //   for (int i = 0; i < tasks.Count; i++)
-         //   {
-         //      var index = i;
-         //      wallets[index] = await tasks[index];
-         //   }
-         //}
-         //catch
-         //{
-         //   await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
-         //}
+         Task taskReturned = Task.WhenAll(tasks);
+         try
+         {
+            await taskReturned;
+            for (int i = 0; i < tasks.Count; i++)
+            {
+               var index = i;
+               wallets[index] = await tasks[index];
+            }
+         }
+         catch
+         {
+            await App.Current.MainPage.DisplayAlert("Alert", taskReturned.Exception.Message, "Ok");
+         }
 
       }
 
@@ -152,6 +152,7 @@ namespace MoneyHater.Services
          wallet.Events = new List<EventModel>() { };
          var loadEvents = eventRepo.GetAll();
          wallet.Events = (await loadEvents) as List<EventModel>;
+         wallet.Members = new List<AnotherUserModel>();
 
          memberRepo.Path = previousPath + "/members";
          budgetRepo.previousPath = previousPath;

@@ -52,6 +52,12 @@
             SelectionMode="Single">
 		 <CollectionView.EmptyView>
 			<StackLayout Padding="12">
+			   <ffSvg:SvgCachedImage
+				  Margin="0,20,0,20"
+					 HeightRequest="120"
+					 Source="resource://MoneyHater.Resources.Icons.empty.svg"
+					 WidthRequest="120" />
+
 			   <Label HorizontalOptions="Center"
 					  Text="No Transaction"
 					  FontAttributes="Bold"
@@ -131,7 +137,7 @@
 										Text="{Binding AmountByWallet}"
 										/>
 								 </StackLayout>
-								 
+
 								 <StackLayout HorizontalOptions="Center" >
 									<Label
 										HorizontalOptions="Center"
@@ -146,7 +152,7 @@
 										Text="{Binding Amount}"
 									/>
 								 </StackLayout>
-								 
+
 								 <StackLayout HorizontalOptions="EndAndExpand" >
 									<Label
 										HorizontalOptions="Center"

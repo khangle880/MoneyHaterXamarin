@@ -40,4 +40,3 @@ D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstand
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\ref\MoneyHater.dll
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.pdb
 D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\MoneyHater.csproj.AssemblyReference.cache
-D:\School\xamarin\New folder\MoneyHater\MoneyHater\MoneyHater\obj\Debug\netstandard2.0\Views\FlyoutHeader.xaml.g.cs

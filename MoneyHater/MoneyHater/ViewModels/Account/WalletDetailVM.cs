@@ -25,9 +25,11 @@ namespace MoneyHater.ViewModels.Account
       public AsyncCommand SwitchToCurrentCommand { get; }
       public bool switchEnable;
       public bool SwitchEnable { get => switchEnable; set => SetProperty(ref switchEnable, value); }
+      public ImageSource PremiumSource { get; set; }
 
       public WalletDetailVM()
       {
+         PremiumSource = ImageSource.FromResource("MoneyHater.Resources.Images.premium3.png");
          CompleteCommand = new AsyncCommand(Complete);
          SwitchToCurrentCommand = new AsyncCommand(SwitchToCurrent);
          Members = new List<AnotherUserModel>();

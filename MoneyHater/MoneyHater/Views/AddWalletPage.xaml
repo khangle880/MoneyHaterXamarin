@@ -85,7 +85,9 @@
 			 
 		 </StackLayout>
 	  </ScrollView>
-		   <Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff" FontAttributes="Bold" Margin="0,0,0,0" Text="Complete" Command="{Binding RegisterCommand}" CornerRadius="0"/>
+		   <Button BackgroundColor="{StaticResource ColorAccent}" TextColor="#edfeff"
+				   VerticalOptions="EndAndExpand"
+				   FontAttributes="Bold" Margin="0,0,0,0" Text="Complete" Command="{Binding RegisterCommand}" CornerRadius="0"/>
 	   </StackLayout>
 	  
    </ContentPage.Content>
