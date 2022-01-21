@@ -16,18 +16,13 @@ namespace MoneyHater.Views
       public HomePage()
       {
          InitializeComponent();
+         if (FirebaseService.walletService.currentWallet == null)
+         {
+            Shell.Current.GoToAsync($"{nameof(AddWalletPage)}");
+         }
       }
       protected override void OnAppearing()
       {
-         Task.Run(async () =>
-           {
-              await Task.Delay(200);
-
-              if (FirebaseService.walletService.currentWallet == null)
-              {
-                 await Shell.Current.GoToAsync($"{nameof(AddWalletPage)}");
-              }
-           });
          base.OnAppearing();
       }
 

@@ -21,8 +21,13 @@ namespace MoneyHater.ViewModels.PickupPage
 
       public PickupIconVM()
       {
-         var list = FirebaseService.icons.Select(x => new IconSvg() { url = x });
-         Icons = list.ToList();
+         Task.Run(async () =>
+          {
+             await Task.Delay(800);
+             var list = FirebaseService.icons.Select(x => new IconSvg() { url = x });
+             Icons = list.ToList();
+          });
+
          CompleteCommand = new AsyncCommand(Complete);
          SelectedCommand = new AsyncCommand<IconSvg>(Selected);
       }

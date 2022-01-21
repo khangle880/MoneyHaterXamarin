@@ -19,7 +19,7 @@ namespace MoneyHater.Services
          walletRepo = DependencyService.Resolve<IRepository<WalletModel>>();
       }
 
-      public async Task AddWallet(WalletModel wallet, bool isEdit, WalletModel oldWallet)
+      public async Task<WalletModel> AddWallet(WalletModel wallet, bool isEdit, WalletModel oldWallet)
       {
          IRepository<AnotherUserModel> memberRepo = DependencyService.Resolve<IRepository<AnotherUserModel>>();
          if (isEdit)
@@ -70,6 +70,7 @@ namespace MoneyHater.Services
             {
                await memberRepo.Save(item, item.Id);
             }
+
             wallets.Insert(0, wallet);
             if (currentWallet == null)
             {
@@ -77,6 +78,8 @@ namespace MoneyHater.Services
                MessagingCenter.Send<object, WalletModel>(this, "Change wallet", currentWallet);
             }
          }
+         wallet = await GetWalletDetails(wallet);
+         return wallet;
       }
 
       public async Task<WalletModel> DeleteWallet(WalletModel wallet)
@@ -162,6 +165,12 @@ namespace MoneyHater.Services
          recurringTransactionRepo.previousPath = previousPath;
          transactionRepo.Path = previousPath + "/transactions";
 
+         wallet.Transactions = new List<TransactionModel>();
+         wallet.Budgets = new List<BudgetModel>();
+         wallet.CustomCategories = new List<CategoryModel>();
+         wallet.Debts = new List<DebtModel>();
+         wallet.ReadyExecutedTransactions = new List<ReadyExecutedTransactionModel>();
+         wallet.RecurringTransactions = new List<RecurringTransactionModel>();
 
          List<Task> tasks = new List<Task> { };
          var loadMembers = memberRepo.GetAll();

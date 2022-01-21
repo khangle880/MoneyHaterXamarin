@@ -82,8 +82,18 @@ namespace MoneyHater.Services
          int index = currentWallet.Transactions.FindIndex(x => x.Id == transaction.Id);
          currentWallet.Transactions.RemoveAt(index);
          await transactionRepo.Delete(transaction);
+         var category = transaction.CategoryModel;
+         var amountChanged = category.Type == "Expense" ||
+                 category.Name == "Loan" ||
+                 category.Name == "Repayment"
+                   ? -transaction.AmountByWallet
+                   : category.Type == "Income" ||
+                     category.Name == "Debt" ||
+                     category.Name == "Debt Collection"
+                   ? transaction.AmountByWallet
+                   : 0;
 
-         currentWallet.Balance -= transaction.AmountByWallet;
+         currentWallet.Balance -= amountChanged;
 
          await walletRepo.Save(currentWallet, currentWallet.Id);
       }

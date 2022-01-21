@@ -22,7 +22,7 @@ namespace MoneyHater.Models
 
       public string AmountText => $"{Amount} {CurrencyModel.Iso}";
 
-      public EventModel EventModel => FirebaseService.walletService.currentWallet.Events.Find(x => x.Id == EventId);
+      public EventModel EventModel => (FirebaseService.walletService.currentWallet.Events ?? new List<EventModel> { }).Find(x => x.Id == EventId);
       public CategoryModel CategoryModel
       {
          get

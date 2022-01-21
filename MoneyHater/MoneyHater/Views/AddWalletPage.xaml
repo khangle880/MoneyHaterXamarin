@@ -5,6 +5,7 @@
 			 xmlns:viewmodels="clr-namespace:MoneyHater.ViewModels"
 			 xmlns:controls="clr-namespace:MoneyHater.Controls"
              x:DataType="viewmodels:AddWalletViewModel"
+			 Title="Add your wallet"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BackgroundColor="{AppThemeBinding 
                         Dark={StaticResource WindowBackgroundColorDark}, 
@@ -81,7 +82,6 @@
                    Color="LightGray"
                    Margin ="0, 10, 0, 0"/>
 			 <RadioButton Margin ="0, 10, 0, 0" Content="Enable Notification" IsChecked="{Binding EnableNotification}" />
-			 <RadioButton Margin ="0, 10, 0, 0" Content="Excluded From Total" IsChecked="{Binding ExcludedFromTotal}" />
 			 
 		 </StackLayout>
 	  </ScrollView>

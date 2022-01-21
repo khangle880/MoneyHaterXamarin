@@ -55,6 +55,7 @@
                                     BorderColor="Black"
                                     BorderThickness="1"
                                     CornerRadius="8"
+									IsPassword="True"
 					                Text="{Binding Password}"
                                     Placeholder="Password" />
 					 </Frame>

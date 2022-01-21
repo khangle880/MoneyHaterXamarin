@@ -55,7 +55,7 @@ namespace MoneyHater.ViewModels
          AddTransactionCommand = new AsyncCommand(AddTransaction);
          MessagingCenter.Subscribe<object, TransactionModel>(this, "Add transaction", (obj, s) =>
          {
-            ReloadPage(Transactions);
+            ReloadPage(FirebaseService.walletService.currentWallet.Transactions);
          });
          MessagingCenter.Subscribe<object, WalletModel>(this, "Update current wallet", (obj, s) =>
            {

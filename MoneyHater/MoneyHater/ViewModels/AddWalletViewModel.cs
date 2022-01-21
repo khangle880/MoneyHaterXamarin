@@ -130,7 +130,7 @@ namespace MoneyHater.ViewModels
                   Icon = IconSelected?.url,
                   State = true,
                };
-               await FirebaseService.walletService.AddWallet(newWallet, isEdit, oldWalletModel);
+               newWallet = await FirebaseService.walletService.AddWallet(newWallet, isEdit, oldWalletModel);
                MessagingCenter.Send<object, WalletModel>(this, "Add wallet", newWallet);
                await Shell.Current.GoToAsync("..");
             }

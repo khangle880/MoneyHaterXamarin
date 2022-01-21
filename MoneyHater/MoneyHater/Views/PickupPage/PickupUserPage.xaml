@@ -57,6 +57,11 @@
 			   </DataTemplate>
 			</ListView.ItemTemplate>
 		 </ListView>
+		 <Button Text="Done"
+				 VerticalOptions="EndAndExpand"
+				 CornerRadius="0" BackgroundColor="{StaticResource ColorAccent}"
+				 TextColor="#edfeff" FontAttributes="Bold"
+				 Command="{Binding CompleteCommand}"></Button>
 	  </StackLayout>
    </ContentPage.Content>
 </ContentPage>
